@@ -24,7 +24,9 @@
         --gray-4: #e8e8e8;
         --green: #16a34a;
         --black-cta: #0a0a0a;
-        --section-pad-y: clamp(72px, 9vw, 112px);
+        /* ~160–200px feel at desktop — consistent “breathing room” between major blocks */
+        --section-pad-y: clamp(120px, 14vw, 200px);
+        --block-gap-y: clamp(80px, 10vw, 140px);
         --label-size: clamp(16px, 2.1vw, 22px);
       }
 
@@ -302,7 +304,7 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        padding: 120px 24px 80px;
+        padding: 120px 24px var(--section-pad-y);
       }
 
       .hero-inner {
@@ -635,7 +637,7 @@
       }
 
       .stats-row {
-        margin-top: 48px;
+        margin-top: var(--block-gap-y);
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
@@ -673,7 +675,7 @@
 
       /* What we build */
       #services {
-        padding: var(--section-pad-y) 24px clamp(40px, 6vw, 64px);
+        padding: var(--section-pad-y) 24px;
         max-width: 1100px;
         margin: 0 auto;
       }
@@ -685,7 +687,7 @@
         color: var(--black);
         text-transform: uppercase;
         display: block;
-        margin-bottom: clamp(20px, 3vw, 32px);
+        margin-bottom: clamp(28px, 4vw, 44px);
         line-height: 1.25;
       }
 
@@ -694,7 +696,7 @@
         display: block;
         width: 40px;
         height: 1px;
-        margin-top: clamp(14px, 2vw, 20px);
+        margin-top: clamp(18px, 2.5vw, 28px);
         background: var(--black);
         opacity: 0.18;
       }
@@ -719,7 +721,7 @@
       }
 
       .section-lead {
-        margin: 20px 0 0;
+        margin: clamp(24px, 3vw, 36px) 0 0;
         max-width: 500px;
         font-size: 17px;
         font-weight: 300;
@@ -728,10 +730,10 @@
       }
 
       .features-grid {
-        margin-top: 56px;
+        margin-top: var(--block-gap-y);
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 40px;
+        gap: 48px;
       }
 
       .feature-icon {
@@ -758,7 +760,7 @@
 
       /* Vaani teaser */
       #agents {
-        padding: clamp(40px, 6vw, 64px) 24px var(--section-pad-y);
+        padding: var(--section-pad-y) 24px;
         max-width: 1100px;
         margin: 0 auto;
         background: var(--bg);
@@ -776,7 +778,7 @@
       }
 
       .vaani-sub {
-        margin: clamp(24px, 3vw, 36px) auto 0;
+        margin: clamp(32px, 4vw, 48px) auto 0;
         max-width: 520px;
         font-size: 16px;
         font-weight: 300;
@@ -786,7 +788,7 @@
       }
 
       .vaani-grid {
-        margin-top: 56px;
+        margin-top: var(--block-gap-y);
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 1px;
@@ -902,7 +904,7 @@
 
       /* Quote */
       #proof {
-        padding: clamp(88px, 10vw, 120px) 24px;
+        padding: var(--section-pad-y) 24px;
         background: var(--black);
         text-align: center;
       }
@@ -926,7 +928,7 @@
       }
 
       .quote-by {
-        margin: 24px 0 0;
+        margin: clamp(28px, 4vw, 40px) 0 0;
         font-size: 13px;
         font-weight: 300;
         color: #888888;
@@ -934,7 +936,7 @@
       }
 
       .proof-points {
-        margin-top: 64px;
+        margin-top: var(--block-gap-y);
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
@@ -970,7 +972,7 @@
       }
 
       .cta-sub {
-        margin: 20px auto 0;
+        margin: clamp(28px, 4vw, 40px) auto 0;
         max-width: 440px;
         font-size: 17px;
         font-weight: 300;
@@ -980,7 +982,7 @@
 
       .btn-cta {
         display: inline-flex;
-        margin-top: 40px;
+        margin-top: clamp(40px, 5vw, 56px);
         padding: 18px 48px;
         border-radius: 100px;
         background: var(--black);
@@ -1071,6 +1073,11 @@
       }
 
       @media (max-width: 768px) {
+        :root {
+          --section-pad-y: clamp(72px, 16vw, 112px);
+          --block-gap-y: clamp(56px, 12vw, 88px);
+        }
+
         body {
           cursor: auto;
         }
@@ -1122,18 +1129,11 @@
         }
 
         #about,
+        #services,
+        #agents,
         #contact,
         #proof {
-          padding-top: 80px;
-          padding-bottom: 80px;
-        }
-
-        #services {
-          padding: 80px 24px 44px;
-        }
-
-        #agents {
-          padding: 44px 24px 80px;
+          padding: var(--section-pad-y) 24px;
         }
 
         .vaani-cell {
