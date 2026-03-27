@@ -24,8 +24,8 @@
         --gray-4: #e8e8e8;
         --green: #16a34a;
         --black-cta: #0a0a0a;
-        --section-pad-y: clamp(100px, 12vw, 160px);
-        --label-size: clamp(13px, 1.35vw, 16px);
+        --section-pad-y: clamp(72px, 9vw, 112px);
+        --label-size: clamp(16px, 2.1vw, 22px);
       }
 
       html {
@@ -450,7 +450,7 @@
       }
 
       .scroll-indicator {
-        margin-top: 40px;
+        margin-top: 36px;
         position: relative;
         display: flex;
         justify-content: center;
@@ -480,51 +480,74 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 8px;
-        animation: scrollPulse 2s ease-in-out infinite;
-        animation-delay: 3.1s;
+        gap: 14px;
       }
 
-      @keyframes scrollPulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.3;
-        }
-      }
-
-      .scroll-indicator-line {
-        width: 1px;
-        height: 0;
-        background: var(--black);
+      /* Mouse-wheel style — distinct from site cursor */
+      .scroll-indicator-wheel {
+        width: 24px;
+        height: 38px;
+        border: 1px solid rgba(10, 10, 10, 0.22);
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        padding-top: 7px;
         opacity: 0;
-        animation: scrollLine 0.8s ease forwards;
+        animation: scrollWheelReveal 0.55s ease forwards;
         animation-delay: 2.5s;
       }
 
-      @keyframes scrollLine {
-        0% {
-          height: 0px;
+      @keyframes scrollWheelReveal {
+        from {
           opacity: 0;
+          transform: translateY(6px);
         }
-        30% {
-          height: 40px;
+        to {
           opacity: 1;
+          transform: translateY(0);
         }
+      }
+
+      .scroll-indicator-dot {
+        width: 4px;
+        height: 8px;
+        border-radius: 3px;
+        background: var(--black);
+        opacity: 0.75;
+        animation: scrollWheelNudge 2.2s ease-in-out infinite;
+        animation-delay: 3.05s;
+      }
+
+      @keyframes scrollWheelNudge {
+        0%,
         100% {
-          height: 40px;
-          opacity: 1;
+          transform: translateY(0);
+          opacity: 0.75;
+        }
+        50% {
+          transform: translateY(12px);
+          opacity: 0.25;
         }
       }
 
       .scroll-indicator-label {
-        font-size: 10px;
+        font-size: 11px;
         font-weight: 500;
-        letter-spacing: 0.35em;
-        color: #999999;
+        letter-spacing: 0.2em;
+        color: #888888;
         text-transform: lowercase;
+        opacity: 0;
+        animation: scrollLabelReveal 0.5s ease forwards;
+        animation-delay: 2.75s;
+      }
+
+      @keyframes scrollLabelReveal {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
 
       .hero-trust {
@@ -650,7 +673,7 @@
 
       /* What we build */
       #services {
-        padding: var(--section-pad-y) 24px;
+        padding: var(--section-pad-y) 24px clamp(40px, 6vw, 64px);
         max-width: 1100px;
         margin: 0 auto;
       }
@@ -658,22 +681,22 @@
       .section-label {
         font-size: var(--label-size);
         font-weight: 500;
-        letter-spacing: 0.22em;
+        letter-spacing: 0.14em;
         color: var(--black);
         text-transform: uppercase;
         display: block;
-        margin-bottom: clamp(28px, 4vw, 40px);
-        line-height: 1.35;
+        margin-bottom: clamp(20px, 3vw, 32px);
+        line-height: 1.25;
       }
 
       .section-label::after {
         content: "";
         display: block;
-        width: 32px;
+        width: 40px;
         height: 1px;
-        margin-top: 20px;
+        margin-top: clamp(14px, 2vw, 20px);
         background: var(--black);
-        opacity: 0.2;
+        opacity: 0.18;
       }
 
       #agents .section-label {
@@ -705,10 +728,10 @@
       }
 
       .features-grid {
-        margin-top: 72px;
+        margin-top: 56px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 48px;
+        gap: 40px;
       }
 
       .feature-icon {
@@ -735,7 +758,7 @@
 
       /* Vaani teaser */
       #agents {
-        padding: var(--section-pad-y) 24px;
+        padding: clamp(40px, 6vw, 64px) 24px var(--section-pad-y);
         max-width: 1100px;
         margin: 0 auto;
         background: var(--bg);
@@ -763,7 +786,7 @@
       }
 
       .vaani-grid {
-        margin-top: 72px;
+        margin-top: 56px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 1px;
@@ -1099,12 +1122,18 @@
         }
 
         #about,
-        #services,
-        #agents,
         #contact,
         #proof {
           padding-top: 80px;
           padding-bottom: 80px;
+        }
+
+        #services {
+          padding: 80px 24px 44px;
+        }
+
+        #agents {
+          padding: 44px 24px 80px;
         }
 
         .vaani-cell {
@@ -1239,7 +1268,9 @@
 
           <div class="scroll-indicator" aria-hidden="true">
             <div class="scroll-indicator-inner">
-              <div class="scroll-indicator-line"></div>
+              <div class="scroll-indicator-wheel">
+                <span class="scroll-indicator-dot"></span>
+              </div>
               <span class="scroll-indicator-label">scroll</span>
             </div>
           </div>
