@@ -1,6 +1,5 @@
 "use client";
 
-import type { ReactNode } from "react";
 import { createContext, useContext, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -36,7 +35,7 @@ export function AdminContextProvider({ children }: { children: React.ReactNode }
 
   const value = useMemo<AdminContextValue>(
     () => ({ activeClientId, setActiveClientId }),
-    [activeClientId]
+    [activeClientId, setActiveClientId]
   );
 
   return <AdminContext.Provider value={value}>{children}</AdminContext.Provider>;

@@ -36,21 +36,12 @@ export default function AdminSidebar({ clients, userName, userRole }: Props) {
 
   const qs = activeClientId ? `?clientId=${encodeURIComponent(activeClientId)}` : "";
 
-  const navAll = [
-    { href: `/admin${qs}`, label: "Overview", active: pathname === "/admin" && !activeClientId },
-    { href: `/admin${qs}`, label: "All Clients", active: pathname === "/admin" && !activeClientId },
-    { href: `/admin/analytics${qs}`, label: "Global Analytics", active: pathname === "/admin/analytics" && !activeClientId },
-    { href: `/admin/settings${qs}`, label: "Settings", active: pathname === "/admin/settings" && !activeClientId },
-  ];
-
-  const navClient = [
-    { href: `/admin${qs}`, label: "Overview", active: pathname === "/admin" && !!activeClientId },
-    { href: `/admin/leads${qs}`, label: "Leads", active: pathname === "/admin/leads" && !!activeClientId },
-    { href: `/admin/conversations${qs}`, label: "Conversations", active: pathname === "/admin/conversations" && !!activeClientId },
-    { href: `/admin/visits${qs}`, label: "Visits", active: pathname === "/admin/visits" && !!activeClientId },
-    { href: `/admin/analytics${qs}`, label: "Analytics", active: pathname === "/admin/analytics" && !!activeClientId },
-    { href: `/admin/settings${qs}`, label: "Agent Settings", active: pathname === "/admin/settings" && !!activeClientId },
-    { href: `/admin/settings${qs}`, label: "System Prompt", active: pathname === "/admin/settings" && !!activeClientId },
+  const navItems = [
+    { href: `/admin${qs}`, label: "Overview", active: pathname === "/admin" },
+    { href: `/admin/clients${qs}`, label: "Clients", active: pathname.startsWith("/admin/clients") },
+    { href: `/admin/leads${qs}`, label: "All Leads", active: pathname.startsWith("/admin/leads") },
+    { href: `/admin/credits${qs}`, label: "Credits", active: pathname.startsWith("/admin/credits") },
+    { href: `/admin/settings${qs}`, label: "Settings", active: pathname.startsWith("/admin/settings") },
   ];
 
   return (
@@ -60,11 +51,11 @@ export default function AdminSidebar({ clients, userName, userRole }: Props) {
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <div className="relative w-[44px] h-[44px] rounded-lg bg-[#F4F4F2] border border-[#E8E8E8] flex items-center justify-center">
-                <Image src="/assets/ivvlyn-logo.png" alt="Ivvlyn" fill className="object-contain p-2" />
+                <Image src="/assets/ivvlyn-logo.png" alt="Ivvlyn" fill sizes="44px" className="object-contain p-2" />
               </div>
               <div>
-                <div className="text-[#0A0A0A] text-[10px] font-semibold uppercase tracking-[0.2em]">Admin</div>
-                <div className="text-[#555555] text-[11px] font-medium">Dashboard</div>
+                <div className="text-[#0A0A0A] text-[12px] font-semibold">Ivvlyn</div>
+                <div className="text-[#555555] text-[11px] font-medium">Admin</div>
               </div>
             </div>
           </div>
@@ -76,7 +67,7 @@ export default function AdminSidebar({ clients, userName, userRole }: Props) {
 
         <div className="px-5 pt-1">
           <nav className="flex flex-col gap-1">
-            {(activeClientId ? navClient : navAll).map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
@@ -88,13 +79,13 @@ export default function AdminSidebar({ clients, userName, userRole }: Props) {
                 {item.label}
               </Link>
             ))}
-            <a
-              href="http://localhost:39999/"
+            <Link
+              href="/"
               className="px-3 py-2 rounded-lg text-[13px] font-normal transition-colors text-[#555555] hover:text-[#0A0A0A] inline-flex items-center gap-2"
             >
               <ArrowLeft className="h-4 w-4 mr-0.5" />
               Back to Website
-            </a>
+            </Link>
             {activeClientId ? (
               <div className="mt-2">
                 <Button

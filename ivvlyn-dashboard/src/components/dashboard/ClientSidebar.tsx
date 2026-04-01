@@ -30,7 +30,6 @@ export default function ClientSidebar({
   agentType,
   userName,
   userEmail,
-  userRole,
 }: Props) {
   const pathname = usePathname();
 
@@ -41,11 +40,8 @@ export default function ClientSidebar({
   }
 
   const nav = [
-    { href: "/dashboard", label: "Overview", active: pathname === "/dashboard" },
+    { href: "/dashboard", label: "Dashboard", active: pathname === "/dashboard" },
     { href: "/dashboard/leads", label: "Leads", active: pathname.startsWith("/dashboard/leads") },
-    { href: "/dashboard/conversations", label: "Conversations", active: pathname.startsWith("/dashboard/conversations") },
-    { href: "/dashboard/visits", label: "Visits", active: pathname.startsWith("/dashboard/visits") },
-    { href: "/dashboard/analytics", label: "Analytics", active: pathname.startsWith("/dashboard/analytics") },
     { href: "/dashboard/settings", label: "Settings", active: pathname.startsWith("/dashboard/settings") },
   ];
 
@@ -55,7 +51,7 @@ export default function ClientSidebar({
         <div className="p-5">
           <div className="flex items-start gap-3">
             <div className="relative w-[44px] h-[44px] rounded-lg bg-[#F4F4F2] border border-[#E8E8E8] flex items-center justify-center">
-              <Image src="/assets/ivvlyn-logo.png" alt="Ivvlyn" fill className="object-contain p-2" />
+              <Image src="/assets/ivvlyn-logo.png" alt="Ivvlyn" fill sizes="44px" className="object-contain p-2" />
             </div>
             <div className="min-w-0">
               <div className="text-[#0A0A0A] text-[14px] font-semibold truncate">Ivvlyn</div>
@@ -78,13 +74,13 @@ export default function ClientSidebar({
                 {item.label}
               </Link>
             ))}
-            <a
-              href="http://localhost:39999/"
+            <Link
+              href="/"
               className="px-3 py-2 rounded-lg text-[13px] font-normal transition-colors text-[#555555] hover:text-[#0A0A0A] inline-flex items-center gap-2"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Website
-            </a>
+            </Link>
           </nav>
         </div>
 

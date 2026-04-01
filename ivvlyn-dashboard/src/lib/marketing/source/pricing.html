@@ -1,0 +1,1788 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing — Vaani by Ivvlyn</title>
+    <meta
+      name="description"
+      content="Understand Vaani's value and ROI for your real estate business. Custom quotes, no hidden pricing games — book a call to get your number."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+      .page-top-anchor {
+        height: 0;
+        width: 100%;
+        scroll-margin-top: 0;
+        pointer-events: none;
+      }
+
+      .section-label {
+        font-size: var(--label-size);
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        color: var(--black);
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: fit-content;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+      .section-label::after {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 1px;
+        margin-top: 12px;
+        background: var(--black);
+      }
+      .section-label--left {
+        margin-left: 0;
+        margin-right: 0;
+        align-items: flex-start;
+        text-align: left;
+      }
+      .section-label--left::after {
+        margin-left: 0;
+      }
+
+      /* Hero */
+      .pricing-hero {
+        min-height: 75vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 160px 24px 80px;
+        background: var(--bg);
+      }
+      .pricing-hero-h1 {
+        font-size: clamp(40px, 7vw, 82px);
+        font-weight: 200;
+        letter-spacing: -3px;
+        line-height: 1.05;
+        color: #0a0a0a;
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .pricing-hero-line {
+        display: block;
+      }
+      .pricing-hero-word {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(16px);
+        animation: pricingWordIn 0.55s ease-out forwards;
+        animation-delay: calc(0.28s + var(--pw, 0) * 0.05s);
+      }
+      @keyframes pricingWordIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .pricing-hero-sub {
+        font-size: 18px;
+        font-weight: 300;
+        color: #666;
+        max-width: 500px;
+        margin: 28px auto 0;
+        line-height: 1.85;
+      }
+      .pricing-quick-stats {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 56px;
+        gap: 0;
+      }
+      .pricing-stat {
+        padding: 0 40px;
+        text-align: center;
+      }
+      .pricing-stat__val {
+        font-size: 24px;
+        font-weight: 300;
+        color: #0a0a0a;
+      }
+      .pricing-stat__lbl {
+        font-size: 11px;
+        color: #aaa;
+        letter-spacing: 1px;
+        margin-top: 6px;
+        text-transform: none;
+      }
+      .pricing-stat-sep {
+        width: 1px;
+        height: 32px;
+        background: #ddd;
+        align-self: center;
+        flex-shrink: 0;
+      }
+
+      /* ROI section */
+      .pricing-roi {
+        background: #fff;
+        padding: 120px 48px;
+      }
+      .pricing-roi-inner {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .pricing-roi-h2 {
+        font-size: clamp(28px, 4vw, 52px);
+        font-weight: 200;
+        letter-spacing: -1.5px;
+        text-align: center;
+        max-width: 640px;
+        margin: 0 auto;
+        line-height: 1.15;
+        color: #0a0a0a;
+      }
+      .pricing-roi-lead {
+        font-size: 16px;
+        font-weight: 300;
+        color: #666;
+        text-align: center;
+        margin: 20px auto 0;
+      }
+
+      #calculator {
+        margin-top: 64px;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      #calculator.is-revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .calc-box {
+        background: #fff;
+        border: 1px solid #e8e8e8;
+        border-radius: 20px;
+        padding: 56px 48px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .calc-slider-block {
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      #calculator.is-revealed .calc-slider-block {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      #calculator.is-revealed .calc-slider-block:nth-child(1) {
+        transition-delay: 0s;
+      }
+      #calculator.is-revealed .calc-slider-block:nth-child(3) {
+        transition-delay: 0.1s;
+      }
+      #calculator.is-revealed .calc-slider-block:nth-child(5) {
+        transition-delay: 0.2s;
+      }
+      .calc-row-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .calc-q {
+        font-size: 14px;
+        font-weight: 400;
+        color: #0a0a0a;
+        line-height: 1.4;
+      }
+      .calc-val-disp {
+        font-size: 18px;
+        font-weight: 300;
+        color: #0a0a0a;
+        white-space: nowrap;
+      }
+      .roi-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 22px;
+        margin: 12px 0 0;
+        background: transparent;
+        cursor: pointer;
+      }
+      .roi-slider:focus {
+        outline: none;
+      }
+      .roi-slider::-webkit-slider-runnable-track {
+        height: 3px;
+        border-radius: 2px;
+        background: linear-gradient(
+          90deg,
+          #0a0a0a 0%,
+          #0a0a0a var(--fill, 50%),
+          #e8e8e8 var(--fill, 50%),
+          #e8e8e8 100%
+        );
+      }
+      .roi-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #0a0a0a;
+        border: 3px solid #fff;
+        box-shadow: 0 0 0 1px #0a0a0a;
+        margin-top: -8.5px;
+        transition: transform 0.15s ease;
+      }
+      .roi-slider:active::-webkit-slider-thumb {
+        transform: scale(1.2);
+      }
+      .roi-slider::-moz-range-track {
+        height: 3px;
+        border-radius: 2px;
+        background: linear-gradient(
+          90deg,
+          #0a0a0a 0%,
+          #0a0a0a var(--fill, 50%),
+          #e8e8e8 var(--fill, 50%),
+          #e8e8e8 100%
+        );
+      }
+      .roi-slider::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #0a0a0a;
+        border: 3px solid #fff;
+        box-shadow: 0 0 0 1px #0a0a0a;
+        transition: transform 0.15s ease;
+      }
+      .roi-slider:active::-moz-range-thumb {
+        transform: scale(1.2);
+      }
+      .calc-markers {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+        font-size: 11px;
+        color: #ccc;
+      }
+      .calc-helper {
+        font-size: 11px;
+        color: #aaa;
+        text-align: right;
+        margin-top: 4px;
+      }
+      .calc-divider {
+        height: 1px;
+        background: #f0f0f0;
+        margin: 36px 0;
+      }
+
+      .roi-results {
+        background: #fafaf8;
+        border-radius: 14px;
+        padding: 36px 32px;
+        margin-top: 40px;
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.55s ease 0.15s, transform 0.55s ease 0.15s;
+      }
+      #calculator.is-revealed .roi-results {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .roi-results-grid {
+        display: grid;
+        grid-template-columns: 1fr 1px 1fr;
+        gap: 0;
+        align-items: start;
+      }
+      .roi-results-vsep {
+        background: #e8e8e8;
+        width: 1px;
+        align-self: stretch;
+        min-height: 120px;
+      }
+      .roi-col {
+        padding: 0 24px;
+      }
+      .roi-col:first-child {
+        padding-left: 0;
+      }
+      .roi-col:last-child {
+        padding-right: 0;
+      }
+      .roi-col-h {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 3px;
+        margin: 0 0 20px;
+        text-transform: uppercase;
+      }
+      .roi-col-h--muted {
+        color: #aaa;
+      }
+      .roi-col-h--green {
+        color: #16a34a;
+      }
+      .roi-metric + .roi-metric {
+        margin-top: 20px;
+      }
+      .roi-metric-lbl {
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 4px;
+      }
+      .roi-metric-lbl--hurt {
+        color: #e53e3e;
+      }
+      .roi-metric-val {
+        font-size: 32px;
+        font-weight: 200;
+        color: #0a0a0a;
+        line-height: 1.1;
+        display: inline-block;
+        transition: transform 0.2s ease;
+      }
+      .roi-metric-val.is-pop {
+        animation: roiPop 0.2s ease;
+      }
+      .roi-metric-val--red {
+        color: #e53e3e;
+      }
+      .roi-metric-val--green {
+        color: #16a34a;
+      }
+      .roi-metric-val--green-italic {
+        color: #16a34a;
+        font-style: italic;
+      }
+      @keyframes roiPop {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .roi-summary {
+        background: #0a0a0a;
+        border-radius: 10px;
+        padding: 24px 28px;
+        margin-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 0.5s ease 0.35s, transform 0.5s ease 0.35s;
+      }
+      #calculator.is-revealed .roi-summary {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .roi-summary-txt {
+        font-size: 15px;
+        font-weight: 300;
+        color: #fff;
+        margin: 0;
+      }
+      .roi-summary-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #fff;
+        color: #0a0a0a;
+        padding: 12px 24px;
+        border-radius: 100px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.2s ease;
+      }
+      .roi-summary-cta:hover {
+        background: #f0f0f0;
+      }
+      .roi-summary-cta:hover .roi-summary-arr {
+        transform: translateX(2px);
+      }
+      .roi-summary-arr {
+        display: inline-block;
+        transition: transform 0.2s ease;
+      }
+      .roi-disclaimer {
+        font-size: 11px;
+        color: #bbb;
+        text-align: center;
+        margin-top: 20px;
+        line-height: 1.6;
+        max-width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* How we price */
+      .pricing-how {
+        background: #fafaf8;
+        padding: 120px 48px;
+      }
+      .pricing-how-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .pricing-how-h2 {
+        font-size: clamp(28px, 4vw, 52px);
+        font-weight: 200;
+        letter-spacing: -1.5px;
+        max-width: 560px;
+        line-height: 1.15;
+        margin: 0;
+        color: #0a0a0a;
+      }
+      .pricing-how-sub {
+        font-size: 16px;
+        font-weight: 300;
+        color: #666;
+        max-width: 480px;
+        line-height: 1.85;
+        margin-top: 20px;
+      }
+      .pricing-factors {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 72px;
+      }
+      .pricing-factor {
+        background: #fff;
+        border: 1px solid #e8e8e8;
+        border-radius: 16px;
+        padding: 40px 32px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          border-color 0.3s ease,
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .pricing-factor.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .pricing-factor:hover {
+        border-color: #0a0a0a;
+      }
+      .pricing-factor__num {
+        font-size: 11px;
+        font-weight: 400;
+        color: #ccc;
+        letter-spacing: 3px;
+        margin-bottom: 24px;
+        display: block;
+      }
+      .pricing-factor h3 {
+        font-size: 17px;
+        font-weight: 400;
+        color: #0a0a0a;
+        margin: 0 0 12px;
+      }
+      .pricing-factor p {
+        font-size: 14px;
+        font-weight: 300;
+        color: #666;
+        line-height: 1.8;
+        margin: 0;
+      }
+      .pricing-factor__scale {
+        margin-top: 24px;
+      }
+      .pricing-factor__scale-lbl {
+        font-size: 10px;
+        color: #aaa;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+      .pricing-dots {
+        display: flex;
+        gap: 4px;
+      }
+      .pricing-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #e8e8e8;
+      }
+      .pricing-dot.is-on {
+        background: #0a0a0a;
+      }
+
+      /* Plans */
+      .pricing-plans {
+        background: #fff;
+        padding: 120px 48px;
+        text-align: center;
+      }
+      .pricing-plans-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .pricing-plans-h2 {
+        font-size: clamp(28px, 4vw, 48px);
+        font-weight: 200;
+        letter-spacing: -1.5px;
+        max-width: 560px;
+        margin: 0 auto;
+        line-height: 1.15;
+        color: #0a0a0a;
+      }
+      .pricing-plans-sub {
+        font-size: 16px;
+        font-weight: 300;
+        color: #666;
+        max-width: 460px;
+        margin: 20px auto 0;
+        line-height: 1.85;
+      }
+      .pricing-plans-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        max-width: 860px;
+        margin: 64px auto 0;
+      }
+      .plan-card {
+        border-radius: 20px;
+        padding: 48px 40px;
+        text-align: left;
+        position: relative;
+        opacity: 0;
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+      .plan-card.is-visible.plan--starter {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .plan-card.is-visible.plan--growth {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .plan--starter {
+        background: #fff;
+        border: 1px solid #e8e8e8;
+        transform: translateX(-20px);
+      }
+      .plan--growth {
+        background: #0a0a0a;
+        border: 1.5px solid #0a0a0a;
+        transform: translateX(20px);
+      }
+      .plan-badge {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 3px;
+        margin-bottom: 16px;
+        display: block;
+      }
+      .plan--starter .plan-badge {
+        color: #888;
+      }
+      .plan--growth .plan-badge {
+        color: #666;
+      }
+      .plan-popular {
+        position: absolute;
+        top: -14px;
+        right: 32px;
+        background: #0a0a0a;
+        color: #fff;
+        border: 1px solid #333;
+        border-radius: 100px;
+        padding: 6px 16px;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+      .plan-for {
+        font-size: 14px;
+        font-weight: 300;
+        margin-bottom: 32px;
+        line-height: 1.5;
+      }
+      .plan--starter .plan-for {
+        color: #888;
+      }
+      .plan--growth .plan-for {
+        color: #555;
+      }
+      .plan-price {
+        font-size: 36px;
+        font-weight: 200;
+        letter-spacing: -1px;
+        margin: 0;
+      }
+      .plan--starter .plan-price {
+        color: #0a0a0a;
+      }
+      .plan--growth .plan-price {
+        color: #fff;
+      }
+      .plan-price-note {
+        font-size: 12px;
+        margin-top: 8px;
+      }
+      .plan--starter .plan-price-note {
+        color: #aaa;
+      }
+      .plan--growth .plan-price-note {
+        color: #555;
+      }
+      .plan-hr {
+        height: 1px;
+        border: none;
+        margin: 32px 0;
+      }
+      .plan--starter .plan-hr {
+        background: #f0f0f0;
+      }
+      .plan--growth .plan-hr {
+        background: #1e1e1e;
+      }
+      .plan-plus {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        margin-bottom: 16px;
+        color: #555;
+      }
+      .plan-feat {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .plan-feat + .plan-feat {
+        margin-top: 14px;
+      }
+      .plan-feat svg {
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .plan-feat span {
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 1.5;
+      }
+      .plan--starter .plan-feat span {
+        color: #444;
+      }
+      .plan--growth .plan-feat span {
+        color: #888;
+      }
+      .plan-cta {
+        display: block;
+        width: 100%;
+        margin-top: 36px;
+        padding: 16px;
+        border-radius: 100px;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+        text-decoration: none;
+        font-family: inherit;
+        transition: all 0.25s ease;
+      }
+      .plan-cta--starter {
+        border: 1.5px solid #0a0a0a;
+        background: #fff;
+        color: #0a0a0a;
+      }
+      .plan-cta--starter:hover {
+        background: #0a0a0a;
+        color: #fff;
+      }
+      .plan-cta--growth {
+        background: #fff;
+        color: #0a0a0a;
+        border: none;
+      }
+      .plan-cta--growth:hover {
+        background: #f0f0f0;
+        transform: scale(1.01);
+      }
+      .pricing-plans-foot {
+        margin-top: 32px;
+        font-size: 13px;
+        font-weight: 300;
+        color: #888;
+        line-height: 1.7;
+        text-align: center;
+      }
+
+      /* FAQ */
+      #pricing-faq {
+        padding: 120px 48px;
+        background: #fafaf8;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      #pricing-faq .faq-item {
+        border-bottom: 1px solid #e8e8e8;
+      }
+      #pricing-faq .faq-q {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 0;
+        background: none;
+        border: none;
+        text-align: left;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 400;
+        color: #0a0a0a;
+        cursor: pointer;
+      }
+      #pricing-faq .faq-icon {
+        width: 20px;
+        height: 20px;
+        position: relative;
+        flex-shrink: 0;
+      }
+      #pricing-faq .faq-icon::before,
+      #pricing-faq .faq-icon::after {
+        content: "";
+        position: absolute;
+        background: #0a0a0a;
+        transition: transform 0.3s ease;
+      }
+      #pricing-faq .faq-icon::before {
+        width: 12px;
+        height: 1px;
+        left: 4px;
+        top: 9px;
+      }
+      #pricing-faq .faq-icon::after {
+        width: 1px;
+        height: 12px;
+        left: 9.5px;
+        top: 4px;
+      }
+      #pricing-faq .faq-item.is-open .faq-icon::after {
+        transform: rotate(90deg);
+        opacity: 0;
+      }
+      #pricing-faq .faq-a {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.45s ease, opacity 0.35s ease;
+        opacity: 0;
+      }
+      #pricing-faq .faq-item.is-open .faq-a {
+        opacity: 1;
+      }
+      #pricing-faq .faq-a-inner {
+        padding: 0 0 24px;
+        font-size: 14px;
+        font-weight: 300;
+        color: #666;
+        line-height: 1.8;
+      }
+
+      /* Final CTA */
+      .pricing-final {
+        padding: 160px 48px;
+        text-align: center;
+        background: #0a0a0a;
+      }
+      .pricing-final-inner {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .pricing-final-h2 {
+        font-size: clamp(36px, 6vw, 76px);
+        font-weight: 200;
+        color: #fff;
+        letter-spacing: -3px;
+        line-height: 1.05;
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      .pricing-final-line {
+        display: block;
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.55s ease, transform 0.55s ease;
+      }
+      .pricing-final-line.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .pricing-final-sub {
+        font-size: 17px;
+        font-weight: 300;
+        color: #888;
+        max-width: 480px;
+        margin: 24px auto 0;
+        line-height: 1.85;
+      }
+      .pricing-final-ctas {
+        margin-top: 48px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        align-items: center;
+      }
+      .pricing-final-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 48px;
+        border-radius: 100px;
+        background: #fff;
+        color: #0a0a0a;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.2s ease;
+      }
+      .pricing-final-primary:hover {
+        background: #f0f0f0;
+        transform: scale(1.02);
+      }
+      .pricing-final-secondary {
+        background: none;
+        border: none;
+        color: #666;
+        font-size: 14px;
+        font-weight: 300;
+        font-family: inherit;
+        cursor: pointer;
+        padding: 8px 12px;
+        transition: color 0.2s ease;
+      }
+      .pricing-final-secondary:hover {
+        color: #aaa;
+      }
+      .pricing-final-note {
+        margin-top: 24px;
+        font-size: 12px;
+        color: #555;
+        letter-spacing: 0.5px;
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.65s ease, transform 0.65s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 768px) {
+        .pricing-hero {
+          padding: 120px 20px 64px;
+        }
+        .pricing-stat-sep {
+          display: none;
+        }
+        .pricing-quick-stats {
+          flex-direction: column;
+          gap: 20px;
+        }
+        .pricing-roi,
+        .pricing-how,
+        .pricing-plans,
+        #pricing-faq,
+        .pricing-final {
+          padding: 80px 20px;
+        }
+        .calc-box {
+          padding: 40px 20px;
+        }
+        .roi-results-grid {
+          grid-template-columns: 1fr;
+        }
+        .roi-results-vsep {
+          display: none;
+        }
+        .roi-col {
+          padding: 0;
+        }
+        .roi-col + .roi-col {
+          margin-top: 32px;
+          padding-top: 32px;
+          border-top: 1px solid #e8e8e8;
+        }
+        .roi-summary {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .roi-summary-cta {
+          justify-content: center;
+        }
+        .pricing-factors {
+          grid-template-columns: 1fr;
+        }
+        .pricing-plans-grid {
+          grid-template-columns: 1fr;
+        }
+        .plan--growth {
+          order: -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="top" class="page-top-anchor" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="nav-inner">
+        <a href="index.html#top" class="logo" aria-label="Ivvlyn home">
+          <img class="logo-mark" src="assets/ivvlyn-logo.png" alt="" width="600" height="452" decoding="async" />
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html#top">Home</a>
+          <a href="vaani.html">Agents</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html" aria-current="page">Pricing</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <a class="btn-nav nav-cta desktop-demo" href="contact.html#demo-form-wrap">Book a Demo</a>
+        <a class="btn-nav nav-cta desktop-login" href="http://localhost:3001/login">Login</a>
+        <button type="button" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-overlay" id="mobile-menu" aria-hidden="true">
+      <button type="button" class="mobile-close" aria-label="Close menu">&times;</button>
+      <nav>
+        <a href="index.html#top">Home</a>
+        <a href="vaani.html">Agents</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html" aria-current="page">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="http://localhost:3001/login">Login</a>
+      </nav>
+    </div>
+
+    <main>
+      <section class="pricing-hero" aria-labelledby="pricing-hero-h1">
+        <p class="section-label">Pricing</p>
+        <h1 class="pricing-hero-h1" id="pricing-hero-h1">
+          <span class="pricing-hero-line">
+            <span class="pricing-hero-word" style="--pw: 0">Vaani</span>
+            <span class="pricing-hero-word" style="--pw: 1">pays</span>
+            <span class="pricing-hero-word" style="--pw: 2">for</span>
+            <span class="pricing-hero-word" style="--pw: 3">herself</span>
+          </span>
+          <span class="pricing-hero-line">
+            <span class="pricing-hero-word" style="--pw: 4">in</span>
+            <span class="pricing-hero-word" style="--pw: 5">the</span>
+            <span class="pricing-hero-word" style="--pw: 6">first</span>
+            <span class="pricing-hero-word" style="--pw: 7">week.</span>
+          </span>
+        </h1>
+        <p class="pricing-hero-sub">
+          We do not charge everyone the same. A business doing 50 leads a month should not pay the same as one
+          doing 500. You get a custom quote — always fair, always explained, never a surprise.
+        </p>
+        <div class="pricing-quick-stats" aria-hidden="true">
+          <div class="pricing-stat">
+            <div class="pricing-stat__val">₹0</div>
+            <div class="pricing-stat__lbl">Cost to book a demo</div>
+          </div>
+          <div class="pricing-stat-sep" role="presentation"></div>
+          <div class="pricing-stat">
+            <div class="pricing-stat__val">7 days</div>
+            <div class="pricing-stat__lbl">Until Vaani is live</div>
+          </div>
+          <div class="pricing-stat-sep" role="presentation"></div>
+          <div class="pricing-stat">
+            <div class="pricing-stat__val">Week 1</div>
+            <div class="pricing-stat__lbl">When most clients see ROI</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pricing-roi" aria-labelledby="pricing-roi-h2">
+        <div class="pricing-roi-inner">
+          <p class="section-label">Calculate your ROI</p>
+          <h2 class="pricing-roi-h2 fade-up" id="pricing-roi-h2">
+            Find out what slow responses are costing you every month.
+          </h2>
+          <p class="pricing-roi-lead fade-up" style="transition-delay: 0.06s">
+            Move the sliders. See the real number. Most people are shocked.
+          </p>
+
+          <div id="calculator" aria-label="ROI calculator">
+            <div class="calc-box">
+              <div class="calc-slider-block">
+                <div class="calc-row-head">
+                  <span class="calc-q" id="label-leads">How many leads do you get per month?</span>
+                  <span class="calc-val-disp" id="disp-leads">100 leads/month</span>
+                </div>
+                <input
+                  type="range"
+                  class="roi-slider"
+                  id="slider-leads"
+                  min="10"
+                  max="1000"
+                  step="10"
+                  value="100"
+                  aria-labelledby="label-leads"
+                  aria-valuetext="100 leads per month"
+                />
+                <div class="calc-markers" aria-hidden="true">
+                  <span>10</span>
+                  <span>500</span>
+                  <span>1000+</span>
+                </div>
+              </div>
+
+              <div class="calc-divider" role="presentation"></div>
+
+              <div class="calc-slider-block">
+                <div class="calc-row-head">
+                  <span class="calc-q" id="label-value">What is your average property value?</span>
+                  <span class="calc-val-disp" id="disp-value">₹80L</span>
+                </div>
+                <input
+                  type="range"
+                  class="roi-slider"
+                  id="slider-value"
+                  min="2500000"
+                  max="50000000"
+                  step="500000"
+                  value="8000000"
+                  aria-labelledby="label-value"
+                />
+                <div class="calc-markers" aria-hidden="true">
+                  <span>₹25L</span>
+                  <span>₹2Cr</span>
+                  <span>₹5Cr+</span>
+                </div>
+              </div>
+
+              <div class="calc-divider" role="presentation"></div>
+
+              <div class="calc-slider-block">
+                <div class="calc-row-head">
+                  <span class="calc-q" id="label-conversion"
+                    >What percentage of leads do you currently close into sales?</span
+                  >
+                  <span class="calc-val-disp" id="disp-conversion">5%</span>
+                </div>
+                <input
+                  type="range"
+                  class="roi-slider"
+                  id="slider-conversion"
+                  min="1"
+                  max="30"
+                  step="1"
+                  value="5"
+                  aria-labelledby="label-conversion"
+                />
+                <div class="calc-markers" aria-hidden="true">
+                  <span>1%</span>
+                  <span>15%</span>
+                  <span>30%+</span>
+                </div>
+                <p class="calc-helper">Industry average for real estate is 3-8%</p>
+              </div>
+
+              <div class="roi-results" id="roi-results-panel">
+                <div class="roi-results-grid">
+                  <div class="roi-col">
+                    <p class="roi-col-h roi-col-h--muted">Without Vaani</p>
+                    <div class="roi-metric">
+                      <div class="roi-metric-lbl">Leads you respond to (next morning)</div>
+                      <span class="roi-metric-val" id="stat-responded">0</span>
+                    </div>
+                    <div class="roi-metric">
+                      <div class="roi-metric-lbl">Estimated monthly revenue</div>
+                      <span class="roi-metric-val" id="stat-current-revenue">₹0</span>
+                    </div>
+                    <div class="roi-metric">
+                      <div class="roi-metric-lbl roi-metric-lbl--hurt">Leads lost after hours</div>
+                      <span class="roi-metric-val roi-metric-val--red" id="stat-lost-leads">0</span>
+                    </div>
+                  </div>
+                  <div class="roi-results-vsep" role="presentation"></div>
+                  <div class="roi-col">
+                    <p class="roi-col-h roi-col-h--green">With Vaani</p>
+                    <div class="roi-metric">
+                      <div class="roi-metric-lbl">Leads Vaani responds to</div>
+                      <span class="roi-metric-val" id="stat-vaani-responded">0</span>
+                    </div>
+                    <div class="roi-metric">
+                      <div class="roi-metric-lbl">Estimated monthly revenue</div>
+                      <span class="roi-metric-val roi-metric-val--green" id="stat-vaani-revenue">₹0</span>
+                    </div>
+                    <div class="roi-metric">
+                      <div class="roi-metric-lbl" style="color: #16a34a">Extra revenue per month</div>
+                      <span class="roi-metric-val roi-metric-val--green-italic" id="stat-extra">₹0</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="roi-summary">
+                <p class="roi-summary-txt">Vaani costs a fraction of this.</p>
+                <a class="roi-summary-cta" href="contact.html#demo-form-wrap"
+                  >Get My Custom Quote <span class="roi-summary-arr" aria-hidden="true">→</span></a
+                >
+              </div>
+            </div>
+            <p class="roi-disclaimer">
+              * Estimates based on industry averages. Actual results vary by business, market, and lead quality.
+              Conservative 40% improvement assumption used for Vaani's impact.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="pricing-how" aria-labelledby="pricing-how-h2">
+        <div class="pricing-how-inner">
+          <p class="section-label section-label--left">How we price</p>
+          <h2 class="pricing-how-h2 fade-up" id="pricing-how-h2">Fair pricing that makes sense for your business size.</h2>
+          <p class="pricing-how-sub fade-up" style="transition-delay: 0.06s">
+            We never charge a small broker the same as a large developer. Your quote is based on three things —
+            nothing hidden, nothing complicated.
+          </p>
+          <div class="pricing-factors">
+            <article class="pricing-factor" data-stagger="0">
+              <span class="pricing-factor__num">01</span>
+              <h3>How many leads you get per month</h3>
+              <p>
+                More leads means Vaani works harder and delivers more value. Businesses with higher lead volumes pay
+                more — but also gain proportionally more in return.
+              </p>
+              <div class="pricing-factor__scale">
+                <div class="pricing-factor__scale-lbl">Impact on price</div>
+                <div class="pricing-dots" aria-hidden="true">
+                  <span class="pricing-dot is-on"></span>
+                  <span class="pricing-dot is-on"></span>
+                  <span class="pricing-dot is-on"></span>
+                  <span class="pricing-dot"></span>
+                  <span class="pricing-dot"></span>
+                </div>
+              </div>
+            </article>
+            <article class="pricing-factor" data-stagger="1">
+              <span class="pricing-factor__num">02</span>
+              <h3>Which channels you need</h3>
+              <p>
+                WhatsApp only is our most popular setup. Adding Email and SMS follow-up requires more infrastructure
+                and costs slightly more — but reaches leads you would otherwise miss.
+              </p>
+              <div class="pricing-factor__scale">
+                <div class="pricing-factor__scale-lbl">Impact on price</div>
+                <div class="pricing-dots" aria-hidden="true">
+                  <span class="pricing-dot is-on"></span>
+                  <span class="pricing-dot is-on"></span>
+                  <span class="pricing-dot is-on"></span>
+                  <span class="pricing-dot is-on"></span>
+                  <span class="pricing-dot"></span>
+                </div>
+              </div>
+            </article>
+            <article class="pricing-factor" data-stagger="2">
+              <span class="pricing-factor__num">03</span>
+              <h3>Level of customisation</h3>
+              <p>
+                Standard Vaani setup works for most real estate businesses out of the box. Custom integrations with
+                your existing CRM or portal add to the setup cost.
+              </p>
+              <div class="pricing-factor__scale">
+                <div class="pricing-factor__scale-lbl">Impact on price</div>
+                <div class="pricing-dots" aria-hidden="true">
+                  <span class="pricing-dot is-on"></span>
+                  <span class="pricing-dot is-on"></span>
+                  <span class="pricing-dot"></span>
+                  <span class="pricing-dot"></span>
+                  <span class="pricing-dot"></span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="pricing-plans" aria-labelledby="pricing-plans-h2">
+        <div class="pricing-plans-inner">
+          <p class="section-label">Plans</p>
+          <h2 class="pricing-plans-h2 fade-up" id="pricing-plans-h2">
+            Two plans. Both fully managed. Both with no hidden costs.
+          </h2>
+          <p class="pricing-plans-sub fade-up" style="transition-delay: 0.06s">
+            We do not give you a login and leave you alone. We set everything up, manage it, and improve it every month.
+            You just watch it work.
+          </p>
+
+          <div class="pricing-plans-grid" id="pricing-plans-grid">
+            <article class="plan-card plan--starter" id="plan-starter">
+              <span class="plan-badge">STARTER</span>
+              <p class="plan-for">For businesses with up to 200 leads/month</p>
+              <p class="plan-price">Custom Quote</p>
+              <p class="plan-price-note">Based on your lead volume</p>
+              <hr class="plan-hr" />
+              <ul style="list-style: none; margin: 0; padding: 0">
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>WhatsApp Business integration</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Personalised AI responses in 60 seconds</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Lead scoring 0–100 in real time</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>6-step follow-up over 14 days</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Site visit booking and reminders</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Daily WhatsApp morning briefing</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Full CRM sync after every conversation</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Complete setup by our team</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Monthly performance report</span>
+                </li>
+              </ul>
+              <a class="plan-cta plan-cta--starter" href="contact.html#demo-form-wrap">Get Starter Quote</a>
+            </article>
+
+            <article class="plan-card plan--growth" id="plan-growth">
+              <span class="plan-popular" aria-label="Most popular plan">MOST POPULAR</span>
+              <span class="plan-badge">GROWTH</span>
+              <p class="plan-for">For businesses with 200–1000 leads/month</p>
+              <p class="plan-price">Custom Quote</p>
+              <p class="plan-price-note">Scales with your lead volume</p>
+              <hr class="plan-hr" />
+              <p class="plan-plus">Everything in Starter, plus:</p>
+              <ul style="list-style: none; margin: 0; padding: 0">
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Multi-channel: WhatsApp + Email + SMS</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Custom AI personality for your brand</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Hindi, Hinglish, English auto-detection</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Advanced lead intent analysis</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Priority support — direct founder access</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Weekly performance strategy calls</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Custom CRM and portal integrations</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>A/B testing of follow-up sequences</span>
+                </li>
+                <li class="plan-feat">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.2l3 3 6-6.5" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                  </svg>
+                  <span>Dedicated WhatsApp business number</span>
+                </li>
+              </ul>
+              <a class="plan-cta plan-cta--growth" href="contact.html#demo-form-wrap">Get Growth Quote</a>
+            </article>
+          </div>
+          <p class="pricing-plans-foot fade-up" style="transition-delay: 0.12s">
+            Both plans include full setup, training for your team, and ongoing support. No surprise costs. Ever.
+          </p>
+        </div>
+      </section>
+
+      <section id="pricing-faq" aria-labelledby="pricing-faq-h2">
+        <p class="section-label">Pricing FAQ</p>
+        <h2 class="pricing-how-h2 fade-up" id="pricing-faq-h2" style="max-width: none">Questions about cost.</h2>
+        <div class="faq-list fade-up" style="margin-top: 40px; transition-delay: 0.08s">
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              Why don't you show exact prices?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                Because we refuse to charge everyone the same. A broker handling 40 leads a month and a developer
+                handling 600 leads a month get very different value from Vaani. Charging them the same would be unfair
+                to one of them — usually the smaller business. We give you a custom quote based on your actual
+                situation. Always explained. Never a random number.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              What is the minimum commitment?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                We ask for a 3-month minimum to start — not because we want to lock you in, but because Vaani needs at
+                least 4-6 weeks to show full results as she learns your leads and market. After 3 months, you continue
+                month to month. Cancel anytime with 30 days notice.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              Is there a setup fee?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                Yes — there is a one-time setup fee that covers connecting Vaani to your WhatsApp, website, property
+                portals, and CRM. This is separate from the monthly fee. The exact amount depends on complexity. We tell
+                you upfront — no surprises on the invoice.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              What if I get more leads than expected?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                We build Vaani to handle volume spikes comfortably. If your lead volume consistently moves into a higher
+                tier, we will suggest an upgrade — but only if it makes financial sense for you. We never auto-charge
+                for volume overages.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              Can I start small and scale up?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                Yes — and that is exactly what we recommend. Start with the Starter plan, see the results in the first
+                30 days, then decide if you want to add channels or features. Most clients upgrade naturally after
+                seeing month-one results.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              What is the ROI I should expect?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                We cannot guarantee a specific number because it depends on your property values, market, and lead
+                quality. What we can say honestly: if Vaani captures even 2 extra leads per month that close — she has
+                paid for herself multiple times over. The calculator above gives you a conservative estimate for your
+                specific numbers.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pricing-final dark-section" id="pricing-final" aria-labelledby="pricing-final-h2">
+        <div class="pricing-final-inner">
+          <h2 class="pricing-final-h2" id="pricing-final-h2">
+            <span class="pricing-final-line" style="transition-delay: 0s">Stop calculating.</span>
+            <span class="pricing-final-line" style="transition-delay: 0.1s">Start converting.</span>
+          </h2>
+          <p class="pricing-final-sub fade-up" style="transition-delay: 0.18s">
+            Get your custom quote in a 20-minute call. We will show you Vaani working live — then tell you exactly what
+            it costs for your business specifically.
+          </p>
+          <div class="pricing-final-ctas fade-up" style="transition-delay: 0.24s">
+            <a class="pricing-final-primary" href="contact.html#demo-form-wrap">Get My Custom Quote</a>
+            <button type="button" class="pricing-final-secondary" id="pricing-scroll-calc">
+              Try the Calculator First ↑
+            </button>
+          </div>
+          <p class="pricing-final-note fade-up" style="transition-delay: 0.3s">
+            No commitment. No credit card. Just an honest conversation.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-legal">
+        <p>© 2026 Ivvlyn. All rights reserved.</p>
+        <p class="footer-trademark">
+          Ivvlyn™ is a trademark of Ivvlyn. Other product or company names may be trademarks of their respective owners.
+        </p>
+        <p><a href="mailto:founder@ivvlin.com" class="footer-legal-link">founder@ivvlin.com</a></p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const header = document.querySelector(".site-header");
+        const menuBtn = document.querySelector(".menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeBtn = mobileMenu.querySelector(".mobile-close");
+        const mobileLinks = mobileMenu.querySelectorAll("a");
+
+        function setHeader() {
+          header.classList.toggle("is-scrolled", window.scrollY > 60);
+        }
+        window.addEventListener("scroll", setHeader, { passive: true });
+        setHeader();
+
+        function openMenu(open) {
+          menuBtn.setAttribute("aria-expanded", open);
+          mobileMenu.classList.toggle("is-open", open);
+          mobileMenu.setAttribute("aria-hidden", !open);
+          document.body.style.overflow = open ? "hidden" : "";
+        }
+        menuBtn.addEventListener("click", () => openMenu(true));
+        closeBtn.addEventListener("click", () => openMenu(false));
+        mobileLinks.forEach((a) => a.addEventListener("click", () => openMenu(false)));
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        document.querySelectorAll(".fade-up").forEach((el) => io.observe(el));
+
+        const calcEl = document.getElementById("calculator");
+        const calcIo = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((ent) => {
+              if (ent.isIntersecting) {
+                ent.target.classList.add("is-revealed");
+                calcIo.unobserve(ent.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+        if (calcEl) calcIo.observe(calcEl);
+
+        const factorsRoot = document.querySelector(".pricing-factors");
+        if (factorsRoot) {
+          const fio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((ent) => {
+                if (!ent.isIntersecting) return;
+                ent.target.querySelectorAll(".pricing-factor").forEach((card, i) => {
+                  const d = Number(card.getAttribute("data-stagger") || i);
+                  setTimeout(() => card.classList.add("is-visible"), d * 120);
+                });
+                fio.unobserve(ent.target);
+              });
+            },
+            { threshold: 0.2 }
+          );
+          fio.observe(factorsRoot);
+        }
+
+        const plansGrid = document.getElementById("pricing-plans-grid");
+        if (plansGrid) {
+          const pio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((ent) => {
+                if (!ent.isIntersecting) return;
+                ent.target.querySelectorAll(".plan-card").forEach((c) => c.classList.add("is-visible"));
+                pio.unobserve(ent.target);
+              });
+            },
+            { threshold: 0.18 }
+          );
+          pio.observe(plansGrid);
+        }
+
+        const finalSec = document.getElementById("pricing-final");
+        if (finalSec) {
+          const fio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.querySelectorAll(".pricing-final-line").forEach((line) => line.classList.add("visible"));
+                  fio.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.22 }
+          );
+          fio.observe(finalSec);
+        }
+
+        document.querySelectorAll("#pricing-faq .faq-item").forEach((item) => {
+          const btn = item.querySelector(".faq-q");
+          const ans = item.querySelector(".faq-a");
+          btn.addEventListener("click", () => {
+            const open = !item.classList.contains("is-open");
+            document.querySelectorAll("#pricing-faq .faq-item").forEach((o) => {
+              o.classList.remove("is-open");
+              o.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+              const a = o.querySelector(".faq-a");
+              a.style.maxHeight = "0";
+            });
+            if (open) {
+              item.classList.add("is-open");
+              btn.setAttribute("aria-expanded", "true");
+              ans.style.maxHeight = ans.scrollHeight + "px";
+            }
+          });
+        });
+
+        document.getElementById("pricing-scroll-calc")?.addEventListener("click", () => {
+          document.getElementById("calculator")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        /* —— ROI calculator —— */
+        function formatValue(val) {
+          if (val >= 10000000) return "₹" + (val / 10000000).toFixed(1) + " Cr";
+          return "₹" + (val / 100000).toFixed(0) + "L";
+        }
+
+        function formatRevenue(val) {
+          if (val >= 10000000) return "₹" + (val / 10000000).toFixed(2) + " Cr";
+          if (val >= 100000) return "₹" + (val / 100000).toFixed(1) + "L";
+          return "₹" + Math.round(val).toLocaleString("en-IN");
+        }
+
+        const sliderLeads = document.getElementById("slider-leads");
+        const sliderValue = document.getElementById("slider-value");
+        const sliderConv = document.getElementById("slider-conversion");
+        const dispLeads = document.getElementById("disp-leads");
+        const dispValue = document.getElementById("disp-value");
+        const dispConv = document.getElementById("disp-conversion");
+
+        const elResponded = document.getElementById("stat-responded");
+        const elCurrentRev = document.getElementById("stat-current-revenue");
+        const elLost = document.getElementById("stat-lost-leads");
+        const elVaaniLeads = document.getElementById("stat-vaani-responded");
+        const elVaaniRev = document.getElementById("stat-vaani-revenue");
+        const elExtra = document.getElementById("stat-extra");
+
+        function setSliderFill(input) {
+          const min = Number(input.min);
+          const max = Number(input.max);
+          const v = Number(input.value);
+          const pct = ((v - min) / (max - min)) * 100;
+          input.style.setProperty("--fill", pct + "%");
+        }
+
+        function compute() {
+          const leads = parseInt(sliderLeads.value, 10);
+          const value = parseInt(sliderValue.value, 10);
+          const conv = parseInt(sliderConv.value, 10) / 100;
+
+          const respondedLeads = Math.round(leads * 0.4);
+          const currentRevenue = respondedLeads * conv * value;
+          const lostLeads = leads - respondedLeads;
+          const vaaniLeads = leads;
+          const vaaniConv = conv * 1.4;
+          const vaaniRevenue = vaaniLeads * vaaniConv * value;
+          const extraRevenue = vaaniRevenue - currentRevenue;
+
+          return {
+            respondedLeads,
+            currentRevenue,
+            lostLeads,
+            vaaniLeads,
+            vaaniRevenue,
+            extraRevenue,
+          };
+        }
+
+        function popEl(el) {
+          if (!el) return;
+          el.classList.remove("is-pop");
+          void el.offsetWidth;
+          el.classList.add("is-pop");
+        }
+
+        let initialAnimDone = false;
+        let countUpGen = 0;
+
+        function applyDisplays(withPop) {
+          const leads = parseInt(sliderLeads.value, 10);
+          const d = compute();
+          dispLeads.textContent = leads + " leads/month";
+          dispValue.textContent = formatValue(parseInt(sliderValue.value, 10));
+          dispConv.textContent = parseInt(sliderConv.value, 10) + "%";
+
+          sliderLeads.setAttribute("aria-valuetext", leads + " leads per month");
+
+          const setText = (el, text) => {
+            if (el.textContent !== text) {
+              el.textContent = text;
+              if (withPop) popEl(el);
+            }
+          };
+
+          setText(elResponded, String(d.respondedLeads));
+          setText(elCurrentRev, formatRevenue(d.currentRevenue));
+          setText(elLost, String(d.lostLeads));
+          setText(elVaaniLeads, String(d.vaaniLeads));
+          setText(elVaaniRev, formatRevenue(d.vaaniRevenue));
+          setText(elExtra, formatRevenue(d.extraRevenue));
+        }
+
+        function easeOutQuad(t) {
+          return 1 - (1 - t) * (1 - t);
+        }
+
+        function runInitialCountUp() {
+          const gen = ++countUpGen;
+          const end = compute();
+          const duration = 650;
+          const t0 = performance.now();
+          const starts = {
+            responded: 0,
+            currentRev: 0,
+            lost: 0,
+            vaaniL: 0,
+            vaaniRev: 0,
+            extra: 0,
+          };
+
+          function frame(now) {
+            if (gen !== countUpGen) return;
+            const t = Math.min((now - t0) / duration, 1);
+            const e = easeOutQuad(t);
+            const responded = Math.round(starts.responded + (end.respondedLeads - starts.responded) * e);
+            const lost = Math.round(starts.lost + (end.lostLeads - starts.lost) * e);
+            const vaaniL = Math.round(starts.vaaniL + (end.vaaniLeads - starts.vaaniL) * e);
+            const currentRev = starts.currentRev + (end.currentRevenue - starts.currentRev) * e;
+            const vaaniRev = starts.vaaniRev + (end.vaaniRevenue - starts.vaaniRev) * e;
+            const extra = starts.extra + (end.extraRevenue - starts.extra) * e;
+
+            elResponded.textContent = String(responded);
+            elCurrentRev.textContent = formatRevenue(currentRev);
+            elLost.textContent = String(lost);
+            elVaaniLeads.textContent = String(vaaniL);
+            elVaaniRev.textContent = formatRevenue(vaaniRev);
+            elExtra.textContent = formatRevenue(extra);
+
+            if (t < 1) {
+              requestAnimationFrame(frame);
+            } else if (gen === countUpGen) {
+              initialAnimDone = true;
+              applyDisplays(false);
+            }
+          }
+          requestAnimationFrame(frame);
+        }
+
+        [sliderLeads, sliderValue, sliderConv].forEach((s) => setSliderFill(s));
+
+        function onSliderInput() {
+          countUpGen++;
+          initialAnimDone = true;
+          [sliderLeads, sliderValue, sliderConv].forEach((s) => setSliderFill(s));
+          applyDisplays(true);
+        }
+
+        sliderLeads.addEventListener("input", onSliderInput);
+        sliderValue.addEventListener("input", onSliderInput);
+        sliderConv.addEventListener("input", onSliderInput);
+
+        window.addEventListener("load", () => {
+          setTimeout(runInitialCountUp, 500);
+        });
+      })();
+    </script>
+  </body>
+</html>

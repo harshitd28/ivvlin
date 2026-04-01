@@ -1,10 +1,12 @@
 import type { ReactNode } from "react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { requireClient } from "@/lib/auth/requireClient";
 import ClientSidebar from "@/components/dashboard/ClientSidebar";
 import MobileClientNav from "@/components/layout/MobileClientNav";
 import type { Client as ClientType, UserRole } from "@/lib/types";
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
+  await requireClient();
   const supabase = await createSupabaseServerClient();
 
   let userName = "Client";

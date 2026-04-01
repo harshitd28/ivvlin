@@ -8,7 +8,7 @@ export default async function LeadsPage() {
   if (!supabase) {
     return (
       <div className="p-8">
-        <div className="text-[#0A0A0A] text-[20px] font-medium">Leads</div>
+        <div className="text-[#0A0A0A] text-[22px] font-medium">Leads</div>
         <div className="text-[#555] text-[13px] mt-2">Configure Supabase env vars to load real data.</div>
       </div>
     );
@@ -19,7 +19,7 @@ export default async function LeadsPage() {
   if (!session) {
     return (
       <div className="p-8">
-        <div className="text-[#0A0A0A] text-[20px] font-medium">Leads</div>
+        <div className="text-[#0A0A0A] text-[22px] font-medium">Leads</div>
         <div className="text-[#555] text-[13px] mt-2">Please sign in again.</div>
       </div>
     );
@@ -36,7 +36,7 @@ export default async function LeadsPage() {
   if (!clientId) {
     return (
       <div className="p-8">
-        <div className="text-[#0A0A0A] text-[20px] font-medium">Leads</div>
+        <div className="text-[#0A0A0A] text-[22px] font-medium">Leads</div>
         <div className="text-[#555] text-[13px] mt-2">No client linked to this account.</div>
       </div>
     );

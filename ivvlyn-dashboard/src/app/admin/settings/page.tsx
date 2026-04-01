@@ -13,7 +13,7 @@ function Field({
 }) {
   return (
     <div className="space-y-2">
-      <div className="text-[#555] text-[11px] uppercase tracking-[0.2em] font-semibold">{label}</div>
+      <div className="text-[#555] text-[11px] uppercase tracking-[0.14em] font-semibold">{label}</div>
       {children}
       {hint ? <div className="text-[#555] text-[12px]">{hint}</div> : null}
     </div>
@@ -22,14 +22,14 @@ function Field({
 
 export default function AdminSettingsPage() {
   return (
-    <div className="p-8 pt-14 space-y-6">
-      <div>
-        <h1 className="text-[#0A0A0A] text-[20px] font-medium">Admin Settings</h1>
+    <div className="p-8 pt-0 space-y-6">
+      <div className="sticky top-0 z-20 bg-[#FAFAF8] py-2">
+        <h1 className="text-[#0A0A0A] text-[22px] font-medium">Admin Settings</h1>
         <p className="text-[#555] text-[13px] mt-2">Meta, Claude, system config, and billing placeholder.</p>
       </div>
 
       <section className="border border-[#E8E8E8] rounded-xl p-5 bg-[#FAFAF8] space-y-4">
-        <div className="text-[#0A0A0A] text-[14px] font-medium">META API GLOBAL</div>
+        <div className="text-[#0A0A0A] text-[16px] font-medium">META API GLOBAL</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="Default WhatsApp Template IDs">
             <Input placeholder="e.g. template_id_1, template_id_2" className="bg-transparent border-[#E8E8E8]" />
@@ -45,7 +45,7 @@ export default function AdminSettingsPage() {
       </section>
 
       <section className="border border-[#E8E8E8] rounded-xl p-5 bg-[#FAFAF8] space-y-4">
-        <div className="text-[#0A0A0A] text-[14px] font-medium">CLAUDE API</div>
+        <div className="text-[#0A0A0A] text-[16px] font-medium">CLAUDE API</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="API key">
             <Input placeholder="Claude API key" type="password" className="bg-transparent border-[#E8E8E8]" />
@@ -61,7 +61,7 @@ export default function AdminSettingsPage() {
       </section>
 
       <section className="border border-[#E8E8E8] rounded-xl p-5 bg-[#FAFAF8] space-y-4">
-        <div className="text-[#0A0A0A] text-[14px] font-medium">SYSTEM</div>
+        <div className="text-[#0A0A0A] text-[16px] font-medium">SYSTEM</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="n8n webhook URL">
             <Input placeholder="https://your-n8n-webhook" className="bg-transparent border-[#E8E8E8]" />
@@ -78,7 +78,7 @@ export default function AdminSettingsPage() {
       </section>
 
       <section className="border border-[#E8E8E8] rounded-xl p-5 bg-[#FAFAF8] space-y-4">
-        <div className="text-[#0A0A0A] text-[14px] font-medium">BILLING</div>
+        <div className="text-[#0A0A0A] text-[16px] font-medium">BILLING</div>
         <p className="text-[#555] text-[13px]">Stripe integration coming soon.</p>
         <Button variant="secondary" className="rounded-lg" disabled>
           Coming soon

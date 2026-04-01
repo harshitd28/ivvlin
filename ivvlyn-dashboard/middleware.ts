@@ -3,58 +3,71 @@ import type { NextRequest } from "next/server";
 import { createSupabaseMiddlewareClient } from "@/lib/supabase/middleware";
 import type { UserRole } from "@/lib/types";
 
-function redirectTo(url: string, req: NextRequest) {
-  const u = req.nextUrl.clone();
-  u.pathname = url;
-  return u;
+const PUBLIC_PATHS = new Set(["/", "/agents", "/pricing", "/about", "/contact", "/login"]);
+const STATIC_PREFIXES = ["/_next", "/favicon.ico", "/assets", "/opengraph-image", "/twitter-image"];
+
+function withPath(req: NextRequest, pathname: string) {
+  const url = req.nextUrl.clone();
+  url.pathname = pathname;
+  return url;
 }
 
 export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  if (STATIC_PREFIXES.some((prefix) => pathname.startsWith(prefix))) return NextResponse.next();
+
+  const isPublicPath = PUBLIC_PATHS.has(pathname);
+  const isAdminRoute = pathname === "/admin" || pathname.startsWith("/admin/");
+  const isDashboardRoute = pathname === "/dashboard" || pathname.startsWith("/dashboard/");
+  if (!isPublicPath && !isAdminRoute && !isDashboardRoute) return NextResponse.next();
+
   const res = NextResponse.next();
   const supabase = createSupabaseMiddlewareClient(req, res);
+  const { data: userData } = await supabase.auth.getUser();
+  const user = userData.user;
 
-  const { data: sessionData } = await supabase.auth.getSession();
-  const session = sessionData.session;
-
-  const { pathname } = req.nextUrl;
-  const isAdminRoute = pathname.startsWith("/admin");
-  const isDashboardRoute = pathname.startsWith("/dashboard");
-
-  if (!session) {
+  if (!user) {
     if (isAdminRoute || isDashboardRoute) {
-      const loginUrl = redirectTo("/login", req);
+      const loginUrl = withPath(req, "/login");
       loginUrl.searchParams.set("redirect", pathname);
       return NextResponse.redirect(loginUrl);
     }
     return res;
   }
 
-  const userId = session.user.id;
   const { data: profile } = await supabase
     .from("profiles")
     .select("role")
-    .eq("id", userId)
+    .eq("id", user.id)
     .maybeSingle();
 
   const role = (profile as unknown as { role?: UserRole | null } | null | undefined)?.role ?? undefined;
 
+  if (pathname === "/login") {
+    if (role === "admin") return NextResponse.redirect(withPath(req, "/admin"));
+    if (role === "client") return NextResponse.redirect(withPath(req, "/dashboard"));
+    return res;
+  }
+
+  if (!role) {
+    return NextResponse.redirect(withPath(req, "/login"));
+  }
+
   // Route gating
   if (isAdminRoute) {
     if (role === "admin") return res;
-    const target = redirectTo("/dashboard", req);
-    return NextResponse.redirect(target);
+    return NextResponse.redirect(withPath(req, "/dashboard"));
   }
 
   if (isDashboardRoute) {
     if (role === "client") return res;
-    const target = redirectTo("/admin", req);
-    return NextResponse.redirect(target);
+    return NextResponse.redirect(withPath(req, "/admin"));
   }
 
   return res;
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/admin", "/dashboard/:path*", "/dashboard"],
+  matcher: ["/((?!.*\\..*|_next).*)"],
 };
 

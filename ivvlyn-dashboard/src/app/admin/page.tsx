@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Client } from "@/lib/types";
 import GlobalStats from "@/components/admin/GlobalStats";
@@ -18,8 +19,8 @@ export default async function AdminHomePage({
   // Client-filtered view will be expanded in the next steps.
   if (activeClientId) {
     return (
-      <div className="space-y-4 pt-14">
-        <h1 className="text-[#0A0A0A] text-[20px] font-medium">Client view</h1>
+      <div className="p-8 pt-0 space-y-4">
+        <h1 className="text-[#0A0A0A] text-[22px] font-medium">Client view</h1>
         <p className="text-[#555] text-[13px]">
           Overview for the selected client will be implemented next.
         </p>
@@ -37,8 +38,8 @@ export default async function AdminHomePage({
 
   if (!supabase) {
     return (
-      <div className="space-y-4 pt-14">
-        <h1 className="text-[#0A0A0A] text-[20px] font-medium">{greeting} — Admin</h1>
+      <div className="p-8 pt-0 space-y-4">
+        <h1 className="text-[#0A0A0A] text-[22px] font-medium">{greeting} — Admin</h1>
         <p className="text-[#555] text-[13px]">
           Configure Supabase env vars to load real analytics.
         </p>
@@ -190,15 +191,15 @@ export default async function AdminHomePage({
   }));
 
   return (
-    <div className="pt-14 p-8">
-      <div>
-        <h1 className="text-[#0A0A0A] text-[20px] font-medium">
+    <div className="p-8 pt-0">
+      <div className="sticky top-0 z-20 bg-[#FAFAF8] py-2">
+        <h1 className="text-[#0A0A0A] text-[22px] font-medium">
           {greeting}, {now.toLocaleString(undefined, { hour: "numeric" }) ? "Harshit" : "Harshit"}.
         </h1>
         <p className="text-[#555] text-[13px]">{dateSubtitle}</p>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-4">
         <GlobalStats
           totalClients={typeof totalClientsCount === "number" ? totalClientsCount : 0}
           leadsToday={typeof leadsTodayCount === "number" ? leadsTodayCount : 0}
@@ -209,7 +210,7 @@ export default async function AdminHomePage({
       </div>
 
       <div className="mt-6">
-        <div className="text-[#555] text-[11px] uppercase tracking-[0.2em] font-semibold">YOUR CLIENTS</div>
+        <div className="text-[#555] text-[11px] uppercase tracking-[0.14em] font-semibold">YOUR CLIENTS</div>
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {clients.map((c) => (
             <ClientCard
@@ -221,19 +222,15 @@ export default async function AdminHomePage({
             />
           ))}
 
-          <div
-            role="button"
-            tabIndex={0}
+          <Link
+            href="/admin/clients/new"
             className="bg-white border border-dashed border-[#E8E8E8] rounded-xl p-6 flex items-center justify-center cursor-pointer hover:border-[#444] transition-colors"
-            onClick={() => {
-              window.location.href = "/admin/clients/new";
-            }}
           >
             <div className="flex flex-col items-center">
               <div className="text-[#0A0A0A] text-3xl leading-none">+</div>
               <div className="mt-3 text-[#555] text-[12px] font-medium">Add Client</div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
 

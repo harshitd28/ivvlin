@@ -1,0 +1,1839 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ivvlyn — AI Automation Agency</title>
+    <meta
+      name="description"
+      content="Ivvlyn builds AI employees that capture leads, hold conversations, and update your CRM — 24/7."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --nav-bar-height: 112px;
+        --logo-header-h: clamp(62px, 11.5vw, 88px);
+        --logo-footer-h: clamp(50px, 8.5vw, 72px);
+        --bg: #fafaf8;
+        --black: #0a0a0a;
+        --gray-1: #444444;
+        --gray-2: #888888;
+        --gray-3: #bbbbbb;
+        --gray-4: #e8e8e8;
+        --green: #16a34a;
+        --black-cta: #0a0a0a;
+        --section-pad-y: clamp(56px, 7vw, 88px);
+        --block-gap-y: clamp(36px, 5vw, 56px);
+        --label-size: clamp(16px, 2.1vw, 22px);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: var(--bg);
+        color: var(--black);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Scroll target for #top — must be in normal flow (not on fixed header) */
+      .page-top-anchor {
+        height: 0;
+        width: 100%;
+        scroll-margin-top: 0;
+        pointer-events: none;
+      }
+
+      .nav-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 clamp(24px, 5vw, 40px) 0 clamp(14px, 3.2vw, 28px);
+        min-height: var(--nav-bar-height);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        line-height: 0;
+        text-decoration: none;
+        color: var(--black);
+        flex-shrink: 0;
+        margin-left: -22px;
+      }
+
+      .logo-mark {
+        flex-shrink: 0;
+        display: block;
+        height: var(--logo-header-h);
+        width: auto;
+        max-height: 88px;
+        object-fit: contain;
+        object-position: left center;
+      }
+
+      .logo--footer .logo-mark {
+        height: var(--logo-footer-h);
+        max-height: 72px;
+        object-position: left center;
+      }
+
+      .logo-text {
+        font-size: 17px;
+        font-weight: 300;
+        letter-spacing: 6px;
+        color: var(--black);
+      }
+
+      .logo--footer .logo-text {
+        font-size: 14px;
+        letter-spacing: 5px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0;
+      }
+
+      .nav-links a {
+        font-size: 15px;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        color: #555555;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a:not(:first-child)::before {
+        content: "|";
+        display: inline-block;
+        margin: 0 clamp(14px, 2vw, 22px);
+        color: #d4d4d4;
+        font-weight: 300;
+        pointer-events: none;
+      }
+
+      .nav-links a:hover {
+        color: var(--black);
+      }
+
+      .nav-cta {
+        margin-left: 0;
+      }
+
+      .desktop-demo {
+        margin-left: 24px !important;
+      }
+
+      .desktop-login {
+        margin-left: 8px !important;
+        background: rgba(255, 255, 255, 0.62) !important;
+        color: #0a0a0a !important;
+        border: 1px solid rgba(255, 255, 255, 0.75) !important;
+        backdrop-filter: blur(14px) saturate(1.35) !important;
+        -webkit-backdrop-filter: blur(14px) saturate(1.35) !important;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.7),
+          0 10px 24px rgba(0, 0, 0, 0.12) !important;
+      }
+
+      .desktop-login:hover {
+        background: rgba(255, 255, 255, 0.78) !important;
+        color: #0a0a0a !important;
+      }
+
+      .btn-nav {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 30px;
+        border-radius: 100px;
+        background: var(--black-cta);
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-decoration: none;
+        border: none;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+        transition:
+          background 0.25s ease,
+          transform 0.25s ease,
+          box-shadow 0.4s ease;
+      }
+
+      .btn-nav:hover {
+        background: #333333;
+        transform: scale(1.02);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.14),
+          0 0 28px rgba(255, 255, 255, 0.22),
+          0 0 52px rgba(255, 255, 255, 0.1),
+          0 10px 36px rgba(0, 0, 0, 0.38);
+      }
+
+      .btn-nav:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 2px var(--bg),
+          0 0 0 4px var(--black-cta),
+          0 0 28px rgba(255, 255, 255, 0.2);
+      }
+
+      .menu-btn {
+        display: none;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: none;
+        background: transparent;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+
+      .menu-btn span {
+        display: block;
+        width: 20px;
+        height: 1.5px;
+        background: var(--black);
+        border-radius: 1px;
+      }
+
+      @keyframes liquidGlassDrift {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate3d(3%, -2%, 0) rotate(0.45deg);
+        }
+        66% {
+          transform: translate3d(-2.5%, 2.5%, 0) rotate(-0.4deg);
+        }
+      }
+
+      @keyframes liquidGlassSheen {
+        0%,
+        100% {
+          background-position: 8% 50%;
+        }
+        50% {
+          background-position: 92% 50%;
+        }
+      }
+
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        isolation: isolate;
+        overflow: hidden;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.44) 0%,
+          rgba(250, 250, 248, 0.3) 48%,
+          rgba(247, 247, 243, 0.24) 100%
+        );
+        -webkit-backdrop-filter: blur(40px) saturate(2.1) brightness(1.04);
+        backdrop-filter: blur(40px) saturate(2.1) brightness(1.04);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.72) inset,
+          0 -1px 0 rgba(255, 255, 255, 0.18) inset;
+        transition: background 0.55s ease, border-color 0.55s ease, box-shadow 0.55s ease;
+      }
+
+      .site-header::before {
+        content: "";
+        position: absolute;
+        inset: -55% -25%;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 52% 78% at 14% 18%, rgba(255, 255, 255, 0.58) 0%, transparent 58%),
+          radial-gradient(ellipse 42% 58% at 90% 78%, rgba(175, 198, 255, 0.26) 0%, transparent 52%),
+          radial-gradient(ellipse 38% 48% at 52% 28%, rgba(255, 238, 220, 0.2) 0%, transparent 50%);
+        mix-blend-mode: soft-light;
+        opacity: 0.92;
+        animation: liquidGlassDrift 16s ease-in-out infinite;
+      }
+
+      .site-header::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(
+          102deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.08) 40%,
+          rgba(255, 255, 255, 0.42) 50%,
+          rgba(255, 255, 255, 0.1) 60%,
+          transparent 100%
+        );
+        background-size: 240% 100%;
+        background-position: 8% 50%;
+        mix-blend-mode: overlay;
+        opacity: 0.72;
+        animation: liquidGlassSheen 10s ease-in-out infinite;
+      }
+
+      .site-header.is-scrolled {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.6) 0%,
+          rgba(252, 252, 248, 0.5) 52%,
+          rgba(248, 248, 244, 0.42) 100%
+        );
+        -webkit-backdrop-filter: blur(52px) saturate(2.35) brightness(1.03);
+        backdrop-filter: blur(52px) saturate(2.35) brightness(1.03);
+        border-bottom-color: rgba(255, 255, 255, 0.55);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.82) inset,
+          0 12px 48px rgba(10, 10, 10, 0.08);
+      }
+
+      .site-header.is-scrolled::after {
+        opacity: 0.88;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .site-header::before,
+        .site-header::after {
+          animation: none;
+        }
+      }
+
+      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .site-header {
+          background: rgba(250, 250, 248, 0.97);
+          box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .site-header.is-scrolled {
+          background: rgba(252, 252, 248, 0.99);
+        }
+
+        .site-header::before {
+          opacity: 0.28;
+          animation: none;
+        }
+
+        .site-header::after {
+          opacity: 0.22;
+          animation: none;
+        }
+      }
+
+      .mobile-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: var(--black);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.35s ease;
+      }
+
+      .mobile-overlay.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .mobile-close {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        width: 44px;
+        height: 44px;
+        border: none;
+        background: transparent;
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: 300;
+        line-height: 1;
+      }
+
+      .mobile-overlay nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .mobile-overlay a {
+        font-size: 32px;
+        font-weight: 200;
+        color: #ffffff;
+        text-decoration: none;
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      .mobile-overlay.is-open a {
+        animation: mobileLinkIn 0.5s ease forwards;
+      }
+
+      .mobile-overlay.is-open a:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .mobile-overlay.is-open a:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .mobile-overlay.is-open a:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .mobile-overlay.is-open a:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .mobile-overlay.is-open a:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .mobile-overlay.is-open a:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+
+      @keyframes mobileLinkIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Hero */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: calc(var(--nav-bar-height) + 16px) 24px var(--section-pad-y);
+      }
+
+      .hero-inner {
+        width: 100%;
+        max-width: 960px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-eyebrow {
+        margin: 16px 0 32px;
+        font-size: clamp(11px, 1.2vw, 13px);
+        font-weight: 500;
+        letter-spacing: 0.42em;
+        color: #444444;
+        opacity: 0;
+        animation: eyebrowIn 0.7s ease forwards;
+        animation-delay: 0.5s;
+      }
+
+      @keyframes eyebrowIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .hero-title {
+        margin: 0;
+        max-width: 900px;
+        font-size: clamp(38px, 5.5vw, 68px);
+        font-weight: 200;
+        line-height: 1.08;
+        letter-spacing: -2px;
+        color: var(--black);
+      }
+
+      @media (max-width: 1024px) {
+        .hero-title {
+          font-size: clamp(32px, 5vw, 52px);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: clamp(28px, 7vw, 40px);
+        }
+      }
+
+      .hero-word {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: wordIn 0.6s ease-out forwards;
+        animation-delay: calc(0.3s + var(--w, 0) * 0.06s);
+      }
+
+      @keyframes wordIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-line {
+        display: block;
+      }
+
+      .hero-sub {
+        margin: 28px auto 0;
+        max-width: 480px;
+        font-size: 17px;
+        font-weight: 300;
+        color: #666666;
+        line-height: 1.9;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: subIn 0.8s ease-out forwards;
+        animation-delay: 1.5s;
+      }
+
+      @keyframes subIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-ctas {
+        margin-top: 36px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: subIn 0.7s ease-out forwards;
+        animation-delay: 1.7s;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 36px;
+        border-radius: 100px;
+        background: var(--black);
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        border: none;
+        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
+        transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.4s ease;
+      }
+
+      .btn-primary:hover {
+        background: #222222;
+        transform: translateY(-2px);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.14),
+          0 0 30px rgba(255, 255, 255, 0.22),
+          0 0 56px rgba(255, 255, 255, 0.09),
+          0 12px 40px rgba(0, 0, 0, 0.38);
+      }
+
+      .btn-primary:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 2px var(--bg),
+          0 0 0 4px var(--black),
+          0 0 30px rgba(255, 255, 255, 0.2);
+      }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 32px;
+        border-radius: 100px;
+        background: transparent;
+        color: #555555;
+        font-size: 14px;
+        font-weight: 400;
+        text-decoration: none;
+        border: 1px solid #cccccc;
+        transition: border-color 0.25s ease, color 0.25s ease;
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--black);
+        color: var(--black);
+      }
+
+      .scroll-indicator {
+        margin-top: 28px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        transition: opacity 0.28s ease, transform 0.28s ease;
+        opacity: 0;
+        animation: scrollIndicatorIn 0.6s ease forwards;
+        animation-delay: 2.5s;
+      }
+
+      .scroll-indicator.scroll-indicator--hidden {
+        opacity: 0 !important;
+        transform: translateY(8px);
+        pointer-events: none;
+      }
+
+      @keyframes scrollIndicatorIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .scroll-indicator-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+
+      /* Mouse-wheel style — distinct from site cursor */
+      .scroll-indicator-wheel {
+        width: 24px;
+        height: 38px;
+        border: 1px solid rgba(10, 10, 10, 0.22);
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        padding-top: 7px;
+        opacity: 0;
+        animation: scrollWheelReveal 0.55s ease forwards;
+        animation-delay: 2.5s;
+      }
+
+      @keyframes scrollWheelReveal {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .scroll-indicator-dot {
+        width: 4px;
+        height: 8px;
+        border-radius: 3px;
+        background: var(--black);
+        opacity: 0.75;
+        animation: scrollWheelNudge 2.2s ease-in-out infinite;
+        animation-delay: 3.05s;
+      }
+
+      @keyframes scrollWheelNudge {
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.75;
+        }
+        50% {
+          transform: translateY(12px);
+          opacity: 0.25;
+        }
+      }
+
+      .scroll-indicator-label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        color: #888888;
+        text-transform: lowercase;
+        opacity: 0;
+        animation: scrollLabelReveal 0.5s ease forwards;
+        animation-delay: 2.75s;
+      }
+
+      @keyframes scrollLabelReveal {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .hero-trust {
+        margin-top: 40px;
+        display: inline-flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        max-width: 100%;
+        opacity: 0;
+        animation: trustIn 1s ease-out forwards;
+        animation-delay: 2s;
+      }
+
+      @keyframes trustIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .hero-trust-item {
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        color: #888888;
+        padding: 0 28px;
+      }
+
+      .hero-trust-sep {
+        width: 1px;
+        height: 14px;
+        align-self: center;
+        border: none;
+        background: #bbbbbb;
+        flex-shrink: 0;
+      }
+
+      /* Global fade-up */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Section: Statement */
+      #about {
+        padding: var(--section-pad-y) 24px;
+        background: var(--bg);
+      }
+
+      .statement-text {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 0;
+        border: none;
+        font: inherit;
+        text-align: center;
+        font-size: clamp(28px, 4.5vw, 52px);
+        font-weight: 200;
+        line-height: 1.3;
+        letter-spacing: -1.5px;
+        color: var(--black);
+      }
+
+      .statement-line {
+        display: block;
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .statement-line.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .statement-line:nth-child(2) {
+        transition-delay: 0.2s;
+      }
+
+      .stats-row {
+        margin-top: var(--block-gap-y);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0;
+      }
+
+      .stat-item {
+        padding: 0 32px;
+        text-align: center;
+      }
+
+      .stat-num {
+        font-size: 56px;
+        font-weight: 200;
+        color: var(--black);
+        line-height: 1;
+      }
+
+      .stat-label {
+        margin: 12px auto 0;
+        max-width: 160px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #666666;
+        line-height: 1.6;
+      }
+
+      .stat-sep {
+        width: 1px;
+        align-self: stretch;
+        min-height: 80px;
+        background: var(--gray-4);
+      }
+
+      /* What we build */
+      #services {
+        padding: var(--section-pad-y) 24px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .section-label {
+        font-size: var(--label-size);
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        color: var(--black);
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: clamp(16px, 2.5vw, 24px);
+        line-height: 1.25;
+      }
+
+      .section-label::after {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 1px;
+        margin-top: clamp(12px, 2vw, 18px);
+        background: var(--black);
+        opacity: 0.18;
+      }
+
+      #agents .section-label {
+        text-align: center;
+      }
+
+      #agents .section-label::after {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .section-h2 {
+        margin: 0;
+        max-width: 640px;
+        font-size: clamp(34px, 4.8vw, 58px);
+        font-weight: 200;
+        letter-spacing: -1.5px;
+        color: var(--black);
+        line-height: 1.12;
+      }
+
+      .section-lead {
+        margin: 16px 0 0;
+        max-width: 500px;
+        font-size: 17px;
+        font-weight: 300;
+        color: #666666;
+        line-height: 1.75;
+      }
+
+      .features-grid {
+        margin-top: var(--block-gap-y);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+      }
+
+      .feature-icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .feature-title {
+        margin: 22px 0 0;
+        font-size: 19px;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        color: var(--black);
+        line-height: 1.35;
+      }
+
+      .feature-desc {
+        margin: 10px 0 0;
+        font-size: 15px;
+        font-weight: 300;
+        color: #666666;
+        line-height: 1.8;
+      }
+
+      /* Vaani teaser */
+      #agents {
+        padding: var(--section-pad-y) 24px;
+        max-width: 1100px;
+        margin: 0 auto;
+        background: var(--bg);
+      }
+
+      .vaani-headline {
+        margin: 0 auto;
+        max-width: 720px;
+        font-size: clamp(30px, 4.2vw, 54px);
+        font-weight: 200;
+        letter-spacing: -1.5px;
+        line-height: 1.1;
+        color: var(--black);
+        text-align: center;
+      }
+
+      .vaani-sub {
+        margin: 20px auto 0;
+        max-width: 520px;
+        font-size: 16px;
+        font-weight: 300;
+        color: #555555;
+        line-height: 1.8;
+        text-align: center;
+      }
+
+      .vaani-grid {
+        margin-top: var(--block-gap-y);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: #e8e8e8;
+      }
+
+      .vaani-cell {
+        margin: 0;
+        padding: 40px 36px;
+        background: var(--bg);
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+        text-align: left;
+        font: inherit;
+        color: inherit;
+        transition: background 0.25s ease;
+      }
+
+      .vaani-cell:hover,
+      .vaani-cell:focus-visible {
+        background: #ffffff;
+        outline: none;
+      }
+
+      .vaani-cell-num {
+        display: block;
+        margin-bottom: 20px;
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 2px;
+        color: #bbbbbb;
+        transition: color 0.25s ease;
+      }
+
+      .vaani-cell:hover .vaani-cell-num,
+      .vaani-cell:focus-visible .vaani-cell-num {
+        color: var(--black);
+      }
+
+      .vaani-cell-title {
+        margin: 0 0 10px;
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--black);
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.25s ease;
+        padding-bottom: 2px;
+        display: inline-block;
+      }
+
+      .vaani-cell:hover .vaani-cell-title,
+      .vaani-cell:focus-visible .vaani-cell-title {
+        border-bottom-color: #e8e8e8;
+      }
+
+      .vaani-cell-desc {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 300;
+        color: #777777;
+        line-height: 1.7;
+      }
+
+      .vaani-cta-bar {
+        margin-top: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 36px 48px;
+        background: var(--black);
+      }
+
+      .vaani-cta-copy {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 300;
+        color: #ffffff;
+        max-width: 520px;
+        line-height: 1.5;
+      }
+
+      .vaani-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 28px;
+        border-radius: 100px;
+        background: #ffffff;
+        color: var(--black);
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        border: none;
+        transition: background 0.25s ease;
+      }
+
+      .vaani-cta-btn:hover {
+        background: #f0f0f0;
+      }
+
+      .vaani-cta-btn span {
+        display: inline-block;
+        transition: transform 0.25s ease;
+      }
+
+      .vaani-cta-btn:hover span {
+        transform: translateX(3px);
+      }
+
+      /* Quote */
+      #proof {
+        padding: var(--section-pad-y) 24px;
+        background: var(--black);
+        text-align: center;
+      }
+
+      .quote-mark {
+        margin: 0;
+        font-size: 120px;
+        font-weight: 200;
+        color: #1e1e1e;
+        line-height: 0.8;
+        margin-bottom: -10px;
+      }
+
+      .quote-body {
+        margin: 0 auto;
+        max-width: 640px;
+        font-size: clamp(22px, 3.5vw, 36px);
+        font-weight: 200;
+        color: #ffffff;
+        line-height: 1.4;
+      }
+
+      .quote-by {
+        margin: 20px 0 0;
+        font-size: 13px;
+        font-weight: 300;
+        color: #888888;
+        letter-spacing: 1px;
+      }
+
+      .proof-points {
+        margin-top: var(--block-gap-y);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 40px;
+      }
+
+      .proof-item {
+        text-align: center;
+      }
+
+      .proof-num {
+        font-size: 32px;
+        font-weight: 200;
+        color: #ffffff;
+        line-height: 1.2;
+      }
+
+
+      /* CTA / Contact — same liquid glass as about founder card */
+      @keyframes contactLiquidDrift {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate3d(2.2%, -1.8%, 0) rotate(0.35deg);
+        }
+        66% {
+          transform: translate3d(-1.8%, 2%, 0) rotate(-0.3deg);
+        }
+      }
+
+      @keyframes contactLiquidSheen {
+        0%,
+        100% {
+          background-position: 8% 35%;
+        }
+        50% {
+          background-position: 92% 65%;
+        }
+      }
+
+      #contact {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        min-height: calc(100vh - var(--nav-bar-height));
+        min-height: calc(100svh - var(--nav-bar-height));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: var(--section-pad-y) 24px;
+        text-align: center;
+        background: linear-gradient(
+          165deg,
+          rgba(255, 255, 255, 0.78) 0%,
+          rgba(255, 255, 255, 0.52) 42%,
+          rgba(252, 252, 250, 0.58) 100%
+        );
+        -webkit-backdrop-filter: blur(32px) saturate(1.9) brightness(1.02);
+        backdrop-filter: blur(32px) saturate(1.9) brightness(1.02);
+        border-top: 1px solid rgba(255, 255, 255, 0.55);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.9) inset,
+          0 -1px 0 rgba(255, 255, 255, 0.22) inset,
+          0 28px 56px rgba(10, 10, 10, 0.09),
+          0 10px 24px rgba(10, 10, 10, 0.05);
+      }
+
+      #contact::before {
+        content: "";
+        position: absolute;
+        inset: -45% -35%;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 58% 72% at 10% 6%, rgba(255, 255, 255, 0.58) 0%, transparent 56%),
+          radial-gradient(ellipse 48% 58% at 94% 90%, rgba(195, 205, 255, 0.22) 0%, transparent 52%),
+          radial-gradient(circle at 6% 22%, rgba(255, 255, 255, 0.38) 0%, transparent 38%);
+        mix-blend-mode: soft-light;
+        opacity: 0.92;
+        animation: contactLiquidDrift 18s ease-in-out infinite;
+      }
+
+      #contact::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background: linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.07) 36%,
+          rgba(255, 255, 255, 0.38) 50%,
+          rgba(255, 255, 255, 0.09) 64%,
+          transparent 100%
+        );
+        background-size: 240% 240%;
+        background-position: 8% 35%;
+        mix-blend-mode: overlay;
+        opacity: 0.58;
+        animation: contactLiquidSheen 11s ease-in-out infinite;
+      }
+
+      #contact > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #contact::before,
+        #contact::after {
+          animation: none;
+        }
+      }
+
+      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        #contact {
+          background: var(--bg);
+          border-top: 1px solid var(--gray-4);
+          border-bottom: 1px solid var(--gray-4);
+          box-shadow: none;
+        }
+        #contact::before {
+          opacity: 0.32;
+          animation: none;
+        }
+        #contact::after {
+          opacity: 0.22;
+          animation: none;
+        }
+      }
+
+      .cta-h2 {
+        margin: 0;
+        font-size: clamp(36px, 6vw, 72px);
+        font-weight: 200;
+        letter-spacing: -2px;
+        color: var(--black);
+      }
+
+      .cta-sub {
+        margin: 20px auto 0;
+        max-width: 440px;
+        font-size: 17px;
+        font-weight: 300;
+        color: #666666;
+        line-height: 1.75;
+      }
+
+      .btn-cta {
+        display: inline-flex;
+        margin-top: 32px;
+        padding: 18px 48px;
+        border-radius: 100px;
+        background: var(--black);
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.4s ease;
+      }
+
+      .btn-cta:hover {
+        background: #222222;
+        transform: scale(1.03);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.16),
+          0 0 32px rgba(255, 255, 255, 0.24),
+          0 0 64px rgba(255, 255, 255, 0.1),
+          0 14px 44px rgba(0, 0, 0, 0.4);
+      }
+
+      .btn-cta:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 2px var(--bg),
+          0 0 0 4px var(--black),
+          0 0 32px rgba(255, 255, 255, 0.22);
+      }
+
+      .cta-note {
+        margin: 16px 0 0;
+        font-size: 12px;
+        font-weight: 300;
+        color: #aaaaaa;
+        letter-spacing: 0.5px;
+      }
+
+      /* Footer */
+      .site-footer {
+        border-top: 1px solid var(--gray-4);
+        background: var(--bg);
+      }
+
+      .footer-legal {
+        padding: 40px 48px 48px;
+        text-align: center;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      .footer-legal p {
+        margin: 0 0 12px;
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--gray-2);
+        line-height: 1.65;
+      }
+
+      .footer-legal p:last-child {
+        margin-bottom: 0;
+      }
+
+      .footer-trademark {
+        font-size: 11px !important;
+        color: #aaaaaa !important;
+        line-height: 1.7 !important;
+      }
+
+      .footer-legal-link {
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--gray-2);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .footer-legal-link:hover {
+        color: var(--black);
+      }
+
+      @media (max-width: 1024px) {
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        :root {
+          --section-pad-y: clamp(44px, 10vw, 72px);
+          --block-gap-y: clamp(28px, 8vw, 48px);
+        }
+
+        .nav-links,
+        .nav-cta {
+          display: none;
+        }
+
+        .menu-btn {
+          display: flex;
+        }
+
+        .hero {
+          padding-top: calc(var(--nav-bar-height) + 20px);
+          padding-bottom: 48px;
+        }
+
+        .hero-sub {
+          font-size: 15px;
+        }
+
+        .hero-trust {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          justify-items: center;
+          gap: 20px 16px;
+          max-width: 100%;
+          margin-top: 40px;
+        }
+
+        .hero-trust-item {
+          padding: 0 12px;
+          text-align: center;
+        }
+
+        .hero-trust-sep {
+          display: none;
+        }
+
+        #about,
+        #services,
+        #agents,
+        #contact,
+        #proof {
+          padding: var(--section-pad-y) 24px;
+        }
+
+        .vaani-cell {
+          border-bottom: 1px solid #e8e8e8;
+        }
+
+        .vaani-cell:last-child {
+          border-bottom: none;
+        }
+
+        .vaani-cta-bar {
+          flex-direction: column;
+          align-items: stretch;
+          text-align: center;
+          padding: 28px 24px;
+        }
+
+        .vaani-cta-copy {
+          text-align: center;
+          max-width: none;
+        }
+
+        .vaani-cta-btn {
+          justify-content: center;
+        }
+
+        .vaani-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stat-sep {
+          display: none;
+        }
+
+        .stat-item {
+          padding: 16px;
+        }
+
+        .footer-legal {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="top" class="page-top-anchor" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="nav-inner">
+        <a href="#top" class="logo" aria-label="Ivvlyn home">
+          <img class="logo-mark" src="assets/ivvlyn-logo.png" alt="" width="600" height="452" decoding="async" />
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#top" aria-current="page">Home</a>
+          <a href="vaani.html">Agents</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <a class="btn-nav nav-cta desktop-demo" href="contact.html#demo-form-wrap">Book a Demo</a>
+        <a class="btn-nav nav-cta desktop-login" href="http://localhost:3001/login">Login</a>
+        <button type="button" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-overlay" id="mobile-menu" aria-hidden="true">
+      <button type="button" class="mobile-close" aria-label="Close menu">&times;</button>
+      <nav>
+        <a href="#top" aria-current="page">Home</a>
+        <a href="vaani.html">Agents</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="http://localhost:3001/login">Login</a>
+      </nav>
+    </div>
+
+    <main>
+      <section class="hero" id="hero" aria-labelledby="hero-heading">
+        <div class="hero-inner">
+          <p class="hero-eyebrow">AI AUTOMATION AGENCY</p>
+          <h1 class="hero-title" id="hero-heading">
+            <span class="hero-line"
+              ><span class="hero-word" style="--w: 0">Your</span>
+              <span class="hero-word" style="--w: 1">business</span></span
+            >
+            <span class="hero-line"
+              ><span class="hero-word" style="--w: 2">deserves</span>
+              <span class="hero-word" style="--w: 3">an</span>
+              <span class="hero-word" style="--w: 4">employee</span></span
+            >
+            <span class="hero-line"
+              ><span class="hero-word" style="--w: 5">that</span>
+              <span class="hero-word" style="--w: 6">never</span>
+              <span class="hero-word" style="--w: 7">sleeps.</span></span
+            >
+          </h1>
+          <p class="hero-sub">
+            While your team rests, Ivvlyn's AI employees capture leads, hold conversations, book
+            appointments, and update your CRM — so Monday morning starts with work already done.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn-primary" href="vaani.html">Meet Our AI Agents</a>
+            <a class="btn-secondary" href="#services">See How It Works →</a>
+          </div>
+
+          <div class="hero-trust" aria-hidden="true">
+            <span class="hero-trust-item">5 Active Workflows</span>
+            <span class="hero-trust-sep"></span>
+            <span class="hero-trust-item">135+ Automation Nodes</span>
+            <span class="hero-trust-sep"></span>
+            <span class="hero-trust-item">&lt; 60s Response Time</span>
+            <span class="hero-trust-sep"></span>
+            <span class="hero-trust-item">24/7 No Days Off</span>
+          </div>
+
+          <div class="scroll-indicator" aria-hidden="true">
+            <div class="scroll-indicator-inner">
+              <div class="scroll-indicator-wheel">
+                <span class="scroll-indicator-dot"></span>
+              </div>
+              <span class="scroll-indicator-label">scroll</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" aria-labelledby="about-heading">
+        <h2 class="statement-text" id="about-heading">
+          <span class="statement-line">Every lead you lose after hours</span>
+          <span class="statement-line">is a sale your competitor woke up to.</span>
+        </h2>
+        <div class="stats-row">
+          <div class="stat-item fade-up">
+            <div class="stat-num counter" data-target="78" data-suffix="%">0%</div>
+            <p class="stat-label">of leads choose the first business that responds</p>
+          </div>
+          <span class="stat-sep" aria-hidden="true"></span>
+          <div class="stat-item fade-up">
+            <div class="stat-num counter" data-target="6" data-suffix="x">0x</div>
+            <p class="stat-label">more conversions with same-day follow-up</p>
+          </div>
+          <span class="stat-sep" aria-hidden="true"></span>
+          <div class="stat-item fade-up">
+            <div class="stat-num counter" data-special="rupee">0</div>
+            <p class="stat-label">average monthly ad spend lost to slow responses</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" aria-labelledby="services-heading">
+        <p class="section-label fade-up">WHAT WE BUILD</p>
+        <h2 class="section-h2 fade-up" id="services-heading">Not software. Not chatbots. AI employees.</h2>
+        <p class="section-lead fade-up">
+          Every Ivvlyn agent is a fully autonomous multi-workflow system that handles an entire
+          business function — start to finish, without human intervention.
+        </p>
+        <div class="features-grid">
+          <div class="feature fade-up">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="15" cy="12" r="6" stroke="#0A0A0A" stroke-width="1.2" fill="none" />
+              <path d="M3 12h9M10 9l3 3-3 3" stroke="#0A0A0A" stroke-width="1.2" fill="none" />
+            </svg>
+            <h3 class="feature-title">Captures every lead, instantly</h3>
+            <p class="feature-desc">
+              The moment someone enquires — from your website, MagicBricks, Facebook, anywhere —
+              your AI employee responds. Personally. In under 60 seconds. At 3 AM if needed.
+            </p>
+          </div>
+          <div class="feature fade-up" style="transition-delay: 0.15s">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path
+                d="M4 6h10v8H8l-4 4V6zM11 10h10v8h-6l-3 3v-11z"
+                stroke="#0A0A0A"
+                stroke-width="1.2"
+                fill="none"
+              />
+            </svg>
+            <h3 class="feature-title">Talks like a human, thinks like a strategist</h3>
+            <p class="feature-desc">
+              Hindi, Hinglish, or English — it detects the language and responds naturally. It reads
+              intent, scores leads 0–100, and knows exactly when to push and when to nurture.
+            </p>
+          </div>
+          <div class="feature fade-up" style="transition-delay: 0.3s">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="4" y="5" width="16" height="15" rx="2" stroke="#0A0A0A" stroke-width="1.2" fill="none" />
+              <path d="M4 9h16" stroke="#0A0A0A" stroke-width="1.2" />
+              <path d="M9 14l2 2 4-5" stroke="#0A0A0A" stroke-width="1.2" fill="none" />
+            </svg>
+            <h3 class="feature-title">Books, reminds, and never forgets</h3>
+            <p class="feature-desc">
+              Site visits get scheduled. Reminders go out. No-shows get followed up. Your CRM stays
+              updated. And every morning — a briefing lands in your WhatsApp.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="agents" aria-labelledby="agents-heading">
+        <p class="section-label fade-up">MEET VAANI</p>
+        <h2 class="vaani-headline fade-up" id="agents-heading" style="transition-delay: 0.15s">
+          The AI employee your<br />
+          real estate business<br />
+          has been waiting for.
+        </h2>
+        <p class="vaani-sub fade-up" style="transition-delay: 0.3s">
+          Vaani doesn't just respond to leads.<br />
+          She qualifies them, scores them, follows up 14 days,<br />
+          books site visits, speaks Hindi and Hinglish,<br />
+          and gives your team a full briefing every morning —<br />
+          before they've had their chai.
+        </p>
+
+        <div class="vaani-grid">
+          <article class="vaani-cell fade-up" style="transition-delay: 0s">
+            <span class="vaani-cell-num">01</span>
+            <h3 class="vaani-cell-title">Responds in under 60 seconds. Every time.</h3>
+            <p class="vaani-cell-desc">
+              Day or night. Weekday or Sunday. The moment a lead enquires, Vaani is already in their
+              WhatsApp.
+            </p>
+          </article>
+          <article class="vaani-cell fade-up" style="transition-delay: 0.08s">
+            <span class="vaani-cell-num">02</span>
+            <h3 class="vaani-cell-title">Speaks their language — literally.</h3>
+            <p class="vaani-cell-desc">
+              Hindi, Hinglish, or English — Vaani detects and matches automatically. No awkward bot
+              vibes.
+            </p>
+          </article>
+          <article class="vaani-cell fade-up" style="transition-delay: 0.16s">
+            <span class="vaani-cell-num">03</span>
+            <h3 class="vaani-cell-title">Scores every lead 0 to 100, live.</h3>
+            <p class="vaani-cell-desc">
+              Not all leads are equal. Vaani knows which ones are hot and which ones need nurturing —
+              in real time.
+            </p>
+          </article>
+          <article class="vaani-cell fade-up" style="transition-delay: 0.24s">
+            <span class="vaani-cell-num">04</span>
+            <h3 class="vaani-cell-title">Books site visits. Sends reminders. Handles reschedules.</h3>
+            <p class="vaani-cell-desc">
+              Vaani manages the full visit lifecycle so your sales team shows up to confirmed
+              appointments — not chaos.
+            </p>
+          </article>
+          <article class="vaani-cell fade-up" style="transition-delay: 0.32s">
+            <span class="vaani-cell-num">05</span>
+            <h3 class="vaani-cell-title">Follows up for 14 days without losing energy.</h3>
+            <p class="vaani-cell-desc">
+              6 smart steps across WhatsApp, SMS, and Email. Vaani stays in the game long after your
+              team has moved on.
+            </p>
+          </article>
+          <article class="vaani-cell fade-up" style="transition-delay: 0.4s">
+            <span class="vaani-cell-num">06</span>
+            <h3 class="vaani-cell-title">Your team's morning briefing — delivered to WhatsApp.</h3>
+            <p class="vaani-cell-desc">
+              Hot leads, today's visits, overnight conversations — all summarised and waiting before
+              9 AM.
+            </p>
+          </article>
+        </div>
+
+        <div class="vaani-cta-bar fade-up" style="transition-delay: 0.5s">
+          <p class="vaani-cta-copy">
+            Vaani is live. Real estate businesses are already using her.
+          </p>
+          <a class="vaani-cta-btn" href="vaani.html"
+            >Meet Vaani in Full <span aria-hidden="true">→</span></a
+          >
+        </div>
+      </section>
+
+      <section id="proof" class="dark-section" aria-labelledby="proof-heading">
+        <p class="quote-mark" aria-hidden="true">"</p>
+        <p class="quote-body fade-up" id="proof-heading">
+          We used to lose leads every night. Vaani responds before our competitors even know the lead
+          exists.
+        </p>
+        <p class="quote-by fade-up">— Real Estate Developer, Pune</p>
+        <div class="proof-points">
+          <div class="proof-item fade-up">
+            <div class="proof-num">Response in 47s</div>
+          </div>
+          <div class="proof-item fade-up">
+            <div class="proof-num">14 leads overnight</div>
+          </div>
+          <div class="proof-item fade-up">
+            <div class="proof-num">3 site visits booked</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-heading">
+        <h2 class="cta-h2 fade-up" id="contact-heading">Your AI employee is ready.</h2>
+        <p class="cta-sub fade-up">
+          Book a 20-minute demo. No fluff. We'll show you exactly what your agent will do — for your
+          business.
+        </p>
+        <a class="btn-cta fade-up" href="contact.html#demo-form-wrap">Book a Free Demo</a>
+        <p class="cta-note fade-up">No commitment. No credit card. Just a conversation.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-legal">
+        <p>© 2026 Ivvlyn. All rights reserved.</p>
+        <p class="footer-trademark">
+          Ivvlyn™ is a trademark of Ivvlyn. Other product or company names may be trademarks of their respective owners.
+        </p>
+        <p><a href="mailto:founder@ivvlin.com" class="footer-legal-link">founder@ivvlin.com</a></p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const header = document.querySelector(".site-header");
+        const menuBtn = document.querySelector(".menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeBtn = mobileMenu.querySelector(".mobile-close");
+        const mobileLinks = mobileMenu.querySelectorAll("a");
+
+        function setHeader() {
+          header.classList.toggle("is-scrolled", window.scrollY > 60);
+        }
+        window.addEventListener("scroll", setHeader, { passive: true });
+        setHeader();
+
+        window.addEventListener(
+          "scroll",
+          () => {
+            const scrollIndicator = document.querySelector(".scroll-indicator");
+            if (!scrollIndicator) return;
+            if (window.scrollY > 0) {
+              scrollIndicator.classList.add("scroll-indicator--hidden");
+            } else {
+              scrollIndicator.classList.remove("scroll-indicator--hidden");
+            }
+          },
+          { passive: true }
+        );
+
+        function openMenu(open) {
+          menuBtn.setAttribute("aria-expanded", open);
+          mobileMenu.classList.toggle("is-open", open);
+          mobileMenu.setAttribute("aria-hidden", !open);
+          document.body.style.overflow = open ? "hidden" : "";
+        }
+
+        menuBtn.addEventListener("click", () => openMenu(true));
+        closeBtn.addEventListener("click", () => openMenu(false));
+        mobileLinks.forEach((a) => a.addEventListener("click", () => openMenu(false)));
+
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        document.querySelectorAll('a[href="#top"]').forEach((a) => {
+          a.addEventListener("click", (e) => {
+            if (e.defaultPrevented) return;
+            if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+            if (window.location.hash) {
+              history.replaceState(null, "", window.location.pathname + window.location.search);
+            }
+          });
+        });
+
+        /* IntersectionObserver fade-up */
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+
+        document.querySelectorAll(".fade-up").forEach((el) => io.observe(el));
+
+        const aboutSec = document.getElementById("about");
+        if (aboutSec) {
+          const lineIo = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (!e.isIntersecting) return;
+                e.target.querySelectorAll(".statement-line").forEach((line) => line.classList.add("visible"));
+                lineIo.unobserve(e.target);
+              });
+            },
+            { threshold: 0.2 }
+          );
+          lineIo.observe(aboutSec);
+        }
+
+        function easeOut(t) {
+          return 1 - Math.pow(1 - t, 3);
+        }
+
+        function runCounter(el) {
+          const target = Number(el.dataset.target);
+          const suffix = el.dataset.suffix || "";
+          const start = performance.now();
+          const duration = 1500;
+          function frame(now) {
+            const p = Math.min((now - start) / duration, 1);
+            const v = Math.round(easeOut(p) * target);
+            el.textContent = v + suffix;
+            if (p < 1) requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        }
+
+        function runSpecialRupee(el) {
+          const start = performance.now();
+          const duration = 1500;
+          function frame(now) {
+            const p = Math.min((now - start) / duration, 1);
+            const t = easeOut(p) * 2;
+            if (t >= 2) {
+              el.textContent = "₹2L+";
+              return;
+            }
+            if (t >= 1) el.textContent = "₹1L+";
+            else el.textContent = "₹0L+";
+            if (p < 1) requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        }
+
+        const counterIo = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (!e.isIntersecting) return;
+              const el = e.target;
+              if (el.dataset.special === "rupee") runSpecialRupee(el);
+              else runCounter(el);
+              counterIo.unobserve(el);
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        document.querySelectorAll(".counter").forEach((c) => counterIo.observe(c));
+      })();
+    </script>
+  </body>
+</html>

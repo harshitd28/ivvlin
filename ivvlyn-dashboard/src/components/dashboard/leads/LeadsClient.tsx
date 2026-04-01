@@ -108,9 +108,9 @@ export default function LeadsClient({ leads, counts }: Props) {
 
   return (
     <div className="p-0">
-      <div className="sticky top-0 z-10 bg-[#FAFAF8] border-b border-[#1A1A1A] px-8 py-4">
-        <div className="flex items-end justify-between gap-6">
-          <div className="flex-1 min-w-[520px]">
+      <div className="sticky top-0 z-10 bg-[#FAFAF8] border-b border-[#E8E8E8] px-8 py-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="flex-1 min-w-0">
             <Tabs value={tab} onValueChange={(v) => setTab(v as TabKey)}>
               <TabsList className="bg-transparent p-0 h-auto">
                 <TabsTrigger value="all" className="px-3 py-2 text-[13px]">
@@ -132,8 +132,8 @@ export default function LeadsClient({ leads, counts }: Props) {
             </Tabs>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="w-[200px]">
+          <div className="w-full md:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="w-full sm:w-[200px]">
               <Select value={channelFilter} onValueChange={(v) => setChannelFilter(v as ChannelKey)}>
                 <SelectTrigger className="h-10 rounded-lg bg-transparent border border-[#E8E8E8]">
                   <SelectValue placeholder="All Channels" />
@@ -146,7 +146,7 @@ export default function LeadsClient({ leads, counts }: Props) {
               </Select>
             </div>
 
-            <div className="w-[230px]">
+            <div className="w-full sm:w-[230px]">
               <Select value={sortKey} onValueChange={(v) => setSortKey(v as SortKey)}>
                 <SelectTrigger className="h-10 rounded-lg bg-transparent border border-[#E8E8E8]">
                   <SelectValue placeholder="Newest First" />
@@ -160,7 +160,7 @@ export default function LeadsClient({ leads, counts }: Props) {
               </Select>
             </div>
 
-            <div className="w-[260px]">
+            <div className="w-full sm:w-[260px]">
               <Input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -178,17 +178,19 @@ export default function LeadsClient({ leads, counts }: Props) {
             No leads found.
           </div>
         ) : (
+          <>
+          <div className="hidden md:block">
           <Table>
             <TableHeader>
-              <TableRow className="border-b border-[#1E1E1E]">
-                <TableHead className="text-[#888] font-semibold">Lead</TableHead>
-                <TableHead className="text-[#888] font-semibold">Score</TableHead>
-                <TableHead className="text-[#888] font-semibold">Status</TableHead>
-                <TableHead className="text-[#888] font-semibold">Channel</TableHead>
-                <TableHead className="text-[#888] font-semibold">Source</TableHead>
-                <TableHead className="text-[#888] font-semibold">Last Contact</TableHead>
-                <TableHead className="text-[#888] font-semibold">Interest</TableHead>
-                <TableHead className="text-[#888] font-semibold text-right">Action</TableHead>
+              <TableRow className="border-b border-[#E8E8E8]">
+                <TableHead className="text-[#777] text-[11px] uppercase tracking-[0.14em] font-semibold">Lead</TableHead>
+                <TableHead className="text-[#777] text-[11px] uppercase tracking-[0.14em] font-semibold">Score</TableHead>
+                <TableHead className="text-[#777] text-[11px] uppercase tracking-[0.14em] font-semibold">Status</TableHead>
+                <TableHead className="text-[#777] text-[11px] uppercase tracking-[0.14em] font-semibold">Channel</TableHead>
+                <TableHead className="text-[#777] text-[11px] uppercase tracking-[0.14em] font-semibold">Source</TableHead>
+                <TableHead className="text-[#777] text-[11px] uppercase tracking-[0.14em] font-semibold">Last Contact</TableHead>
+                <TableHead className="text-[#777] text-[11px] uppercase tracking-[0.14em] font-semibold">Interest</TableHead>
+                <TableHead className="text-[#777] text-[11px] uppercase tracking-[0.14em] font-semibold text-right">Action</TableHead>
               </TableRow>
             </TableHeader>
 
@@ -252,6 +254,47 @@ export default function LeadsClient({ leads, counts }: Props) {
               })}
             </TableBody>
           </Table>
+          </div>
+          <div className="md:hidden space-y-3">
+            {filtered.map((l) => {
+              const last = lastContactForLead(l);
+              const timeAgo = last ? formatDistanceToNow(new Date(last), { addSuffix: false }) : "—";
+              const interest = interestPills(l);
+              return (
+                <div key={l.lead_id} className="border border-[#E8E8E8] rounded-xl p-3 bg-white">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <div className="text-[14px] font-medium text-[#111] truncate">{l.name ?? "Lead"}</div>
+                      <div className="text-[12px] text-[#555] mt-1">{l.phone ?? ""}</div>
+                    </div>
+                    <LeadStatusPill status={l.status} />
+                  </div>
+                  <div className="mt-2 inline-flex items-center gap-2">
+                    <ChannelBadge channel={l.channel} />
+                  </div>
+                  <div className="mt-2"><ScoreBar score={typeof l.score === "number" ? l.score : 0} /></div>
+                  <div className="mt-2 text-[12px] text-[#555]">{l.source ?? "—"} · {timeAgo} ago</div>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {interest.slice(0, 3).map((p) => (
+                      <span key={p} className="text-[11px] text-[#555] border border-[#E8E8E8] rounded-full px-2 py-0.5">
+                        {p}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-3">
+                    <Button
+                      variant="secondary"
+                      className="rounded-lg"
+                      onClick={() => router.push(`/dashboard/leads/${encodeURIComponent(l.lead_id)}`)}
+                    >
+                      View →
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          </>
         )}
       </div>
     </div>

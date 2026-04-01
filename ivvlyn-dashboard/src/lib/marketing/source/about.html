@@ -1,0 +1,1407 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Story — Ivvlyn</title>
+    <meta
+      name="description"
+      content="Ivvlyn builds AI employees that answer leads fast — starting with Vaani for real estate. Meet the founder and why we exist."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+      .btn-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 52px;
+        border-radius: 100px;
+        background: var(--black);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        border: none;
+        font-family: inherit;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.4s ease;
+      }
+      .btn-pill:hover {
+        background: #222;
+        transform: scale(1.02);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.16),
+          0 0 32px rgba(255, 255, 255, 0.24),
+          0 0 64px rgba(255, 255, 255, 0.1),
+          0 14px 44px rgba(0, 0, 0, 0.4);
+      }
+      .btn-pill:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 2px var(--bg),
+          0 0 0 4px var(--black),
+          0 0 32px rgba(255, 255, 255, 0.22);
+      }
+      .link-founder {
+        display: inline-block;
+        margin-top: 36px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--black);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.3s ease, color 0.2s ease;
+      }
+      .link-founder:hover {
+        border-bottom-color: var(--black);
+      }
+
+      /* Section labels — dash under text */
+      .section-label {
+        font-size: var(--label-size);
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        color: var(--black);
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: fit-content;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+      .section-label::after {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 1px;
+        margin-top: 12px;
+        background: var(--black);
+        flex-shrink: 0;
+      }
+      .section-label--light {
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .section-label--light::after {
+        background: rgba(255, 255, 255, 0.25);
+      }
+      .section-label--muted {
+        font-size: 11px;
+        letter-spacing: 4px;
+        color: #555;
+      }
+      .section-label--muted::after {
+        background: rgba(255, 255, 255, 0.22);
+      }
+
+      /* Hero */
+      #about-hero {
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 160px 24px 80px;
+        padding-top: calc(var(--nav-bar-height) + 96px);
+      }
+      .about-hero-h1 {
+        font-size: clamp(32px, 5vw, 62px);
+        font-weight: 200;
+        letter-spacing: -2px;
+        line-height: 1.12;
+        color: var(--black);
+        max-width: 820px;
+        margin: 0 auto;
+      }
+      .about-hero-lead {
+        font-size: 18px;
+        font-weight: 300;
+        color: #666;
+        max-width: 520px;
+        margin: 28px auto 0;
+        line-height: 1.85;
+      }
+
+      .scroll-indicator {
+        margin-top: 48px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        transition: opacity 0.28s ease, transform 0.28s ease;
+        opacity: 0;
+        animation: scrollIndicatorIn 0.6s ease forwards;
+        animation-delay: 1.2s;
+      }
+      .scroll-indicator.scroll-indicator--hidden {
+        opacity: 0 !important;
+        transform: translateY(8px);
+        pointer-events: none;
+      }
+      @keyframes scrollIndicatorIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .scroll-indicator-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      .scroll-indicator-wheel {
+        width: 24px;
+        height: 38px;
+        border: 1px solid rgba(10, 10, 10, 0.22);
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        padding-top: 7px;
+        opacity: 0;
+        animation: scrollWheelReveal 0.55s ease forwards;
+        animation-delay: 1.2s;
+      }
+      @keyframes scrollWheelReveal {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .scroll-indicator-dot {
+        width: 4px;
+        height: 8px;
+        border-radius: 3px;
+        background: var(--black);
+        opacity: 0.75;
+        animation: scrollWheelNudge 2.2s ease-in-out infinite;
+        animation-delay: 1.65s;
+      }
+      @keyframes scrollWheelNudge {
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.75;
+        }
+        50% {
+          transform: translateY(12px);
+          opacity: 0.25;
+        }
+      }
+      .scroll-indicator-label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        color: #888;
+        text-transform: lowercase;
+        opacity: 0;
+        animation: scrollLabelReveal 0.5s ease forwards;
+        animation-delay: 1.35s;
+      }
+      @keyframes scrollLabelReveal {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .fade-up--founder {
+        opacity: 0;
+        transform: translateY(24px) scale(0.98);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+      .fade-up--founder.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .fade-up--cta-line {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.55s ease, transform 0.55s ease;
+      }
+      .fade-up--cta-line.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Founding */
+      @keyframes quoteLiquidDrift {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate3d(2.2%, -1.8%, 0) rotate(0.35deg);
+        }
+        66% {
+          transform: translate3d(-1.8%, 2%, 0) rotate(-0.3deg);
+        }
+      }
+
+      @keyframes quoteLiquidSheen {
+        0%,
+        100% {
+          background-position: 8% 35%;
+        }
+        50% {
+          background-position: 92% 65%;
+        }
+      }
+
+      #founding-story {
+        background: #fff;
+        padding: 140px 48px;
+      }
+      .founding-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 45% 55%;
+        gap: 80px;
+        align-items: start;
+      }
+      .quote-card {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: linear-gradient(
+          155deg,
+          rgba(34, 34, 38, 0.82) 0%,
+          rgba(18, 18, 20, 0.88) 45%,
+          rgba(10, 10, 12, 0.92) 100%
+        );
+        -webkit-backdrop-filter: blur(36px) saturate(1.75) brightness(0.88);
+        backdrop-filter: blur(36px) saturate(1.75) brightness(0.88);
+        border-radius: 20px;
+        padding: 48px 40px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.11) inset,
+          0 -2px 14px rgba(0, 0, 0, 0.5) inset,
+          0 28px 56px rgba(0, 0, 0, 0.32),
+          0 12px 28px rgba(0, 0, 0, 0.2);
+      }
+
+      .quote-card::before {
+        content: "";
+        position: absolute;
+        inset: -45% -35%;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 55% 68% at 8% 4%, rgba(255, 255, 255, 0.18) 0%, transparent 55%),
+          radial-gradient(ellipse 45% 52% at 95% 92%, rgba(150, 175, 255, 0.14) 0%, transparent 48%),
+          radial-gradient(circle at 18% 38%, rgba(255, 255, 255, 0.1) 0%, transparent 42%);
+        mix-blend-mode: soft-light;
+        opacity: 0.88;
+        animation: quoteLiquidDrift 18s ease-in-out infinite;
+      }
+
+      .quote-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        border-radius: inherit;
+        background: linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.05) 34%,
+          rgba(255, 255, 255, 0.16) 50%,
+          rgba(255, 255, 255, 0.06) 66%,
+          transparent 100%
+        );
+        background-size: 240% 240%;
+        background-position: 8% 35%;
+        mix-blend-mode: overlay;
+        opacity: 0.72;
+        animation: quoteLiquidSheen 11s ease-in-out infinite;
+      }
+
+      .quote-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .quote-card::before,
+        .quote-card::after {
+          animation: none;
+        }
+      }
+
+      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .quote-card {
+          background: var(--black);
+          border: 1px solid #2a2a2a;
+          box-shadow: 0 24px 52px rgba(0, 0, 0, 0.4);
+        }
+        .quote-card::before {
+          opacity: 0.28;
+          animation: none;
+        }
+        .quote-card::after {
+          opacity: 0.32;
+          animation: none;
+        }
+      }
+
+      .quote-card__mark {
+        font-size: 80px;
+        font-weight: 200;
+        color: rgba(255, 255, 255, 0.22);
+        line-height: 0.8;
+        margin: 0;
+      }
+      .quote-card__body {
+        font-size: 18px;
+        font-weight: 200;
+        color: #f2f2f2;
+        line-height: 1.8;
+        font-style: italic;
+        margin: 8px 0 0;
+      }
+      .quote-card__rule {
+        width: 32px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.16);
+        margin-top: 24px;
+        border: none;
+      }
+      .quote-card__attr {
+        font-size: 12px;
+        color: #999;
+        margin-top: 16px;
+        letter-spacing: 1px;
+      }
+      .founding-copy p {
+        font-size: 17px;
+        font-weight: 300;
+        color: #444;
+        line-height: 1.9;
+        margin: 0 0 28px;
+      }
+      .founding-copy p:last-child {
+        margin-bottom: 0;
+        font-size: 15px;
+        color: #666;
+      }
+
+      /* Founder */
+      @keyframes founderLiquidDrift {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate3d(2.2%, -1.8%, 0) rotate(0.35deg);
+        }
+        66% {
+          transform: translate3d(-1.8%, 2%, 0) rotate(-0.3deg);
+        }
+      }
+
+      @keyframes founderLiquidSheen {
+        0%,
+        100% {
+          background-position: 8% 35%;
+        }
+        50% {
+          background-position: 92% 65%;
+        }
+      }
+
+      #founder {
+        padding: 140px 48px;
+        background: var(--bg);
+      }
+      .founder-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 80px;
+      }
+      .founder-card {
+        flex: 0 0 40%;
+        max-width: 400px;
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: linear-gradient(
+          165deg,
+          rgba(255, 255, 255, 0.78) 0%,
+          rgba(255, 255, 255, 0.52) 42%,
+          rgba(252, 252, 250, 0.58) 100%
+        );
+        -webkit-backdrop-filter: blur(32px) saturate(1.9) brightness(1.02);
+        backdrop-filter: blur(32px) saturate(1.9) brightness(1.02);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 20px;
+        padding: 40px 32px;
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.9) inset,
+          0 -1px 0 rgba(255, 255, 255, 0.22) inset,
+          0 28px 56px rgba(10, 10, 10, 0.09),
+          0 10px 24px rgba(10, 10, 10, 0.05);
+      }
+
+      .founder-card::before {
+        content: "";
+        position: absolute;
+        inset: -45% -35%;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 58% 72% at 10% 6%, rgba(255, 255, 255, 0.58) 0%, transparent 56%),
+          radial-gradient(ellipse 48% 58% at 94% 90%, rgba(195, 205, 255, 0.22) 0%, transparent 52%),
+          radial-gradient(circle at 6% 22%, rgba(255, 255, 255, 0.38) 0%, transparent 38%);
+        mix-blend-mode: soft-light;
+        opacity: 0.92;
+        animation: founderLiquidDrift 18s ease-in-out infinite;
+      }
+
+      .founder-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        border-radius: inherit;
+        background: linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.07) 36%,
+          rgba(255, 255, 255, 0.38) 50%,
+          rgba(255, 255, 255, 0.09) 64%,
+          transparent 100%
+        );
+        background-size: 240% 240%;
+        background-position: 8% 35%;
+        mix-blend-mode: overlay;
+        opacity: 0.58;
+        animation: founderLiquidSheen 11s ease-in-out infinite;
+      }
+
+      .founder-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .founder-card::before,
+        .founder-card::after {
+          animation: none;
+        }
+      }
+
+      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .founder-card {
+          background: #fff;
+          border: 1px solid var(--gray-4);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.07);
+        }
+        .founder-card::before {
+          opacity: 0.32;
+          animation: none;
+        }
+        .founder-card::after {
+          opacity: 0.22;
+          animation: none;
+        }
+      }
+      .founder-card__avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: var(--black);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 28px;
+        font-weight: 200;
+      }
+      .founder-card__name {
+        margin-top: 20px;
+        font-size: 28px;
+        font-weight: 200;
+        letter-spacing: -0.5px;
+        color: var(--black);
+      }
+      .founder-card__title {
+        font-size: 13px;
+        font-weight: 400;
+        color: #888;
+        margin-top: 4px;
+      }
+      .founder-card__loc {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 8px;
+        font-size: 12px;
+        color: #aaa;
+      }
+      .founder-card__hr {
+        height: 1px;
+        background: var(--gray-4);
+        border: none;
+        margin: 24px 0;
+      }
+      .founder-stat {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 12px 0;
+        border-bottom: 1px solid #f8f8f8;
+        font-size: 11px;
+        color: #aaa;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .founder-stat span:last-child {
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--black);
+        text-transform: none;
+        letter-spacing: 0;
+        text-align: right;
+      }
+      .founder-links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .founder-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: #666;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      .founder-links a:hover {
+        color: var(--black);
+      }
+      .founder-bio {
+        flex: 1;
+        min-width: 0;
+      }
+      .founder-bio h2 {
+        font-size: clamp(24px, 3.5vw, 40px);
+        font-weight: 200;
+        letter-spacing: -1px;
+        line-height: 1.2;
+        color: var(--black);
+        margin: 0 0 32px;
+      }
+      .founder-bio p {
+        font-size: 16px;
+        font-weight: 300;
+        color: #444;
+        line-height: 1.9;
+        margin: 0 0 24px;
+      }
+      .founder-bio p:last-of-type {
+        margin-bottom: 0;
+      }
+
+      /* Beliefs */
+      #beliefs {
+        background: #fff;
+        padding: 140px 48px;
+        text-align: center;
+      }
+      .beliefs-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .beliefs-h2 {
+        font-size: clamp(28px, 4vw, 52px);
+        font-weight: 200;
+        letter-spacing: -1.5px;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.15;
+        color: var(--black);
+      }
+      .beliefs-grid {
+        margin-top: 80px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--gray-4);
+      }
+      .belief-cell {
+        background: #fff;
+        padding: 56px 40px;
+        text-align: left;
+      }
+      .belief-num {
+        display: block;
+        font-size: 11px;
+        font-weight: 400;
+        color: #ccc;
+        letter-spacing: 3px;
+        margin-bottom: 32px;
+      }
+      .belief-title {
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--black);
+        margin: 0 0 16px;
+        line-height: 1.4;
+      }
+      .belief-desc {
+        font-size: 14px;
+        font-weight: 300;
+        color: #666;
+        line-height: 1.85;
+        margin: 0;
+      }
+
+      /* Vision */
+      #vision {
+        padding: 140px 48px;
+        background: var(--black);
+        text-align: center;
+      }
+      .vision-inner {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .vision-h2 {
+        font-size: clamp(36px, 6vw, 76px);
+        font-weight: 200;
+        letter-spacing: -3px;
+        color: #fff;
+        line-height: 1.05;
+        margin: 0 0 32px;
+      }
+      .vision-body {
+        font-size: 18px;
+        font-weight: 300;
+        color: #666;
+        line-height: 2;
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .vision-body .agent-name {
+        color: #fff;
+        font-style: italic;
+      }
+      .vision-line {
+        display: block;
+        margin-bottom: 0.35em;
+      }
+      .vision-line:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Roadmap */
+      .roadmap-viz {
+        margin-top: 80px;
+        position: relative;
+        padding: 48px 0 32px;
+      }
+      .roadmap-track {
+        position: relative;
+        height: 120px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .roadmap-line-bg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 64px;
+        height: 1px;
+        background: repeating-linear-gradient(
+          90deg,
+          #222 0,
+          #222 6px,
+          transparent 6px,
+          transparent 12px
+        );
+      }
+      .roadmap-line-solid {
+        position: absolute;
+        left: 0;
+        top: 64px;
+        height: 1px;
+        width: 0;
+        background: #333;
+        transition: width 1s ease-out;
+      }
+      .roadmap-viz.in-view .roadmap-line-solid {
+        width: 25%;
+      }
+      .roadmap-stops {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .roadmap-stop {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 25%;
+      }
+      .roadmap-stop__above {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #555;
+        margin-bottom: 12px;
+        min-height: 2.6em;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+      .roadmap-stop--now .roadmap-stop__above {
+        color: #fff;
+      }
+      .roadmap-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid #444;
+        background: transparent;
+        flex-shrink: 0;
+      }
+      .roadmap-stop--now .roadmap-dot {
+        border-color: #fff;
+        background: #fff;
+      }
+      .roadmap-stop--future .roadmap-dot {
+        border-color: #444;
+      }
+      .roadmap-stop--dashed .roadmap-dot {
+        border-style: dashed;
+        border-color: #333;
+      }
+      .roadmap-stop__below {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #555;
+        margin-top: 12px;
+        line-height: 1.35;
+      }
+      .roadmap-stop--now .roadmap-stop__below {
+        color: #fff;
+      }
+
+      /* Why trust */
+      #why-trust {
+        padding: 120px 48px;
+        background: var(--bg);
+      }
+      .why-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .why-h2 {
+        font-size: clamp(28px, 4vw, 52px);
+        font-weight: 200;
+        letter-spacing: -1.5px;
+        color: var(--black);
+        margin: 0;
+      }
+      .why-lead {
+        font-size: 17px;
+        font-weight: 300;
+        color: #666;
+        max-width: 520px;
+        line-height: 1.85;
+        margin-top: 20px;
+      }
+      .trust-grid {
+        margin-top: 72px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .trust-card {
+        background: #fff;
+        border: 1px solid var(--gray-4);
+        border-radius: 16px;
+        padding: 36px 32px;
+        transition: border-color 0.3s ease;
+      }
+      .trust-card:hover {
+        border-color: var(--black);
+      }
+      .trust-card h3 {
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--black);
+        margin: 16px 0 0;
+      }
+      .trust-card p {
+        font-size: 14px;
+        font-weight: 300;
+        color: #666;
+        line-height: 1.8;
+        margin: 10px 0 0;
+      }
+
+      /* Personal CTA */
+      #booking {
+        padding: 140px 48px;
+        background: #fff;
+        text-align: center;
+      }
+      .cta-personal-inner {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .cta-personal-h2 {
+        font-size: clamp(28px, 4.5vw, 56px);
+        font-weight: 200;
+        letter-spacing: -2px;
+        color: var(--black);
+        line-height: 1.1;
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      .cta-personal-body {
+        font-size: 17px;
+        font-weight: 300;
+        color: #555;
+        line-height: 1.9;
+        max-width: 540px;
+        margin: 28px auto 0;
+      }
+      .cta-personal-sig {
+        margin-top: 32px;
+        font-size: 15px;
+        font-weight: 300;
+        color: #888;
+        font-style: italic;
+      }
+      .cta-personal-note {
+        margin-top: 16px;
+        font-size: 12px;
+        color: #aaa;
+        font-weight: 300;
+      }
+
+      @media (max-width: 900px) {
+        .founding-inner {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .founder-inner {
+          flex-direction: column;
+          gap: 48px;
+        }
+        .founder-card {
+          flex: none;
+          max-width: none;
+          width: 100%;
+        }
+        .beliefs-grid {
+          grid-template-columns: 1fr;
+        }
+        .trust-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #founding-story,
+        #founder,
+        #beliefs,
+        #vision,
+        #why-trust,
+        #booking {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        .roadmap-viz {
+          margin-top: 56px;
+        }
+        .roadmap-track {
+          display: none;
+        }
+        .roadmap-stops {
+          flex-direction: column;
+          align-items: stretch;
+          padding-left: 0;
+          gap: 32px;
+        }
+        .roadmap-stop {
+          max-width: 100%;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          text-align: left;
+          gap: 14px 16px;
+          padding-left: 8px;
+          border-left: 1px solid #333;
+          margin-left: 11px;
+          padding-bottom: 8px;
+        }
+        .roadmap-stop__above {
+          min-height: 0;
+          flex: 1 1 100%;
+          justify-content: flex-start;
+          margin-bottom: 0;
+          order: 2;
+        }
+        .roadmap-dot {
+          order: 1;
+          position: relative;
+          top: 2px;
+          flex-shrink: 0;
+          margin-left: -19px;
+          background: var(--black);
+        }
+        .roadmap-stop--now .roadmap-dot {
+          box-shadow: 0 0 0 4px var(--black);
+        }
+        .roadmap-stop__below {
+          order: 3;
+          flex: 1 1 100%;
+          margin-top: 0;
+          margin-left: 0;
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="nav-inner">
+        <a href="index.html#top" class="logo" aria-label="Ivvlyn home">
+          <img class="logo-mark" src="assets/ivvlyn-logo.png" alt="" width="600" height="452" decoding="async" />
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html#top">Home</a>
+          <a href="vaani.html">Agents</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html" aria-current="page">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <a class="btn-nav nav-cta desktop-demo" href="contact.html#demo-form-wrap">Book a Demo</a>
+        <a class="btn-nav nav-cta desktop-login" href="http://localhost:3001/login">Login</a>
+        <button type="button" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-overlay" id="mobile-menu" aria-hidden="true">
+      <button type="button" class="mobile-close" aria-label="Close menu">&times;</button>
+      <nav>
+        <a href="index.html#top">Home</a>
+        <a href="vaani.html">Agents</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html" aria-current="page">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="http://localhost:3001/login">Login</a>
+      </nav>
+    </div>
+
+    <main>
+      <section id="about-hero" aria-labelledby="about-hero-h1">
+        <p class="section-label fade-up">OUR STORY</p>
+        <h1 class="about-hero-h1 fade-up" id="about-hero-h1" style="transition-delay: 0.06s">
+          We are not a tech company that stumbled into automation. We are builders who got tired of watching businesses lose money to slow responses.
+        </h1>
+        <p class="about-hero-lead fade-up" style="transition-delay: 0.12s">
+          Ivvlyn was not built in a boardroom. It was built out of frustration — watching businesses pour real money into ads, only to lose leads because nobody replied fast enough.
+        </p>
+        <div class="scroll-indicator" aria-hidden="true">
+          <div class="scroll-indicator-inner">
+            <div class="scroll-indicator-wheel">
+              <span class="scroll-indicator-dot"></span>
+            </div>
+            <span class="scroll-indicator-label">scroll</span>
+          </div>
+        </div>
+      </section>
+
+      <article id="founding-story" aria-labelledby="founding-heading">
+        <div class="founding-inner">
+          <div class="quote-card fade-up">
+            <p class="quote-card__mark" aria-hidden="true">"</p>
+            <p class="quote-card__body" id="founding-heading">
+              I watched a real estate developer burn through a full month of Facebook ad spend in thirty days. 47 leads came in. 31 of them messaged after 9 PM. Nobody replied until morning. 19 of those 31 had already booked with someone else.<br /><br />
+              That was the day I decided to build Vaani.
+            </p>
+            <hr class="quote-card__rule" />
+            <p class="quote-card__attr">Harshit, Founder — Ivvlyn</p>
+          </div>
+          <div class="founding-copy fade-up" style="transition-delay: 0.1s">
+            <p>
+              Ivvlyn started with one question: why are businesses still losing leads to slow responses in 2026 — when the technology to fix it has existed for years?
+            </p>
+            <p>
+              The answer wasn't laziness. It was complexity. The tools were too expensive, too technical, or too generic to work for a local business whose customers message at 11 PM — in plain language, mixed languages, shorthand — asking real questions nobody was awake to answer.
+            </p>
+            <p>
+              So we built Vaani — not as a chatbot, not as a plugin, but as a real AI employee. Built for messy, real conversations. Built for how people actually type on WhatsApp. Built to work at 2 AM when your team is asleep — wherever in the world your leads are.
+            </p>
+            <p>
+              We are a small team. We don't have a fancy office or a 50-person sales team. What we have is a product that genuinely works — and the obsession to make it better every week.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <section id="founder" aria-labelledby="founder-heading">
+        <p class="section-label fade-up">THE FOUNDER</p>
+        <div class="founder-inner">
+          <aside class="founder-card fade-up--founder" aria-label="Founder profile">
+            <div class="founder-card__avatar" aria-hidden="true">H</div>
+            <div class="founder-card__name">Harshit</div>
+            <p class="founder-card__title">Founder, Ivvlyn</p>
+            <div class="founder-card__loc">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 21s7-4.35 7-10a7 7 0 10-14 0c0 5.65 7 10 7 10z"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                />
+                <circle cx="12" cy="11" r="2" stroke="currentColor" stroke-width="1.2" />
+              </svg>
+              Bhopal · working with teams worldwide
+            </div>
+            <hr class="founder-card__hr" />
+            <div class="founder-stat"><span>Currently building</span><span>Ivvlyn</span></div>
+            <div class="founder-stat"><span>Based in</span><span>Bhopal, MP</span></div>
+            <hr class="founder-card__hr" />
+            <div class="founder-links">
+              <a href="https://www.linkedin.com/in/harshitdivekar/" target="_blank" rel="noopener noreferrer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M6 10h3v8H6V10zm0-3.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM13 10h3v1.3c.8-1.4 2.5-2.1 4.1-2.1 2.8 0 4.9 1.7 4.9 5.4V18h-3v-4.7c0-2-.7-3.4-2.5-3.4-1.5 0-2.5 1-2.5 2.7V18h-3V10z"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                LinkedIn
+              </a>
+              <a href="mailto:founder@ivvlin.com">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.2" />
+                </svg>
+                founder@ivvlin.com
+              </a>
+            </div>
+          </aside>
+          <div class="founder-bio fade-up" style="transition-delay: 0.12s">
+            <h2 id="founder-heading">
+              I have always believed that the best technology is the kind that feels invisible.
+            </h2>
+            <p>
+              I am a student-entrepreneur from Bhopal. I started Ivvlyn because I saw a gap nobody was filling well — fast, human-feeling follow-up at a price that made sense, tuned to how people really message (not how Silicon Valley assumes they do).
+            </p>
+            <p>
+              I have spent months talking to real estate developers, clinic owners, coaching institute founders — in more than one country. The same story keeps showing up: too many leads lost to slow responses, too much time burned on follow-ups, too much ad spend with too little to show for it.
+            </p>
+            <p>
+              Vaani is my answer to that. She is the first of many AI employees we are building at Ivvlyn — each one designed for a specific industry, each one built to feel like a real person and work like a machine.
+            </p>
+            <p>
+              If you are a business owner reading this — I want to talk to you directly. Not to sell you something. To understand your problem first. Book a call. Tell me what is breaking. I will tell you honestly if Vaani can fix it.
+            </p>
+            <a class="link-founder" href="mailto:founder@ivvlin.com">Talk to Harshit directly →</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="beliefs" aria-labelledby="beliefs-heading">
+        <div class="beliefs-inner">
+          <p class="section-label fade-up">OUR BELIEFS</p>
+          <h2 class="beliefs-h2 fade-up" id="beliefs-heading" style="transition-delay: 0.05s">
+            Three things we will never compromise on.
+          </h2>
+          <div class="beliefs-grid">
+            <article class="belief-cell fade-up" style="transition-delay: 0s">
+              <span class="belief-num">01</span>
+              <h3 class="belief-title">Honest over impressive.</h3>
+              <p class="belief-desc">
+                We will never oversell what Vaani can do. If your business is not the right fit, we will tell you before you're out of pocket. We would rather lose a sale than lose your trust.
+              </p>
+            </article>
+            <article class="belief-cell fade-up" style="transition-delay: 0.1s">
+              <span class="belief-num">02</span>
+              <h3 class="belief-title">Built for real conversations, not translated playbooks.</h3>
+              <p class="belief-desc">
+                Most tools are shipped from one market and awkwardly adapted for another. We built Vaani for how people actually behave on WhatsApp — the mixed languages, the late hours, the blunt questions — whether your leads are down the street or across a timezone.
+              </p>
+            </article>
+            <article class="belief-cell fade-up" style="transition-delay: 0.2s">
+              <span class="belief-num">03</span>
+              <h3 class="belief-title">Simple enough for anyone to understand.</h3>
+              <p class="belief-desc">
+                If we cannot explain what Vaani does in plain language, we have not built it well enough yet. No jargon. No dashboards you need training to use. Just results.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="vision" class="dark-section" aria-labelledby="vision-heading">
+        <div class="vision-inner">
+          <p class="section-label section-label--muted fade-up">WHERE WE ARE GOING</p>
+          <h2 class="vision-h2 fade-up" id="vision-heading" style="transition-delay: 0.06s">Vaani is just the beginning.</h2>
+          <div class="vision-body fade-up" style="transition-delay: 0.1s">
+            <p style="margin: 0 0 1.25em">
+              Every lead-heavy industry runs into the same wall — too many enquiries, not enough time, replies that land too late.
+            </p>
+            <p style="margin: 0 0 1.25em">We are building an AI employee for each one.</p>
+            <p class="vision-agents fade-up" style="transition-delay: 0.14s; margin: 0 0 0.35em">
+              <span class="vision-line"><span class="agent-name">Vaani</span> is live for real estate.</span>
+            </p>
+            <p class="vision-agents fade-up" style="transition-delay: 0.2s; margin: 0 0 0.35em">
+              <span class="vision-line"><span class="agent-name">Nova</span> is coming for clinics.</span>
+            </p>
+            <p class="vision-agents fade-up" style="transition-delay: 0.26s; margin: 0 0 0.35em">
+              <span class="vision-line"><span class="agent-name">Kira</span> is coming for coaching institutes.</span>
+            </p>
+            <p class="vision-agents fade-up" style="transition-delay: 0.32s; margin: 0 0 1.25em">
+              <span class="vision-line"><span class="agent-name">Zane</span> is coming for restaurants.</span>
+            </p>
+            <p style="margin: 0">
+              Eventually — serious teams everywhere will have an AI employee that works harder than any human ever could, without sounding like a machine.
+            </p>
+          </div>
+
+          <div class="roadmap-viz" data-roadmap>
+            <div class="roadmap-track">
+              <div class="roadmap-line-bg" aria-hidden="true"></div>
+              <div class="roadmap-line-solid" aria-hidden="true"></div>
+            </div>
+            <div class="roadmap-stops">
+              <div class="roadmap-stop roadmap-stop--now">
+                <span class="roadmap-stop__above">Now</span>
+                <span class="roadmap-dot"></span>
+                <span class="roadmap-stop__below">Vaani — Real Estate</span>
+              </div>
+              <div class="roadmap-stop roadmap-stop--future">
+                <span class="roadmap-stop__above">Q3 2026</span>
+                <span class="roadmap-dot"></span>
+                <span class="roadmap-stop__below">Nova — Healthcare</span>
+              </div>
+              <div class="roadmap-stop roadmap-stop--future">
+                <span class="roadmap-stop__above">Q4 2026</span>
+                <span class="roadmap-dot"></span>
+                <span class="roadmap-stop__below">Kira — Education</span>
+              </div>
+              <div class="roadmap-stop roadmap-stop--dashed">
+                <span class="roadmap-stop__above">2027</span>
+                <span class="roadmap-dot"></span>
+                <span class="roadmap-stop__below">Zane — Hospitality + more</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="why-trust" aria-labelledby="why-heading">
+        <div class="why-inner">
+          <p class="section-label fade-up">WHY IVVLYN</p>
+          <h2 class="why-h2 fade-up" id="why-heading" style="transition-delay: 0.05s">We are small. That is our advantage.</h2>
+          <p class="why-lead fade-up" style="transition-delay: 0.1s">
+            You will not talk to a sales rep. You will not wait 3 days for a support ticket. You get the actual founder — who built the product — on a call with you.
+          </p>
+          <div class="trust-grid">
+            <article class="trust-card fade-up" style="transition-delay: 0s">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1" />
+                <path d="M12 12V8.5M12 12l3.5 2" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+              </svg>
+              <h3>Live in 7 days</h3>
+              <p>
+                We handle the full setup. You don't touch a single line of code. Vaani is live and working for your business within a week of you saying yes.
+              </p>
+            </article>
+            <article class="trust-card fade-up" style="transition-delay: 0.08s">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V7l8-4z" stroke="currentColor" stroke-width="1" />
+                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+              </svg>
+              <h3>Your data stays yours</h3>
+              <p>
+                We do not store your leads' conversations beyond what is needed for Vaani to work. No selling data. No sharing. Your leads are your leads.
+              </p>
+            </article>
+            <article class="trust-card fade-up" style="transition-delay: 0.15s">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4 14c0-4 3.5-7 8-7s8 3 8 7v2h-3v-2c0-2.5-2-4.5-5-4.5S7 11.5 7 14v2H4v-2z"
+                  stroke="currentColor"
+                  stroke-width="1"
+                  stroke-linejoin="round"
+                />
+                <path d="M9 18v2M15 18v2" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+              </svg>
+              <h3>Direct founder support</h3>
+              <p>
+                When something needs fixing, you speak to the person who built it — not a support team reading from a script. Fast, direct, and actually useful.
+              </p>
+            </article>
+            <article class="trust-card fade-up" style="transition-delay: 0.22s">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4 12a8 8 0 0114.32-4.91M20 12a8 8 0 01-14.32 4.91M4 12h4m12 0h-4"
+                  stroke="currentColor"
+                  stroke-width="1"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <h3>Gets better every week</h3>
+              <p>
+                Vaani is not a product we built and forgot. We improve her every week based on real conversations — making her smarter, faster, and more effective for your specific market.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="booking" aria-labelledby="cta-personal-h2">
+        <div class="cta-personal-inner">
+          <h2 class="cta-personal-h2 fade-up--cta-line" id="cta-personal-h2">If you made it to the bottom of this page — you are serious.</h2>
+          <div class="cta-personal-body">
+            <p class="fade-up--cta-line" style="transition-delay: 0.1s">
+              That means you probably have a real problem you want to fix — not just curiosity about AI.
+            </p>
+            <p class="fade-up--cta-line" style="transition-delay: 0.18s">I want to hear about it.</p>
+            <p class="fade-up--cta-line" style="transition-delay: 0.26s">
+              Book 20 minutes with me. Tell me what is breaking in your sales process. I will show you exactly what Vaani can do about it — no pitch deck, no recorded demo, just a real conversation.
+            </p>
+          </div>
+          <p class="cta-personal-sig fade-up--cta-line" style="transition-delay: 0.34s">— Harshit, Founder</p>
+          <a class="btn-pill fade-up--cta-line" href="mailto:founder@ivvlin.com" style="transition-delay: 0.42s">Book a Call With Harshit</a>
+          <p class="cta-personal-note fade-up--cta-line" style="transition-delay: 0.5s">
+            Or email directly: founder@ivvlin.com
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-legal">
+        <p>© 2026 Ivvlyn. All rights reserved.</p>
+        <p class="footer-trademark">
+          Ivvlyn™ is a trademark of Ivvlyn. Other product or company names may be trademarks of their respective owners.
+        </p>
+        <p><a href="mailto:founder@ivvlin.com" class="footer-legal-link">founder@ivvlin.com</a></p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const header = document.querySelector(".site-header");
+        const menuBtn = document.querySelector(".menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeBtn = mobileMenu.querySelector(".mobile-close");
+        const mobileLinks = mobileMenu.querySelectorAll("a");
+
+        function setHeader() {
+          header.classList.toggle("is-scrolled", window.scrollY > 60);
+        }
+        window.addEventListener("scroll", setHeader, { passive: true });
+        setHeader();
+
+        window.addEventListener(
+          "scroll",
+          () => {
+            const si = document.querySelector(".scroll-indicator");
+            if (!si) return;
+            si.classList.toggle("scroll-indicator--hidden", window.scrollY > 0);
+          },
+          { passive: true }
+        );
+
+        function openMenu(open) {
+          menuBtn.setAttribute("aria-expanded", open);
+          mobileMenu.classList.toggle("is-open", open);
+          mobileMenu.setAttribute("aria-hidden", !open);
+          document.body.style.overflow = open ? "hidden" : "";
+        }
+        menuBtn.addEventListener("click", () => openMenu(true));
+        closeBtn.addEventListener("click", () => openMenu(false));
+        mobileLinks.forEach((a) => a.addEventListener("click", () => openMenu(false)));
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        document.querySelectorAll(".fade-up").forEach((el) => io.observe(el));
+        document.querySelectorAll(".fade-up--founder").forEach((el) => io.observe(el));
+        document.querySelectorAll(".fade-up--cta-line").forEach((el) => io.observe(el));
+
+        const roadmap = document.querySelector("[data-roadmap]");
+        if (roadmap) {
+          const rio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  roadmap.classList.add("in-view");
+                  rio.unobserve(roadmap);
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+          rio.observe(roadmap);
+        }
+      })();
+    </script>
+  </body>
+</html>

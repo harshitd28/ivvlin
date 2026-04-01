@@ -41,7 +41,7 @@ export default function LoginForm({ redirectPath }: Props) {
       });
 
       if (signInErr) {
-        setError(signInErr.message);
+        setError("Invalid credentials");
         return;
       }
 
@@ -67,12 +67,17 @@ export default function LoginForm({ redirectPath }: Props) {
         .maybeSingle();
 
       if (profileErr) {
-        setError(profileErr.message);
+        setError("Invalid credentials");
         return;
       }
 
-      const role = ((profile as unknown as { role?: UserRole | null } | null | undefined)?.role ??
-        "client") as UserRole;
+      const role = (profile as unknown as { role?: UserRole | null } | null | undefined)?.role as
+        | UserRole
+        | undefined;
+      if (role !== "admin" && role !== "client") {
+        setError("Invalid credentials");
+        return;
+      }
       const target = role === "admin" ? "/admin" : "/dashboard";
 
       // If redirectPath is present and looks like an internal route, use it.
@@ -81,44 +86,47 @@ export default function LoginForm({ redirectPath }: Props) {
       } else {
         router.push(target);
       }
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Sign in failed.";
-      setError(message);
+    } catch {
+      setError("Invalid credentials");
     } finally {
       setIsLoading(false);
     }
   }
 
   return (
-    <div className="bg-white border border-[#E8E8E8] rounded-xl p-6">
+    <div className="bg-[#111827] border border-[#1f2937] rounded-xl p-6">
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-semibold uppercase tracking-widest text-[#555555]">Email</label>
+          <label className="text-xs font-semibold uppercase tracking-widest text-[#9ca3af]">Email</label>
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             autoComplete="email"
-            className="w-full rounded-lg bg-[#FAFAF8] border border-[#E8E8E8] px-3 py-2 outline-none focus:border-white/30"
+            className="w-full rounded-lg bg-[#030712] border border-[#1f2937] px-3 py-2 outline-none focus:border-[#f9fafb]/40 text-[#f9fafb]"
             placeholder="you@company.com"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-xs font-semibold uppercase tracking-widest text-[#555555]">Password</label>
+          <label className="text-xs font-semibold uppercase tracking-widest text-[#9ca3af]">Password</label>
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             autoComplete="current-password"
-            className="w-full rounded-lg bg-[#FAFAF8] border border-[#E8E8E8] px-3 py-2 outline-none focus:border-white/30"
+            className="w-full rounded-lg bg-[#030712] border border-[#1f2937] px-3 py-2 outline-none focus:border-[#f9fafb]/40 text-[#f9fafb]"
             placeholder="••••••••"
           />
         </div>
 
-        {error ? <p className="text-sm text-red-400">{error}</p> : null}
+        {error ? <p className="text-sm text-red-300">{error}</p> : null}
 
-        <Button type="submit" disabled={!canSubmit || isLoading} className="h-11 rounded-lg">
+        <Button
+          type="submit"
+          disabled={!canSubmit || isLoading}
+          className="h-11 rounded-lg bg-white text-black hover:bg-[#f3f4f6]"
+        >
           {isLoading ? "Signing in..." : "Sign in"}
         </Button>
       </form>

@@ -14,7 +14,7 @@ export type LeadStage =
   | "closed_won"
   | "closed_lost";
 
-export type Channel = "whatsapp" | "instagram";
+export type Channel = "whatsapp" | "instagram" | "facebook" | "sms" | "email";
 
 export type VisitStatus = "scheduled" | "confirmed" | "completed" | "no_show" | "cancelled";
 
@@ -114,6 +114,19 @@ export interface Activity {
   status: string | null;
 }
 
+export interface CreditLog {
+  id: string;
+  created_at: string;
+  client_id: string | null;
+  log_type: string | null;
+  channel: string | null;
+  lead_id: string | null;
+  tokens_used: number | null;
+  cost_inr: number | null;
+  workflow_name: string | null;
+  status: string | null;
+}
+
 export interface Visit {
   id: string;
   created_at: string;
@@ -156,6 +169,11 @@ export type Database = {
         Insert: Omit<Activity, "id" | "created_at"> & Partial<Pick<Activity, "id" | "created_at">>;
         Update: Partial<Omit<Activity, "id">>;
       };
+      credit_logs: {
+        Row: CreditLog;
+        Insert: Omit<CreditLog, "id" | "created_at"> & Partial<Pick<CreditLog, "id" | "created_at">>;
+        Update: Partial<Omit<CreditLog, "id">>;
+      };
       visits: {
         Row: Visit;
         Insert: Omit<Visit, "id" | "created_at"> & Partial<Pick<Visit, "id" | "created_at">>;
@@ -167,10 +185,10 @@ export type Database = {
         Update: Partial<Omit<Profile, "id">>;
       };
     };
-    Views: {};
-    Functions: {};
-    Enums: {};
-    CompositeTypes: {};
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
   };
 };
 

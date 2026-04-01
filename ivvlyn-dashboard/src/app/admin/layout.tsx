@@ -1,12 +1,14 @@
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/auth/requireAdmin";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import { AdminContextProvider } from "@/components/admin/AdminContext";
 import ClientContextBar from "@/components/admin/ClientContextBar";
 import MobileAdminNav from "@/components/layout/MobileAdminNav";
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
+  await requireAdmin();
   const supabase = await createSupabaseServerClient();
 
   let clients: Array<import("@/lib/types").Client> = [];
