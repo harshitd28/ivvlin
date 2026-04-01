@@ -1,0 +1,2850 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vaani — Real Estate AI Employee | Ivvlyn</title>
+    <meta
+      name="description"
+      content="Vaani responds to property leads in under 60 seconds, follows up for 14 days, and books site visits — while you sleep."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+      /* Standard iPhone mock (~19.5:9) — hero + briefing */
+      :root {
+        --iphone-mock-w: 320px;
+        --iphone-mock-h: 693px;
+        --iphone-mock-pad-x: 14px;
+        --iphone-mock-pad-y: 14px;
+        --iphone-mock-island-w: 102px;
+        --iphone-mock-island-h: 32px;
+        --iphone-mock-island-y: 11px;
+        --iphone-mock-screen-r: 44px;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 36px;
+        border-radius: 100px;
+        background: var(--black);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+        border: none;
+        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
+        transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.4s ease;
+      }
+      .btn-primary:hover {
+        background: #222;
+        transform: translateY(-2px);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.14),
+          0 0 30px rgba(255, 255, 255, 0.22),
+          0 0 56px rgba(255, 255, 255, 0.09),
+          0 12px 40px rgba(0, 0, 0, 0.38);
+      }
+      .btn-primary:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 2px var(--bg),
+          0 0 0 4px var(--black),
+          0 0 30px rgba(255, 255, 255, 0.2);
+      }
+      .btn-text-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        font-weight: 400;
+        color: #555;
+        text-decoration: none;
+        background: none;
+        border: none;
+        padding: 12px 8px;
+        font-family: inherit;
+      }
+      .btn-text-link .arr {
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+      .btn-text-link:hover .arr {
+        animation: bounceArr 0.6s ease infinite;
+      }
+      @keyframes bounceArr {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(4px);
+        }
+      }
+
+      /* Hero split */
+      .vaani-hero {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding-top: var(--nav-bar-height);
+      }
+      .vaani-hero__left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 48px 64px;
+        background: var(--bg);
+      }
+      .vaani-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .vaani-badge__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        animation: pulseDot 2s ease-in-out infinite;
+      }
+      @keyframes pulseDot {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(0.85);
+        }
+      }
+      .vaani-badge__text {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        color: var(--green);
+      }
+      .vaani-name {
+        font-size: 96px;
+        font-weight: 200;
+        letter-spacing: -4px;
+        color: var(--black);
+        line-height: 1;
+        margin: 16px 0 8px;
+      }
+      .vaani-role {
+        font-size: 18px;
+        font-weight: 300;
+        color: #666;
+        letter-spacing: 0.5px;
+        margin: 0;
+      }
+      .vaani-divider {
+        width: 48px;
+        height: 1px;
+        background: var(--black);
+        margin: 28px 0;
+        border: none;
+      }
+      .vaani-tagline {
+        font-size: 20px;
+        font-weight: 300;
+        color: #444;
+        line-height: 1.7;
+        max-width: 440px;
+        margin: 0;
+      }
+      .vaani-subtext {
+        margin-top: 20px;
+        font-size: 15px;
+        font-weight: 300;
+        color: #777;
+        line-height: 1.8;
+        max-width: 420px;
+      }
+      .vaani-hero-ctas {
+        margin-top: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+      }
+      .vaani-micro {
+        margin-top: 32px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 8px 16px;
+      }
+      .vaani-micro > div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .vaani-micro__num {
+        font-size: 20px;
+        font-weight: 300;
+        color: var(--black);
+      }
+      .vaani-micro__label {
+        font-size: 10px;
+        color: #999;
+      }
+      .vaani-micro__sep {
+        color: #ccc;
+        font-size: 20px;
+        line-height: 1.2;
+        padding: 0 4px;
+      }
+      .vaani-hero__right {
+        background: #fff;
+        border-left: 1px solid var(--gray-4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 48px 24px;
+        position: relative;
+      }
+      .phone-wrap,
+      .brief-phone-wrap {
+        --phone-screen-w: var(--iphone-mock-w);
+        --phone-screen-h: var(--iphone-mock-h);
+        --iphone-pad-x: var(--iphone-mock-pad-x);
+        --iphone-pad-y: var(--iphone-mock-pad-y);
+        --iphone-island-w: var(--iphone-mock-island-w);
+        --iphone-island-h: var(--iphone-mock-island-h);
+        --iphone-island-offset-y: var(--iphone-mock-island-y);
+        --iphone-screen-r: var(--iphone-mock-screen-r);
+        --wa-below-island: calc(
+          var(--iphone-island-offset-y) + var(--iphone-island-h) + 10px
+        );
+      }
+
+      .phone-wrap {
+        position: relative;
+        width: auto;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        --phone-notify-top: calc(var(--wa-below-island) + 44px);
+      }
+
+      .iphone-device {
+        position: relative;
+        width: calc(var(--phone-screen-w) + 2 * var(--iphone-pad-x));
+        height: calc(var(--phone-screen-h) + 2 * var(--iphone-pad-y));
+        padding: var(--iphone-pad-y) var(--iphone-pad-x);
+        border-radius: calc(var(--iphone-screen-r) + var(--iphone-pad-x) + 2px);
+        background:
+          linear-gradient(
+            165deg,
+            rgba(255, 255, 255, 0.11) 0%,
+            rgba(255, 255, 255, 0) 42%
+          ),
+          linear-gradient(
+            145deg,
+            #3f3f42 0%,
+            #2a2a2d 18%,
+            #1a1a1c 52%,
+            #121214 78%,
+            #0a0a0b 100%
+          );
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.2) inset,
+          0 -2px 6px rgba(0, 0, 0, 0.45) inset,
+          0 28px 56px rgba(0, 0, 0, 0.28),
+          0 12px 24px rgba(0, 0, 0, 0.18),
+          0 2px 4px rgba(0, 0, 0, 0.12);
+        filter: drop-shadow(0 22px 44px rgba(0, 0, 0, 0.2))
+          drop-shadow(0 10px 20px rgba(0, 0, 0, 0.14));
+      }
+
+      .iphone-device::before {
+        content: "";
+        position: absolute;
+        inset: 2px;
+        border-radius: inherit;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 28%,
+          transparent 72%,
+          rgba(255, 255, 255, 0.03) 100%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .iphone-side {
+        position: absolute;
+        z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(90deg, #454548 0%, #1f1f22 55%, #141416 100%);
+        box-shadow:
+          1px 0 0 rgba(255, 255, 255, 0.06) inset,
+          -1px 0 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .iphone-side--silent {
+        left: -2px;
+        top: 88px;
+        width: 3px;
+        height: 30px;
+        border-radius: 2px 0 0 2px;
+      }
+
+      .iphone-side--vol-up {
+        left: -2px;
+        top: 144px;
+        width: 3px;
+        height: 52px;
+        border-radius: 2px 0 0 2px;
+      }
+
+      .iphone-side--vol-down {
+        left: -2px;
+        top: 210px;
+        width: 3px;
+        height: 52px;
+        border-radius: 2px 0 0 2px;
+      }
+
+      .iphone-side--power {
+        right: -2px;
+        top: 176px;
+        width: 3px;
+        height: 90px;
+        border-radius: 0 2px 2px 0;
+        background: linear-gradient(270deg, #454548 0%, #1f1f22 55%, #141416 100%);
+        box-shadow:
+          -1px 0 0 rgba(255, 255, 255, 0.06) inset,
+          1px 0 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .iphone-screen-outer {
+        position: relative;
+        z-index: 1;
+        width: var(--phone-screen-w);
+        height: var(--phone-screen-h);
+        border-radius: var(--iphone-screen-r);
+        background: #050506;
+        overflow: hidden;
+        box-shadow:
+          inset 0 0 0 2px #0d0d0f,
+          inset 0 2px 3px rgba(255, 255, 255, 0.06),
+          inset 0 -4px 12px rgba(0, 0, 0, 0.65),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+      }
+
+      .iphone-dynamic-island {
+        position: absolute;
+        top: var(--iphone-island-offset-y, 10px);
+        left: 50%;
+        transform: translateX(-50%);
+        width: var(--iphone-island-w);
+        height: var(--iphone-island-h);
+        border-radius: calc(var(--iphone-island-h) / 2);
+        z-index: 20;
+        pointer-events: none;
+        background: linear-gradient(180deg, #242426 0%, #0a0a0b 45%, #000 100%);
+        box-shadow:
+          0 3px 10px rgba(0, 0, 0, 0.55),
+          0 1px 0 rgba(255, 255, 255, 0.1) inset,
+          0 -2px 4px rgba(0, 0, 0, 0.8) inset;
+      }
+
+      .iphone-dynamic-island::before {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 32% 32%, #1c2838 0%, #060708 72%);
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6) inset;
+        opacity: 0.85;
+      }
+
+      .phone {
+        width: var(--phone-screen-w);
+        height: var(--phone-screen-h);
+        border: none;
+        border-radius: calc(var(--iphone-screen-r) - 3px);
+        background: #fff;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 5;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      }
+      .phone-notify {
+        position: absolute;
+        top: var(--phone-notify-top);
+        left: 8px;
+        right: 8px;
+        background: var(--black);
+        color: #fff;
+        font-size: 11px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        z-index: 5;
+        transform: translateY(-120%);
+        opacity: 0;
+        transition: transform 0.35s ease, opacity 0.35s ease;
+      }
+      .phone-notify.is-visible {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .wa-head {
+        background: #25d366;
+        color: #fff;
+        padding: 0 14px 12px;
+        padding-top: var(--wa-below-island);
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+      .wa-back {
+        width: 18px;
+        height: 18px;
+        border-left: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        transform: rotate(45deg);
+        margin-left: 4px;
+        opacity: 0.9;
+      }
+      .wa-head-title {
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .wa-chat {
+        flex: 1;
+        overflow-y: auto;
+        padding: 12px 10px 16px;
+        background: #e5ddd5;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .wa-msg {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        opacity: 0;
+        transform: translateY(8px);
+        animation: waIn 0.3s ease forwards;
+      }
+      @keyframes waIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .wa-msg--out {
+        align-self: flex-end;
+        align-items: flex-end;
+      }
+      .wa-msg--in {
+        align-self: flex-start;
+      }
+      .wa-bubble {
+        padding: 10px 14px;
+        font-size: 13px;
+        line-height: 1.45;
+        max-width: 200px;
+        margin: 4px 0 0;
+      }
+      .wa-msg--in .wa-bubble {
+        background: #f0f0f0;
+        color: var(--black);
+        border-radius: 16px 16px 16px 4px;
+      }
+      .wa-msg--out .wa-bubble {
+        background: #dcf8c6;
+        color: var(--black);
+        border-radius: 16px 16px 4px 16px;
+      }
+      .wa-time {
+        font-size: 10px;
+        color: rgba(0, 0, 0, 0.45);
+        margin-top: 2px;
+        padding: 0 4px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .wa-tick {
+        opacity: 0.5;
+        letter-spacing: -2px;
+      }
+      .phone-caption {
+        margin-top: 24px;
+        font-size: 12px;
+        color: #999;
+        text-align: center;
+        font-style: italic;
+        max-width: min(380px, 94vw);
+      }
+
+      /* Problem */
+      #problem {
+        padding: 120px 48px;
+        text-align: center;
+        background: var(--black);
+      }
+      .problem-h2 {
+        font-size: clamp(28px, 4vw, 48px);
+        font-weight: 200;
+        color: #fff;
+        line-height: 1.3;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .problem-lead {
+        margin: 24px auto 0;
+        font-size: 17px;
+        font-weight: 300;
+        color: #888;
+        line-height: 1.8;
+        max-width: 520px;
+      }
+      .pain-grid {
+        margin-top: 72px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: #222;
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .pain-cell {
+        background: var(--black);
+        padding: 40px 32px;
+      }
+      .pain-num {
+        font-size: 48px;
+        font-weight: 200;
+        color: #fff;
+        line-height: 1;
+      }
+      .pain-text {
+        margin-top: 12px;
+        font-size: 14px;
+        color: #666;
+        line-height: 1.7;
+      }
+
+      /* How section */
+      #how-vaani-works {
+        padding: 120px 48px 80px;
+        background: var(--bg);
+      }
+      .how-head {
+        text-align: center;
+        max-width: 640px;
+        margin: 0 auto 80px;
+      }
+      .how-h2 {
+        margin: 16px 0 0;
+        font-size: clamp(30px, 4vw, 44px);
+        font-weight: 200;
+        letter-spacing: -1px;
+        color: var(--black);
+        line-height: 1.15;
+      }
+      .how-lead {
+        margin-top: 16px;
+        font-size: 17px;
+        font-weight: 300;
+        color: #666;
+        line-height: 1.75;
+      }
+      .timeline-stack {
+        position: relative;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      .timeline-stack::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: var(--gray-4);
+        transform: translateX(-50%);
+        z-index: 0;
+      }
+      .timeline-row {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px 64px;
+        align-items: center;
+        margin-bottom: 96px;
+      }
+      .timeline-row > .timeline-node {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .timeline-row:last-child {
+        margin-bottom: 0;
+      }
+      .timeline-node {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid var(--black);
+        z-index: 2;
+        transition: background 0.4s ease;
+      }
+      .timeline-node.filled {
+        background: var(--black);
+      }
+      .timeline-row .step-label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        color: #888;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+      .timeline-row .step-title {
+        font-size: clamp(22px, 3vw, 32px);
+        font-weight: 200;
+        color: var(--black);
+        line-height: 1.2;
+        margin: 0 0 16px;
+      }
+      .timeline-row .step-body {
+        font-size: 15px;
+        font-weight: 300;
+        color: #555;
+        line-height: 1.8;
+      }
+      .callout {
+        border-left: 2px solid var(--black);
+        padding-left: 16px;
+        margin-top: 20px;
+        font-size: 14px;
+        font-weight: 300;
+        color: #444;
+        line-height: 1.7;
+      }
+      .timeline-row--flip .timeline-col-text {
+        order: 2;
+      }
+      .timeline-row--flip .timeline-col-viz {
+        order: 1;
+      }
+      .timeline-col-text,
+      .timeline-col-viz {
+        position: relative;
+      }
+
+      /* Speed demo — liquid glass (same system as .cal-wrap) */
+      .speed-demo {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        padding: 24px;
+        background: linear-gradient(
+          165deg,
+          rgba(255, 255, 255, 0.78) 0%,
+          rgba(255, 255, 255, 0.52) 42%,
+          rgba(252, 252, 250, 0.58) 100%
+        );
+        -webkit-backdrop-filter: blur(32px) saturate(1.85) brightness(1.02);
+        backdrop-filter: blur(32px) saturate(1.85) brightness(1.02);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 16px;
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.9) inset,
+          0 -1px 0 rgba(255, 255, 255, 0.22) inset,
+          0 24px 52px rgba(10, 10, 10, 0.09),
+          0 10px 22px rgba(10, 10, 10, 0.05);
+      }
+
+      .speed-demo::before {
+        content: "";
+        position: absolute;
+        inset: -40% -32%;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 58% 72% at 10% 6%, rgba(255, 255, 255, 0.58) 0%, transparent 56%),
+          radial-gradient(ellipse 48% 58% at 94% 90%, rgba(195, 205, 255, 0.22) 0%, transparent 52%),
+          radial-gradient(circle at 6% 22%, rgba(255, 255, 255, 0.38) 0%, transparent 38%);
+        mix-blend-mode: soft-light;
+        opacity: 0.9;
+        animation: calLiquidDrift 18s ease-in-out infinite;
+      }
+
+      .speed-demo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        border-radius: inherit;
+        background: linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.07) 36%,
+          rgba(255, 255, 255, 0.36) 50%,
+          rgba(255, 255, 255, 0.09) 64%,
+          transparent 100%
+        );
+        background-size: 240% 240%;
+        background-position: 8% 35%;
+        mix-blend-mode: overlay;
+        opacity: 0.55;
+        animation: calLiquidSheen 11s ease-in-out infinite;
+      }
+
+      .speed-demo > * {
+        position: relative;
+        z-index: 1;
+      }
+      .speed-row {
+        margin-bottom: 20px;
+      }
+      .speed-row:last-child {
+        margin-bottom: 0;
+      }
+      .speed-label {
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 8px;
+      }
+      .speed-track {
+        height: 8px;
+        background: rgba(240, 240, 240, 0.75);
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+      }
+      .speed-fill {
+        height: 100%;
+        width: 0;
+        border-radius: 4px;
+        transition: width 0s;
+      }
+      .speed-fill--slow {
+        background: linear-gradient(180deg, #d8d8d8 0%, #c4c4c4 100%);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+      }
+      .speed-fill--fast {
+        background: linear-gradient(180deg, #222 0%, var(--black) 100%);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset;
+      }
+      .speed-demo.in-view .speed-fill--slow {
+        width: 100%;
+        transition: width 3s ease-out;
+      }
+      .speed-demo.in-view .speed-fill--fast {
+        width: 100%;
+        transition: width 0.3s ease-out;
+        transition-delay: 0.2s;
+      }
+      .speed-tag {
+        font-size: 11px;
+        color: #999;
+        margin-top: 6px;
+      }
+      .speed-tag--slow::after {
+        content: "";
+      }
+      .speed-tag--fast::after {
+        content: "";
+      }
+      .speed-demo.in-view .speed-tag--slow::after {
+        content: "Next morning";
+      }
+      .speed-demo.in-view .speed-tag--fast::after {
+        content: "47 seconds";
+      }
+
+      /* Lead card — liquid glass */
+      .lead-card {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        width: 280px;
+        max-width: 100%;
+        background: linear-gradient(
+          165deg,
+          rgba(255, 255, 255, 0.78) 0%,
+          rgba(255, 255, 255, 0.52) 42%,
+          rgba(252, 252, 250, 0.58) 100%
+        );
+        -webkit-backdrop-filter: blur(32px) saturate(1.85) brightness(1.02);
+        backdrop-filter: blur(32px) saturate(1.85) brightness(1.02);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 16px;
+        padding: 24px;
+        margin: 0 auto;
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.9) inset,
+          0 -1px 0 rgba(255, 255, 255, 0.22) inset,
+          0 24px 52px rgba(10, 10, 10, 0.09),
+          0 10px 22px rgba(10, 10, 10, 0.05);
+      }
+
+      .lead-card::before {
+        content: "";
+        position: absolute;
+        inset: -40% -32%;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 58% 72% at 10% 6%, rgba(255, 255, 255, 0.58) 0%, transparent 56%),
+          radial-gradient(ellipse 48% 58% at 94% 90%, rgba(195, 205, 255, 0.22) 0%, transparent 52%),
+          radial-gradient(circle at 6% 22%, rgba(255, 255, 255, 0.38) 0%, transparent 38%);
+        mix-blend-mode: soft-light;
+        opacity: 0.9;
+        animation: calLiquidDrift 18s ease-in-out infinite;
+      }
+
+      .lead-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        border-radius: inherit;
+        background: linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.07) 36%,
+          rgba(255, 255, 255, 0.36) 50%,
+          rgba(255, 255, 255, 0.09) 64%,
+          transparent 100%
+        );
+        background-size: 240% 240%;
+        background-position: 8% 35%;
+        mix-blend-mode: overlay;
+        opacity: 0.55;
+        animation: calLiquidSheen 11s ease-in-out infinite;
+      }
+
+      .lead-card > * {
+        position: relative;
+        z-index: 1;
+      }
+      .lead-card__hdr {
+        font-size: 11px;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .lead-card__name {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 8px 0 4px;
+      }
+      .lead-card__src {
+        font-size: 11px;
+        color: #999;
+      }
+      .score-bar-wrap {
+        margin-top: 16px;
+      }
+      .score-bar-label {
+        font-size: 11px;
+        color: #666;
+        margin-bottom: 6px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .score-bar-track {
+        height: 6px;
+        background: rgba(240, 240, 240, 0.8);
+        border-radius: 3px;
+        overflow: hidden;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+      }
+      .score-bar-fill {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(180deg, #222 0%, var(--black) 100%);
+        border-radius: 3px;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+      }
+      .lead-card.in-view .score-bar-fill {
+        width: 91%;
+        transition: width 1.2s ease-out 0.3s;
+      }
+      .tags-row {
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .tag-pill {
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        border-radius: 100px;
+        padding: 4px 12px;
+        font-size: 11px;
+        color: #444;
+        background: rgba(255, 255, 255, 0.42);
+        -webkit-backdrop-filter: blur(12px) saturate(1.15);
+        backdrop-filter: blur(12px) saturate(1.15);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.75) inset;
+      }
+      .hot-pill {
+        margin-top: 16px;
+        display: inline-block;
+        background: rgba(236, 253, 245, 0.88);
+        -webkit-backdrop-filter: blur(12px) saturate(1.2);
+        backdrop-filter: blur(12px) saturate(1.2);
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 100px;
+        padding: 6px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+      }
+
+      /* 14-day timeline */
+      .day-timeline {
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      .day-track {
+        position: relative;
+        min-width: 520px;
+        height: 56px;
+        margin: 0 auto;
+      }
+      .day-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 28px;
+        height: 1px;
+        background: var(--gray-4);
+      }
+      .day-markers {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        height: 56px;
+        width: 100%;
+      }
+      .day-dot {
+        position: relative;
+        flex: 1;
+        min-width: 0;
+      }
+      .day-dot__inner {
+        position: absolute;
+        left: 50%;
+        top: 24px;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+        background: #fff;
+        transition: background 0.3s ease, transform 0.3s ease;
+      }
+      .day-dot--active .day-dot__inner {
+        width: 10px;
+        height: 10px;
+        top: 22px;
+        background: var(--black);
+        border-color: var(--black);
+      }
+      .day-dot__tip {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(4px);
+        white-space: nowrap;
+        font-size: 9px;
+        color: #666;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        margin-bottom: 6px;
+        pointer-events: none;
+        max-width: 120px;
+        text-align: center;
+        line-height: 1.3;
+      }
+      .day-dot--active.visible .day-dot__tip {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      .day-num {
+        font-size: 9px;
+        color: #aaa;
+        position: absolute;
+        top: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .day-foot {
+        font-size: 13px;
+        color: #888;
+        margin-top: 20px;
+        line-height: 1.6;
+      }
+
+      /* Calendar — liquid glass */
+      @keyframes calLiquidDrift {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate3d(2.2%, -1.8%, 0) rotate(0.35deg);
+        }
+        66% {
+          transform: translate3d(-1.8%, 2%, 0) rotate(-0.3deg);
+        }
+      }
+
+      @keyframes calLiquidSheen {
+        0%,
+        100% {
+          background-position: 8% 35%;
+        }
+        50% {
+          background-position: 92% 65%;
+        }
+      }
+
+      .cal-wrap {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: linear-gradient(
+          165deg,
+          rgba(255, 255, 255, 0.78) 0%,
+          rgba(255, 255, 255, 0.52) 42%,
+          rgba(252, 252, 250, 0.58) 100%
+        );
+        -webkit-backdrop-filter: blur(32px) saturate(1.85) brightness(1.02);
+        backdrop-filter: blur(32px) saturate(1.85) brightness(1.02);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 16px;
+        max-width: 420px;
+        margin: 0 auto;
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.9) inset,
+          0 -1px 0 rgba(255, 255, 255, 0.22) inset,
+          0 24px 52px rgba(10, 10, 10, 0.09),
+          0 10px 22px rgba(10, 10, 10, 0.05);
+      }
+
+      .cal-wrap::before {
+        content: "";
+        position: absolute;
+        inset: -40% -32%;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 58% 72% at 10% 6%, rgba(255, 255, 255, 0.58) 0%, transparent 56%),
+          radial-gradient(ellipse 48% 58% at 94% 90%, rgba(195, 205, 255, 0.22) 0%, transparent 52%),
+          radial-gradient(circle at 6% 22%, rgba(255, 255, 255, 0.38) 0%, transparent 38%);
+        mix-blend-mode: soft-light;
+        opacity: 0.9;
+        animation: calLiquidDrift 18s ease-in-out infinite;
+      }
+
+      .cal-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        border-radius: inherit;
+        background: linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.07) 36%,
+          rgba(255, 255, 255, 0.36) 50%,
+          rgba(255, 255, 255, 0.09) 64%,
+          transparent 100%
+        );
+        background-size: 240% 240%;
+        background-position: 8% 35%;
+        mix-blend-mode: overlay;
+        opacity: 0.55;
+        animation: calLiquidSheen 11s ease-in-out infinite;
+      }
+
+      .cal-wrap > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .cal-wrap::before,
+        .cal-wrap::after,
+        .speed-demo::before,
+        .speed-demo::after,
+        .lead-card::before,
+        .lead-card::after {
+          animation: none;
+        }
+      }
+
+      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .cal-wrap,
+        .speed-demo,
+        .lead-card {
+          background: #fff;
+          border: 1px solid var(--gray-4);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.07);
+        }
+        .cal-wrap::before,
+        .speed-demo::before,
+        .lead-card::before {
+          opacity: 0.32;
+          animation: none;
+        }
+        .cal-wrap::after,
+        .speed-demo::after,
+        .lead-card::after {
+          opacity: 0.22;
+          animation: none;
+        }
+      }
+
+      .cal-head {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+      }
+      .cal-head span {
+        padding: 10px 4px;
+        font-size: 10px;
+        color: #888;
+        text-align: center;
+      }
+      .cal-body {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+      }
+      .cal-body--week {
+        grid-auto-rows: minmax(72px, auto);
+      }
+      .cal-cell {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 4px;
+        font-size: 10px;
+        color: #bbb;
+        min-height: 60px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .cal-cell--stack {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        justify-content: flex-start;
+      }
+      .cal-evt {
+        padding: 6px 8px;
+        font-size: 11px;
+        line-height: 1.35;
+        color: var(--green);
+        border-left: 3px solid var(--green);
+        background: rgba(236, 253, 245, 0.88);
+        -webkit-backdrop-filter: blur(10px) saturate(1.2);
+        backdrop-filter: blur(10px) saturate(1.2);
+        border-radius: 4px;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+      }
+      .cal-note {
+        margin: 16px 12px 12px;
+        background: rgba(255, 255, 255, 0.48);
+        -webkit-backdrop-filter: blur(18px) saturate(1.25);
+        backdrop-filter: blur(18px) saturate(1.25);
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 12px;
+        color: #444;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.75) inset;
+      }
+      .cal-wrap.in-view .cal-note {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.6s;
+      }
+      .cal-list {
+        display: none;
+      }
+
+      /* Briefing phone — same iPhone shell + size as hero */
+      .brief-phone-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+        width: max-content;
+        max-width: 100%;
+      }
+
+      .brief-phone {
+        width: var(--phone-screen-w);
+        height: var(--phone-screen-h);
+        border: none;
+        border-radius: calc(var(--iphone-screen-r) - 3px);
+        margin: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background: #e5ddd5;
+        position: relative;
+        z-index: 5;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      }
+
+      .brief-wa-head {
+        background: #075e54;
+        color: #fff;
+        padding: 0 12px 12px;
+        padding-top: var(--wa-below-island);
+        font-size: 13px;
+        font-weight: 500;
+        text-align: center;
+        flex-shrink: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        min-height: calc(var(--wa-below-island) + 36px);
+      }
+      .brief-chat {
+        flex: 1;
+        padding: 12px;
+        overflow-y: auto;
+      }
+      .brief-bubble {
+        background: #dcf8c6;
+        padding: 14px;
+        font-size: 11.5px;
+        line-height: 1.55;
+        color: var(--black);
+        border-radius: 8px;
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        white-space: pre-wrap;
+      }
+      .brief-time {
+        text-align: right;
+        font-size: 10px;
+        color: rgba(0, 0, 0, 0.45);
+        margin-top: 4px;
+      }
+
+      /* Demo video */
+      #demo-video {
+        padding: 120px 48px;
+        background: #fff;
+        text-align: center;
+      }
+      .video-box {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        margin: 56px auto 0;
+        aspect-ratio: 16 / 9;
+        background: #111;
+        border-radius: 16px;
+        border: 1px solid #222;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .video-badge {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 0 0 8px 0;
+        font-size: 10px;
+        color: #fff;
+        letter-spacing: 2px;
+      }
+      .video-badge::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #ef4444;
+      }
+      .play-btn {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: glowPulse 3s ease-in-out infinite;
+      }
+      @keyframes glowPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1);
+        }
+        50% {
+          box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+        }
+      }
+      .play-tri {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 0 10px 16px;
+        border-color: transparent transparent transparent #fff;
+        margin-left: 4px;
+      }
+      .video-soon {
+        margin-top: 16px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.4);
+      }
+      .video-caps {
+        margin-top: 40px;
+        font-size: 12px;
+        color: #999;
+      }
+
+      /* Numbers */
+      #numbers {
+        padding: 120px 48px;
+        background: var(--bg);
+        text-align: center;
+      }
+      #numbers .how-h2 {
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .stats4 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: stretch;
+        max-width: 920px;
+        margin: 64px auto 0;
+        padding: 24px 16px 8px;
+        gap: 0;
+        border: 1px solid var(--gray-4);
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 1px 0 rgba(10, 10, 10, 0.04);
+      }
+      .stats4__col {
+        flex: 1 1 0;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: clamp(44px, 7vw, 72px);
+        padding: 20px 36px 28px;
+        box-sizing: border-box;
+      }
+      .stats4__divider {
+        flex: 0 0 1px;
+        width: 1px;
+        background: var(--gray-4);
+        align-self: stretch;
+        min-height: 220px;
+      }
+      .stats4__item {
+        text-align: center;
+        padding: 0 4px;
+      }
+      .stats4__num {
+        font-size: clamp(40px, 6vw, 72px);
+        font-weight: 200;
+        color: var(--black);
+        line-height: 1;
+      }
+      .stats4__label {
+        margin-top: 14px;
+        font-size: 13px;
+        font-weight: 300;
+        color: #666;
+        line-height: 1.7;
+        max-width: 220px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .ba-wrap {
+        margin-top: 80px;
+        display: grid;
+        grid-template-columns: 1fr 1px 1fr;
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid var(--gray-4);
+        align-items: start;
+      }
+      .ba-col {
+        padding: 0 24px;
+      }
+      .ba-sep {
+        background: var(--gray-4);
+        width: 1px;
+        align-self: stretch;
+        min-height: 200px;
+      }
+      .ba-h {
+        font-size: 12px;
+        margin: 24px 0 0;
+        padding-bottom: 12px;
+      }
+      .ba-h--before {
+        color: #999;
+      }
+      .ba-h--after {
+        color: var(--green);
+      }
+      .ba-line {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 16px 0;
+        min-height: 52px;
+        font-size: 14px;
+        line-height: 1.5;
+        display: flex;
+        align-items: center;
+      }
+      .ba-line:last-child {
+        border-bottom: none;
+      }
+      .ba-line--bad {
+        color: #777;
+      }
+      .ba-line--good {
+        color: #444;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 0.45s ease, transform 0.45s ease;
+      }
+      .ba-wrap.in-view .ba-line--good {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Story */
+      #story {
+        padding: 120px 48px;
+        background: #fff;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .story-quote {
+        font-size: 100px;
+        line-height: 0;
+        color: #eee;
+        font-weight: 200;
+      }
+      .story-text {
+        font-size: clamp(16px, 2.5vw, 20px);
+        font-weight: 300;
+        color: #333;
+        line-height: 1.9;
+        font-style: italic;
+        margin: 0;
+      }
+      .story-att {
+        margin-top: 32px;
+        font-size: 13px;
+        font-weight: 400;
+        color: #666;
+      }
+      .story-cr {
+        margin-top: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--green);
+      }
+
+      /* Included */
+      #included {
+        padding: 120px 48px;
+        background: var(--bg);
+        text-align: center;
+      }
+      #included .how-h2 {
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .inc-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 48px;
+        max-width: 1100px;
+        margin: 48px auto 0;
+        align-items: start;
+        text-align: left;
+      }
+      .inc-group-h {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 3px;
+        color: #888;
+        text-transform: uppercase;
+        margin: 32px 0 12px;
+      }
+      .inc-group:first-child .inc-group-h {
+        margin-top: 0;
+      }
+      .inc-item {
+        font-size: 14px;
+        font-weight: 300;
+        color: #444;
+        padding: 8px 0;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .inc-item::before {
+        content: "✓";
+        color: var(--green);
+        flex-shrink: 0;
+      }
+      .pkg-card {
+        background: #fff;
+        border: 1.5px solid var(--black);
+        border-radius: 16px;
+        padding: 40px 32px;
+        position: sticky;
+        top: 100px;
+      }
+      .pkg-top {
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        color: #666;
+      }
+      .pkg-price-row {
+        margin-top: 20px;
+      }
+      .pkg-label {
+        font-size: 12px;
+        color: #888;
+      }
+      .pkg-big {
+        font-size: 40px;
+        font-weight: 200;
+        color: var(--black);
+      }
+      .pkg-plus {
+        margin: 16px 0 8px;
+        font-size: 18px;
+        color: #999;
+      }
+      .pkg-mid {
+        font-size: 32px;
+        font-weight: 200;
+      }
+      .pkg-sub {
+        font-size: 12px;
+        color: #888;
+        margin-top: 8px;
+      }
+      .pkg-div {
+        height: 1px;
+        background: var(--gray-4);
+        margin: 28px 0;
+      }
+      .pkg-list {
+        font-size: 13px;
+        color: #444;
+        line-height: 2;
+      }
+      .pkg-turn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        margin-top: 8px;
+      }
+      .pkg-cta {
+        display: block;
+        width: 100%;
+        margin-top: 28px;
+        padding: 16px;
+        border-radius: 100px;
+        background: var(--black);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+        text-decoration: none;
+        border: none;
+        font-family: inherit;
+        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
+        transition: background 0.25s ease, box-shadow 0.4s ease;
+      }
+      .pkg-cta:hover {
+        background: #222;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.14),
+          0 0 30px rgba(255, 255, 255, 0.22),
+          0 0 56px rgba(255, 255, 255, 0.09),
+          0 12px 40px rgba(0, 0, 0, 0.38);
+      }
+      .pkg-cta:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 2px var(--bg),
+          0 0 0 4px var(--black),
+          0 0 30px rgba(255, 255, 255, 0.2);
+      }
+      .pkg-note {
+        margin-top: 12px;
+        font-size: 11px;
+        color: #aaa;
+        text-align: center;
+        line-height: 1.7;
+      }
+
+      /* FAQ */
+      #faq {
+        padding: 120px 48px;
+        background: #fff;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .faq-item {
+        border-bottom: 1px solid var(--gray-4);
+      }
+      .faq-q {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 0;
+        background: none;
+        border: none;
+        text-align: left;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--black);
+        cursor: pointer;
+      }
+      .faq-icon {
+        width: 20px;
+        height: 20px;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .faq-icon::before,
+      .faq-icon::after {
+        content: "";
+        position: absolute;
+        background: var(--black);
+        transition: transform 0.3s ease;
+      }
+      .faq-icon::before {
+        width: 12px;
+        height: 1px;
+        left: 4px;
+        top: 9px;
+      }
+      .faq-icon::after {
+        width: 1px;
+        height: 12px;
+        left: 9.5px;
+        top: 4px;
+      }
+      .faq-item.is-open .faq-icon::after {
+        transform: rotate(90deg);
+        opacity: 0;
+      }
+      .faq-a {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.45s ease, opacity 0.35s ease;
+        opacity: 0;
+      }
+      .faq-item.is-open .faq-a {
+        opacity: 1;
+      }
+      .faq-a-inner {
+        padding: 0 0 24px;
+        font-size: 14px;
+        font-weight: 300;
+        color: #666;
+        line-height: 1.8;
+      }
+
+      /* Final CTA */
+      #booking {
+        padding: 160px 48px;
+        text-align: center;
+        background: var(--black);
+      }
+      .final-h2 {
+        font-size: clamp(32px, 5vw, 64px);
+        font-weight: 200;
+        color: #fff;
+        letter-spacing: -2px;
+        line-height: 1.1;
+        margin: 0;
+      }
+      .final-lead {
+        margin-top: 24px;
+        font-size: 20px;
+        font-weight: 200;
+        color: #666;
+      }
+      .btn-final {
+        display: inline-block;
+        margin-top: 48px;
+        padding: 18px 56px;
+        border-radius: 100px;
+        background: #fff;
+        color: var(--black);
+        font-size: 15px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: transform 0.25s ease, background 0.25s ease;
+      }
+      .btn-final:hover {
+        transform: scale(1.03);
+        background: #f0f0f0;
+      }
+      .final-note {
+        margin-top: 16px;
+        font-size: 12px;
+        color: #555;
+      }
+
+      .section-label {
+        font-size: var(--label-size);
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        color: var(--black);
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: fit-content;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+      .section-label--light {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .section-label::after {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 1px;
+        margin-top: 12px;
+        background: var(--black);
+        flex-shrink: 0;
+      }
+      #problem .section-label::after,
+      #booking .section-label::after {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      @media (max-width: 1024px) {
+        .vaani-hero {
+          grid-template-columns: 1fr;
+        }
+        .vaani-hero__right {
+          border-left: none;
+          border-top: 1px solid var(--gray-4);
+          min-height: auto;
+          padding: 64px 24px;
+        }
+        .timeline-stack::before {
+          display: none;
+        }
+        .timeline-row {
+          grid-template-columns: 1fr;
+          gap: 32px;
+          margin-bottom: 64px;
+        }
+        .timeline-node {
+          display: none;
+        }
+        .timeline-row--flip .timeline-col-text,
+        .timeline-row--flip .timeline-col-viz {
+          order: unset;
+        }
+        .stats4 {
+          max-width: 100%;
+        }
+        .stats4__col {
+          padding: 20px 24px 28px;
+        }
+        .inc-grid {
+          grid-template-columns: 1fr;
+        }
+        .pkg-card {
+          position: relative;
+          top: auto;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .vaani-name {
+          font-size: 64px;
+        }
+        .vaani-hero__left {
+          padding: 32px 24px 48px;
+        }
+        :root {
+          --iphone-mock-w: min(300px, calc(100vw - 40px));
+          --iphone-mock-h: calc(var(--iphone-mock-w) * 693 / 320);
+          --iphone-mock-pad-x: 12px;
+          --iphone-mock-pad-y: 12px;
+          --iphone-mock-island-w: 92px;
+          --iphone-mock-island-h: 29px;
+          --iphone-mock-island-y: 10px;
+          --iphone-mock-screen-r: 38px;
+        }
+
+        .phone-wrap {
+          margin: 0 auto;
+          --phone-notify-top: calc(var(--wa-below-island) + 40px);
+        }
+
+        .iphone-side--silent {
+          top: 12.5%;
+          height: 26px;
+        }
+
+        .iphone-side--vol-up {
+          top: 20.5%;
+          height: 44px;
+        }
+
+        .iphone-side--vol-down {
+          top: 30%;
+          height: 44px;
+        }
+
+        .iphone-side--power {
+          top: 25%;
+          height: 76px;
+        }
+
+        .iphone-dynamic-island::before {
+          width: 9px;
+          height: 9px;
+          top: 5px;
+        }
+
+        .brief-wa-head {
+          font-size: 11px;
+          padding-left: 8px;
+          padding-right: 8px;
+          min-height: calc(var(--wa-below-island) + 32px);
+        }
+
+        .brief-bubble {
+          font-size: 10px;
+          padding: 10px;
+        }
+
+        .brief-chat {
+          padding: 8px;
+        }
+
+        .pain-grid {
+          grid-template-columns: 1fr;
+        }
+        #problem,
+        #how-vaani-works,
+        #demo-video,
+        #numbers,
+        #story,
+        #included,
+        #faq,
+        #booking {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        .stats4 {
+          flex-direction: column;
+          align-items: stretch;
+          padding: 20px 12px 24px;
+        }
+        .stats4__divider {
+          width: min(280px, 72%);
+          height: 1px;
+          min-height: 0;
+          flex: 0 0 auto;
+          margin: 4px auto;
+          align-self: center;
+        }
+        .stats4__col {
+          max-width: 100%;
+          gap: 40px;
+          padding: 16px 12px 8px;
+        }
+        .stats4__col + .stats4__divider + .stats4__col {
+          padding-top: 8px;
+        }
+        .ba-wrap {
+          grid-template-columns: 1fr;
+        }
+        .ba-wrap .ba-sep {
+          display: none;
+        }
+        .ba-after-col {
+          order: 1;
+        }
+        .ba-before-col {
+          order: 2;
+        }
+        .cal-body {
+          display: none;
+        }
+        .cal-list {
+          display: block;
+          padding: 16px;
+        }
+        .cal-list-item {
+          background: rgba(236, 253, 245, 0.9);
+          -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+          border-left: 3px solid var(--green);
+          border-radius: 6px;
+          padding: 12px;
+          margin-bottom: 12px;
+          font-size: 12px;
+          color: var(--green);
+          line-height: 1.4;
+          box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="nav-inner">
+        <a href="index.html#top" class="logo" aria-label="Ivvlyn home">
+          <img class="logo-mark" src="assets/ivvlyn-logo.png" alt="" width="600" height="452" decoding="async" />
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html#top">Home</a>
+          <a href="vaani.html" aria-current="page">Agents</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <a class="btn-nav nav-cta desktop-demo" href="contact.html#demo-form-wrap">Book a Demo</a>
+        <a class="btn-nav nav-cta desktop-login" href="http://localhost:3001/login">Login</a>
+        <button type="button" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-overlay" id="mobile-menu" aria-hidden="true">
+      <button type="button" class="mobile-close" aria-label="Close menu">&times;</button>
+      <nav>
+        <a href="index.html#top">Home</a>
+        <a href="vaani.html" aria-current="page">Agents</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="http://localhost:3001/login">Login</a>
+      </nav>
+    </div>
+
+    <main>
+      <section class="vaani-hero" id="vaani-hero" aria-labelledby="vaani-h1">
+        <div class="vaani-hero__left">
+          <div class="vaani-badge fade-up">
+            <span class="vaani-badge__dot" aria-hidden="true"></span>
+            <span class="vaani-badge__text">LIVE — SERVING REAL ESTATE BUSINESSES</span>
+          </div>
+          <h1 class="vaani-name fade-up" id="vaani-h1" style="transition-delay: 0.05s">Vaani</h1>
+          <p class="vaani-role fade-up" style="transition-delay: 0.1s">Real Estate AI Employee</p>
+          <hr class="vaani-divider fade-up" style="transition-delay: 0.12s" />
+          <p class="vaani-tagline fade-up" style="transition-delay: 0.15s">
+            Vaani is the employee who never misses a lead, never forgets a follow-up, and never needs a day off.
+          </p>
+          <p class="vaani-subtext fade-up" style="transition-delay: 0.18s">
+            She works while you sleep — responding to enquiries, booking property visits, and making sure your sales team walks in every morning knowing exactly who to call.
+          </p>
+          <div class="vaani-hero-ctas fade-up" style="transition-delay: 0.22s">
+            <a class="btn-primary" href="#booking">Book a Free Demo</a>
+            <a class="btn-text-link" href="#demo-video">Watch Vaani Work <span class="arr">↓</span></a>
+          </div>
+          <div class="vaani-micro fade-up" style="transition-delay: 0.26s">
+            <div>
+              <span class="vaani-micro__num">&lt; 60s</span>
+              <span class="vaani-micro__label">First response time</span>
+            </div>
+            <span class="vaani-micro__sep" aria-hidden="true">·</span>
+            <div>
+              <span class="vaani-micro__num">14 Days</span>
+              <span class="vaani-micro__label">Follow-up window</span>
+            </div>
+            <span class="vaani-micro__sep" aria-hidden="true">·</span>
+            <div>
+              <span class="vaani-micro__num">24 / 7</span>
+              <span class="vaani-micro__label">Always working</span>
+            </div>
+          </div>
+        </div>
+        <div class="vaani-hero__right">
+          <div class="phone-wrap">
+            <div class="iphone-device">
+              <span class="iphone-side iphone-side--silent" aria-hidden="true"></span>
+              <span class="iphone-side iphone-side--vol-up" aria-hidden="true"></span>
+              <span class="iphone-side iphone-side--vol-down" aria-hidden="true"></span>
+              <span class="iphone-side iphone-side--power" aria-hidden="true"></span>
+              <div class="iphone-screen-outer">
+                <div class="iphone-dynamic-island" aria-hidden="true"></div>
+                <div class="phone" id="wa-phone" aria-label="Simulated WhatsApp conversation">
+                  <div class="phone-notify" id="phone-notify" role="status">📊 Lead scored: 91 · Marked HOT · CRM updated</div>
+                  <div class="wa-head">
+                    <span class="wa-back" aria-hidden="true"></span>
+                    <span class="wa-head-title">Vaani · Real Estate</span>
+                  </div>
+                  <div class="wa-chat" id="wa-chat"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="phone-caption">This conversation happened at 2 AM. Your competitor's phone was off.</p>
+        </div>
+      </section>
+
+      <section id="problem" class="dark-section" aria-labelledby="problem-h">
+        <p class="section-label section-label--light fade-up">THE PROBLEM</p>
+        <h2 class="problem-h2 fade-up" id="problem-h">
+          Right now, somewhere in India, a lead just messaged you. Will you respond before your competitor does?
+        </h2>
+        <p class="problem-lead fade-up">
+          78% of buyers go with the first business that responds. Most real estate teams respond the next morning. That's not a sales problem. That's a timing problem.
+        </p>
+        <div class="pain-grid fade-up">
+          <div class="pain-cell">
+            <div class="pain-num">68%</div>
+            <p class="pain-text">of leads go cold if not contacted within the first hour</p>
+          </div>
+          <div class="pain-cell">
+            <div class="pain-num">11 PM</div>
+            <p class="pain-text">the most common time leads enquire from property websites in India</p>
+          </div>
+          <div class="pain-cell">
+            <div class="pain-num">₹0</div>
+            <p class="pain-text">revenue from leads your team never followed up with</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-vaani-works" aria-labelledby="how-h2">
+        <div class="how-head">
+          <p class="section-label fade-up">HOW VAANI WORKS</p>
+          <h2 class="how-h2 fade-up" id="how-h2">Think of Vaani as your best sales employee — just better.</h2>
+          <p class="how-lead fade-up">
+            She never has a bad day. Never forgets a name. Never misses a message. Here's exactly what she does.
+          </p>
+        </div>
+
+        <div class="timeline-stack">
+          <article class="timeline-row" data-step="1">
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-col-text">
+              <p class="step-label">STEP 1 — THE MOMENT A LEAD ARRIVES</p>
+              <h3 class="step-title">Vaani says hello before your team has seen the notification.</h3>
+              <p class="step-body">
+                Whenever someone fills a form on your website, clicks your MagicBricks listing, or messages your Facebook page — Vaani gets the information instantly and sends them a warm, personal WhatsApp message. Not a template. A real conversation. This happens in under 60 seconds. Even at 3 AM.
+              </p>
+              <p class="callout">
+                Your lead feels valued from the first second. By the time your team arrives in the morning, Vaani has already started the conversation.
+              </p>
+            </div>
+            <div class="timeline-col-viz">
+              <div class="speed-demo" data-io="speed">
+                <div class="speed-row">
+                  <div class="speed-label">Your current response:</div>
+                  <div class="speed-track">
+                    <div class="speed-fill speed-fill--slow"></div>
+                  </div>
+                  <div class="speed-tag speed-tag--slow"></div>
+                </div>
+                <div class="speed-row">
+                  <div class="speed-label">Vaani's response:</div>
+                  <div class="speed-track">
+                    <div class="speed-fill speed-fill--fast"></div>
+                  </div>
+                  <div class="speed-tag speed-tag--fast"></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-row timeline-row--flip" data-step="2">
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-col-text">
+              <p class="step-label">STEP 2 — UNDERSTANDING WHAT THEY WANT</p>
+              <h3 class="step-title">Vaani doesn't just collect a name and number. She understands people.</h3>
+              <p class="step-body">
+                Follow-up means staying in touch with a lead until they're ready to buy. Most salespeople give up after 1-2 messages. Vaani stays for 14 days.
+              </p>
+              <p class="step-body">
+                She reads every reply and figures out: Are they ready to buy now or just looking? What's their budget? Which area do they prefer? How serious are they — score 0 to 100? Then she adjusts how she talks to them based on the answers. Hot leads get urgency. Cold leads get nurturing. She knows the difference.
+              </p>
+            </div>
+            <div class="timeline-col-viz">
+              <div class="lead-card" data-io="lead">
+                <div class="lead-card__hdr">Lead Profile</div>
+                <div class="lead-card__name">Rahul Mehta</div>
+                <div class="lead-card__src">MagicBricks · 11:34 PM</div>
+                <div class="score-bar-wrap">
+                  <div class="score-bar-label"><span>Interest Score</span><span>91 / 100</span></div>
+                  <div class="score-bar-track">
+                    <div class="score-bar-fill"></div>
+                  </div>
+                </div>
+                <div class="tags-row">
+                  <span class="tag-pill">3BHK</span>
+                  <span class="tag-pill">Baner</span>
+                  <span class="tag-pill">₹80-90L</span>
+                  <span class="tag-pill">Ready to move</span>
+                </div>
+                <div class="hot-pill">🔥 HOT LEAD — Call today</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-row" data-step="3">
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-col-text">
+              <p class="step-label">STEP 3 — FOLLOWING UP SO YOU DON'T HAVE TO</p>
+              <h3 class="step-title">Most leads need 5-7 touches before they're ready to buy. Vaani sends all of them.</h3>
+              <p class="step-body">
+                Following up means reaching out to a lead multiple times over several days or weeks until they either buy or say they're not interested. It's the most important part of sales — and the most forgotten.
+              </p>
+              <p class="step-body">
+                Your sales team follows up once, maybe twice. Then they move on. The lead goes cold. Vaani follows up 6 times over 14 days across WhatsApp, SMS, and Email. Each message is different. Each one is timed based on when the lead is most likely to respond. Never spammy. Always relevant.
+              </p>
+            </div>
+            <div class="timeline-col-viz">
+              <div class="day-timeline" data-io="days">
+                <div class="day-track">
+                  <div class="day-line"></div>
+                  <div class="day-markers" id="day-markers"></div>
+                </div>
+                <p class="day-foot">
+                  After Day 14, Vaani marks the lead as cold and notifies your team. Clean. Organised. Nothing falls through the cracks.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-row timeline-row--flip" data-step="4">
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-col-text">
+              <p class="step-label">STEP 4 — BOOKING THE PROPERTY VISIT</p>
+              <h3 class="step-title">Vaani fills your weekend calendar without you lifting a finger.</h3>
+              <p class="step-body">
+                When a lead says they want to see the property, Vaani immediately sends them available time slots, confirms the visit, and saves it to your calendar. The day before the visit — she sends the lead a reminder so they don't forget. The morning of — she reminds your sales team who they're meeting and what that lead cares about. No missed visits. No awkward "I forgot" calls.
+              </p>
+            </div>
+            <div class="timeline-col-viz">
+              <div class="cal-wrap" data-io="cal">
+                <div class="cal-head">
+                  <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                </div>
+                <div class="cal-body cal-body--week">
+                  <div class="cal-cell"></div>
+                  <div class="cal-cell"></div>
+                  <div class="cal-cell"></div>
+                  <div class="cal-cell"></div>
+                  <div class="cal-cell"></div>
+                  <div class="cal-cell cal-cell--stack">
+                    <div class="cal-evt">Sat 11AM — Rahul M. · Baner Heights · 3BHK</div>
+                    <div class="cal-evt">Sat 2PM — Priya S. · Wakad Grande · 2BHK</div>
+                  </div>
+                  <div class="cal-cell cal-cell--stack">
+                    <div class="cal-evt">Sun 10AM — Amit K. · Baner Heights · 3BHK</div>
+                  </div>
+                </div>
+                <div class="cal-list">
+                  <div class="cal-list-item">Saturday 11AM — Rahul M. · Baner Heights · 3BHK</div>
+                  <div class="cal-list-item">Saturday 2PM — Priya S. · Wakad Grande · 2BHK</div>
+                  <div class="cal-list-item">Sunday 10AM — Amit K. · Baner Heights · 3BHK</div>
+                </div>
+                <div class="cal-note">📅 Reminder sent to Rahul for tomorrow's visit</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-row" data-step="5">
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-col-text">
+              <p class="step-label">STEP 5 — YOUR MORNING BRIEFING</p>
+              <h3 class="step-title">Before your team has their first cup of chai — they already know everything they need to.</h3>
+              <p class="step-body">
+                Every morning at 9 AM, Vaani sends your sales team a summary on WhatsApp. Not a boring report. A clear briefing — like a PA handing you your day before you walk into the office. It tells them which leads are hottest right now, who replied last night and what they said, which property visits are today, which leads need a call today, and how many leads came in overnight. Your team doesn't waste 30 minutes sorting through WhatsApp messages and Excel sheets. They just open their phone and they know.
+              </p>
+            </div>
+            <div class="timeline-col-viz">
+              <div class="brief-phone-wrap">
+                <div class="iphone-device">
+                  <span class="iphone-side iphone-side--silent" aria-hidden="true"></span>
+                  <span class="iphone-side iphone-side--vol-up" aria-hidden="true"></span>
+                  <span class="iphone-side iphone-side--vol-down" aria-hidden="true"></span>
+                  <span class="iphone-side iphone-side--power" aria-hidden="true"></span>
+                  <div class="iphone-screen-outer">
+                    <div class="iphone-dynamic-island" aria-hidden="true"></div>
+                    <div class="brief-phone">
+                      <div class="brief-wa-head">Ivvlyn · Morning Report</div>
+                      <div class="brief-chat">
+                        <div class="brief-bubble">
+📊 Good morning! Here's your daily briefing:
+
+🔥 Hot leads today: 4
+Rahul M. (91) · Priya S. (84) · Amit K. (78) · Sneha R. (71)
+
+📅 Site visits today: 2
+11:00 AM — Rahul · Baner Heights
+2:00 PM — Priya · Wakad Grande
+
+💬 Replied overnight: 9 leads
+📥 New leads since yesterday: 6
+
+⚡ Suggested first call: Rahul M.
+He asked about possession date.
+Score jumped from 68 → 91 overnight.
+                        </div>
+                        <div class="brief-time">9:00 AM <span class="wa-tick">✓✓</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="demo-video" aria-labelledby="demo-h2">
+        <p class="section-label fade-up">LIVE DEMO</p>
+        <h2 class="how-h2 fade-up" id="demo-h2">Watch Vaani handle a real lead.</h2>
+        <p class="how-lead fade-up" style="max-width: 520px; margin: 16px auto 0">
+          No scripted demo. This is Vaani responding to an actual midnight enquiry — start to finish.
+        </p>
+        <div class="video-box fade-up">
+          <div class="video-badge">LIVE DEMO</div>
+          <div class="play-btn" aria-hidden="true"><span class="play-tri"></span></div>
+          <p class="video-soon">Video coming soon</p>
+        </div>
+        <p class="video-caps fade-up">
+          Captured from a real session · No editing or scripting · Midnight to booked visit in 4 minutes
+        </p>
+      </section>
+
+      <section id="numbers" aria-labelledby="num-h2">
+        <p class="section-label fade-up">BY THE NUMBERS</p>
+        <h2 class="how-h2 fade-up" id="num-h2">What actually changes when Vaani joins your team.</h2>
+        <div class="stats4">
+          <div class="stats4__col">
+            <div class="stats4__item fade-up">
+              <div class="stats4__num counter" data-mode="prefix" data-target="60" data-prefix="&lt; " data-suffix="s">&lt; 0s</div>
+              <p class="stats4__label">Time for Vaani to respond to any new lead, day or night</p>
+            </div>
+            <div class="stats4__item fade-up" style="transition-delay: 0.12s">
+              <div class="stats4__num counter" data-target="14">0</div>
+              <p class="stats4__label">Days Vaani stays in touch with every single lead automatically</p>
+            </div>
+          </div>
+          <div class="stats4__divider" aria-hidden="true"></div>
+          <div class="stats4__col">
+            <div class="stats4__item fade-up" style="transition-delay: 0.06s">
+              <div class="stats4__num counter" data-target="6" data-suffix="×">0×</div>
+              <p class="stats4__label">More follow-ups sent compared to an average sales person</p>
+            </div>
+            <div class="stats4__item fade-up" style="transition-delay: 0.18s">
+              <div class="stats4__num counter" data-target="0">0</div>
+              <p class="stats4__label">Leads forgotten, missed, or lost due to slow response</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ba-wrap ba-grid-mobile fade-up">
+          <div class="ba-col ba-after-col">
+            <p class="ba-h ba-h--after">With Vaani</p>
+            <div id="ba-after"></div>
+          </div>
+          <div class="ba-sep" aria-hidden="true"></div>
+          <div class="ba-col ba-before-col">
+            <p class="ba-h ba-h--before">Before Vaani</p>
+            <div id="ba-before"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="story" aria-labelledby="story-h">
+        <p class="section-label fade-up">REAL STORY</p>
+        <p class="story-quote fade-up" aria-hidden="true">"</p>
+        <p class="story-text fade-up" id="story-h">
+          It was a Tuesday night. A lead messaged our MagicBricks listing at 11:47 PM asking about a 3BHK in Wakad. My team was asleep. Vaani replied within 40 seconds. Asked about budget. Understood they needed possession in 3 months. Sent two property options. Booked a Saturday visit. When my sales manager came in at 9:30 AM Wednesday, Vaani had already sent the briefing. He called Rahul at 10 AM — fully prepared. Rahul showed up Saturday. Paid the booking amount by Sunday evening.
+        </p>
+        <p class="story-att fade-up">— Real Estate Developer, Pune</p>
+        <p class="story-cr fade-up">₹1.2 Cr unit closed from a midnight WhatsApp message.</p>
+      </section>
+
+      <section id="included" aria-labelledby="inc-h2">
+        <p class="section-label fade-up">WHAT YOU GET</p>
+        <h2 class="how-h2 fade-up" id="inc-h2">Everything included. Nothing extra to figure out.</h2>
+        <p class="how-lead fade-up" style="max-width: 560px; margin: 16px auto 0; text-align: center">
+          Vaani is not a software you set up yourself. We build it, connect it, and run it for you.
+        </p>
+        <div class="inc-grid">
+          <div class="inc-left fade-up">
+            <div class="inc-group">
+              <p class="inc-group-h">Lead Capture</p>
+              <p class="inc-item">Connects to your website form</p>
+              <p class="inc-item">MagicBricks, 99acres, Housing.com integration</p>
+              <p class="inc-item">Facebook &amp; Instagram Lead Ads</p>
+              <p class="inc-item">Manual lead entry support</p>
+            </div>
+            <div class="inc-group">
+              <p class="inc-group-h">Conversations</p>
+              <p class="inc-item">WhatsApp Business (official API)</p>
+              <p class="inc-item">Email responses</p>
+              <p class="inc-item">SMS fallback</p>
+              <p class="inc-item">Hindi, Hinglish, and English — automatic</p>
+              <p class="inc-item">Never sounds like a bot</p>
+            </div>
+            <div class="inc-group">
+              <p class="inc-group-h">Follow-Up</p>
+              <p class="inc-item">6-message sequence over 14 days</p>
+              <p class="inc-item">Timed for best open rates</p>
+              <p class="inc-item">Stops automatically if lead replies</p>
+              <p class="inc-item">Restarts if lead goes cold again</p>
+            </div>
+            <div class="inc-group">
+              <p class="inc-group-h">Visit Management</p>
+              <p class="inc-item">Sends time slots to lead</p>
+              <p class="inc-item">Confirms booking over WhatsApp</p>
+              <p class="inc-item">24-hour reminder to lead</p>
+              <p class="inc-item">Morning reminder to your sales team</p>
+              <p class="inc-item">Handles reschedules</p>
+            </div>
+            <div class="inc-group">
+              <p class="inc-group-h">Your Team's Dashboard</p>
+              <p class="inc-item">Lead score updated after every message</p>
+              <p class="inc-item">Full conversation history</p>
+              <p class="inc-item">Morning WhatsApp briefing at 9 AM</p>
+              <p class="inc-item">Instant alerts for hot leads</p>
+              <p class="inc-item">Weekly performance report</p>
+            </div>
+          </div>
+          <aside class="pkg-card fade-up">
+            <p class="pkg-top">Vaani — Real Estate</p>
+            <div class="pkg-price-row">
+              <p class="pkg-label">Setup Fee</p>
+              <p class="pkg-big">Contact Us</p>
+            </div>
+            <p class="pkg-plus">+</p>
+            <p class="pkg-label">Monthly</p>
+            <p class="pkg-mid">₹___/mo</p>
+            <p class="pkg-sub">Pricing based on lead volume and features</p>
+            <div class="pkg-div"></div>
+            <div class="pkg-list">
+              ✓ Full setup by Ivvlyn team<br />
+              ✓ WhatsApp Business API included<br />
+              ✓ Dedicated support channel
+            </div>
+            <div class="pkg-div"></div>
+            <div class="pkg-turn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+                <path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.5" />
+              </svg>
+              Live in 7 days
+            </div>
+            <a class="pkg-cta" href="#booking">Book a Free Demo</a>
+            <p class="pkg-note">No commitment. 20 minutes. We'll show you Vaani working with your actual leads.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section id="faq" aria-labelledby="faq-h2">
+        <p class="section-label fade-up">QUESTIONS</p>
+        <h2 class="how-h2 fade-up" id="faq-h2">Things people usually ask.</h2>
+        <div class="faq-list" style="margin-top: 40px">
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              Do I need to do anything to set this up?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                No. We handle the entire setup. You don't need any technical knowledge. We connect Vaani to your WhatsApp, website, and property portals. Usually takes 5-7 days. Then she's live.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              Will it sound like a bot to my leads?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                No. Vaani is powered by advanced AI that writes like a real person. She uses the lead's name, references what they asked, and replies naturally. Most leads don't know they're talking to AI unless you tell them.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              What happens when a lead wants to speak to a real person?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                Vaani detects when a lead is ready for a human and immediately notifies your sales team with a full summary of the conversation. The handover is smooth — your team picks up right where Vaani left off.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              What if I already have a CRM?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                We can connect to most CRMs. If you don't have one, Vaani comes with a simple built-in lead tracker that your team can access anytime.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              Which property portals does it work with?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                MagicBricks, 99acres, Housing.com, NoBroker, Facebook &amp; Instagram Lead Ads, and your own website. If you use something else, tell us — we'll check.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              What language does Vaani speak?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                Hindi, Hinglish (mix of Hindi and English), and English. She automatically detects which language the lead uses and replies in the same way. No setup needed.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              How long is the follow-up period?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                14 days. Vaani sends 6 messages across different channels over 14 days. If the lead replies at any point, she responds immediately and the sequence adjusts. If they say they're not interested, she stops and marks them as closed.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false">
+              What does the morning briefing look like?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                A WhatsApp message your team gets at 9 AM every day. It shows: hot leads to call, today's site visits, leads who replied overnight, and new leads since yesterday. Takes 30 seconds to read. Your team knows exactly what to do.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="booking" class="dark-section" aria-labelledby="booking-h2">
+        <p class="section-label section-label--light fade-up">NEXT STEP</p>
+        <h2 class="final-h2 fade-up" id="booking-h2">Your next sale could come at 2 AM tonight.</h2>
+        <p class="final-lead fade-up">Will Vaani be there to answer it?</p>
+        <a class="btn-final fade-up" href="#booking">Book Your Free Demo</a>
+        <p class="final-note fade-up">20 minutes. No obligation. See Vaani live.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-legal">
+        <p>© 2026 Ivvlyn. All rights reserved.</p>
+        <p class="footer-trademark">
+          Ivvlyn™ is a trademark of Ivvlyn. Other product or company names may be trademarks of their respective owners.
+        </p>
+        <p><a href="mailto:founder@ivvlin.com" class="footer-legal-link">founder@ivvlin.com</a></p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const header = document.querySelector(".site-header");
+        const menuBtn = document.querySelector(".menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeBtn = mobileMenu.querySelector(".mobile-close");
+        const mobileLinks = mobileMenu.querySelectorAll("a");
+
+        function setHeader() {
+          header.classList.toggle("is-scrolled", window.scrollY > 60);
+        }
+        window.addEventListener("scroll", setHeader, { passive: true });
+        setHeader();
+
+        function openMenu(open) {
+          menuBtn.setAttribute("aria-expanded", open);
+          mobileMenu.classList.toggle("is-open", open);
+          mobileMenu.setAttribute("aria-hidden", !open);
+          document.body.style.overflow = open ? "hidden" : "";
+        }
+        menuBtn.addEventListener("click", () => openMenu(true));
+        closeBtn.addEventListener("click", () => openMenu(false));
+        mobileLinks.forEach((a) => a.addEventListener("click", () => openMenu(false)));
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        document.querySelectorAll(".fade-up").forEach((el) => io.observe(el));
+
+        /* WhatsApp chat loop */
+        const chatEl = document.getElementById("wa-chat");
+        const notifyEl = document.getElementById("phone-notify");
+        const msgs = [
+          { in: true, t: "2:14 AM", text: "Hi, I saw your property listing on MagicBricks" },
+          {
+            in: false,
+            t: "2:14 AM",
+            tick: true,
+            text:
+              "Hi Rahul! 🏡 Thanks for reaching out at this hour! I saw you're interested in a 3BHK. We have two amazing options in Baner starting ₹82L. Quick question — are you looking to move in soon or planning for later?",
+          },
+          { in: true, t: "2:15 AM", text: "Looking to move in within 3 months" },
+          {
+            in: false,
+            t: "2:15 AM",
+            tick: true,
+            text:
+              "Perfect! That's actually our sweet spot 😊 Both properties are ready to move in. Want to visit this Saturday? I can book a slot for you right now.",
+          },
+          { in: true, t: "2:16 AM", text: "Yes Saturday works!" },
+          {
+            in: false,
+            t: "2:16 AM",
+            tick: true,
+            text:
+              "Done! ✅ Your visit is confirmed for Saturday, 11:00 AM at Baner Heights. I'll send you a reminder the day before. See you then, Rahul!",
+          },
+        ];
+
+        function bubble(m) {
+          const wrap = document.createElement("div");
+          wrap.className = "wa-msg wa-msg--" + (m.in ? "in" : "out");
+          const b = document.createElement("div");
+          b.className = "wa-bubble";
+          b.textContent = m.text;
+          const time = document.createElement("div");
+          time.className = "wa-time";
+          time.textContent = m.t + " ";
+          if (m.tick) {
+            const sp = document.createElement("span");
+            sp.className = "wa-tick";
+            sp.textContent = "✓✓";
+            time.appendChild(sp);
+          }
+          wrap.appendChild(b);
+          wrap.appendChild(time);
+          return wrap;
+        }
+
+        let loopTimer;
+        function runChatLoop() {
+          if (loopTimer) clearTimeout(loopTimer);
+          chatEl.innerHTML = "";
+          notifyEl.classList.remove("is-visible");
+          const times = [0, 1500, 4000, 5500, 8000, 9500];
+          times.forEach((delay, i) => {
+            setTimeout(() => chatEl.appendChild(bubble(msgs[i])), delay);
+          });
+          setTimeout(() => notifyEl.classList.add("is-visible"), 11000);
+          setTimeout(() => notifyEl.classList.remove("is-visible"), 13200);
+          loopTimer = setTimeout(runChatLoop, 14000);
+        }
+        runChatLoop();
+
+        /* Timeline nodes */
+        document.querySelectorAll(".timeline-row").forEach((row) => {
+          const node = row.querySelector(".timeline-node");
+          const nio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  node.classList.add("filled");
+                  nio.unobserve(row);
+                }
+              });
+            },
+            { threshold: 0.25 }
+          );
+          nio.observe(row);
+        });
+
+        /* Speed demo */
+        const speedDemo = document.querySelector(".speed-demo");
+        if (speedDemo) {
+          const sio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  speedDemo.classList.add("in-view");
+                  sio.unobserve(speedDemo);
+                }
+              });
+            },
+            { threshold: 0.35 }
+          );
+          sio.observe(speedDemo);
+        }
+
+        const leadCard = document.querySelector(".lead-card");
+        if (leadCard) {
+          const lio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  leadCard.classList.add("in-view");
+                  lio.unobserve(leadCard);
+                }
+              });
+            },
+            { threshold: 0.35 }
+          );
+          lio.observe(leadCard);
+        }
+
+        /* 14-day markers */
+        const dayHost = document.getElementById("day-markers");
+        const activeDays = [
+          { d: 1, tip: "First message — WhatsApp 💬" },
+          { d: 2, tip: "Property suggestions — WhatsApp 🏡" },
+          { d: 4, tip: "Urgent follow-up — SMS 📱" },
+          { d: 7, tip: "Social proof — WhatsApp ⭐" },
+          { d: 10, tip: "Comparison email — Email 📧" },
+          { d: 13, tip: "Final message — WhatsApp 🤝" },
+        ];
+        if (dayHost) {
+          for (let day = 1; day <= 14; day++) {
+            const wrap = document.createElement("div");
+            wrap.className = "day-dot";
+            const act = activeDays.find((a) => a.d === day);
+            if (act) wrap.classList.add("day-dot--active");
+            const inner = document.createElement("span");
+            inner.className = "day-dot__inner";
+            const tip = document.createElement("span");
+            tip.className = "day-dot__tip";
+            if (act) tip.textContent = act.tip;
+            const dn = document.createElement("span");
+            dn.className = "day-num";
+            dn.textContent = "D" + day;
+            wrap.appendChild(tip);
+            wrap.appendChild(inner);
+            wrap.appendChild(dn);
+            dayHost.appendChild(wrap);
+          }
+        }
+        const daySection = document.querySelector('[data-io="days"]');
+        if (daySection) {
+          const dio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (!e.isIntersecting) return;
+                const dots = daySection.querySelectorAll(".day-dot--active");
+                dots.forEach((d, i) => {
+                  setTimeout(() => d.classList.add("visible"), i * 200);
+                });
+                dio.unobserve(daySection);
+              });
+            },
+            { threshold: 0.3 }
+          );
+          dio.observe(daySection);
+        }
+
+        const calWrap = document.querySelector(".cal-wrap");
+        if (calWrap) {
+          const cio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  calWrap.classList.add("in-view");
+                  cio.unobserve(calWrap);
+                }
+              });
+            },
+            { threshold: 0.25 }
+          );
+          cio.observe(calWrap);
+        }
+
+        const badLines = [
+          "❌ Leads wait until next morning for a reply",
+          "❌ Sales team forgets to follow up after day 2",
+          "❌ No one knows which leads are serious",
+          "❌ Site visit bookings done over phone calls",
+          "❌ No idea how many leads came in last week",
+          "❌ 2 AM enquiry goes unanswered until 10 AM",
+          "❌ CRM updated maybe once a week, if at all",
+        ];
+        const goodLines = [
+          "✓ Every lead gets a reply in under 60 seconds",
+          "✓ 6 follow-ups sent automatically over 14 days",
+          "✓ Every lead scored 0-100 in real time",
+          "✓ Visits booked, confirmed, and reminded by Vaani",
+          "✓ Daily WhatsApp report with full lead summary",
+          "✓ Replied, qualified, and scored before 10 AM",
+          "✓ CRM updated after every single conversation",
+        ];
+        const bf = document.getElementById("ba-before");
+        const af = document.getElementById("ba-after");
+        const baWrap = document.querySelector(".ba-wrap");
+        if (bf && af) {
+          badLines.forEach((b, i) => {
+            const rowB = document.createElement("div");
+            rowB.className = "ba-line ba-line--bad fade-up";
+            rowB.style.transitionDelay = i * 0.06 + "s";
+            rowB.textContent = b;
+            bf.appendChild(rowB);
+            const rowG = document.createElement("div");
+            rowG.className = "ba-line ba-line--good fade-up";
+            rowG.style.transitionDelay = i * 0.06 + 0.12 + "s";
+            rowG.textContent = goodLines[i];
+            af.appendChild(rowG);
+          });
+        }
+        const baIo = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("in-view");
+                baIo.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        if (baWrap) baIo.observe(baWrap);
+
+        function easeOut(t) {
+          return 1 - Math.pow(1 - t, 3);
+        }
+        function runCounter(el) {
+          const target = Number(el.dataset.target);
+          const suffix = el.dataset.suffix || "";
+          const prefix = el.dataset.prefix || "";
+          const mode = el.dataset.mode;
+          const start = performance.now();
+          const duration = 1500;
+          function frame(now) {
+            const p = Math.min((now - start) / duration, 1);
+            const v = Math.round(easeOut(p) * target);
+            if (mode === "prefix") el.textContent = prefix + v + suffix;
+            else el.textContent = v + suffix;
+            if (p < 1) requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        }
+        const counterIo = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (!e.isIntersecting) return;
+              runCounter(e.target);
+              counterIo.unobserve(e.target);
+            });
+          },
+          { threshold: 0.2 }
+        );
+        document.querySelectorAll(".counter").forEach((c) => counterIo.observe(c));
+
+        /* FAQ */
+        document.querySelectorAll(".faq-item").forEach((item) => {
+          const btn = item.querySelector(".faq-q");
+          const ans = item.querySelector(".faq-a");
+          btn.addEventListener("click", () => {
+            const open = !item.classList.contains("is-open");
+            document.querySelectorAll(".faq-item").forEach((o) => {
+              o.classList.remove("is-open");
+              o.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+              const a = o.querySelector(".faq-a");
+              a.style.maxHeight = "0";
+            });
+            if (open) {
+              item.classList.add("is-open");
+              btn.setAttribute("aria-expanded", "true");
+              ans.style.maxHeight = ans.scrollHeight + "px";
+            }
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
+

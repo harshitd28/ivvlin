@@ -1,0 +1,2068 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services — Ivvlyn</title>
+    <meta
+      name="description"
+      content="Ivvlyn automates repetitive work with AI employees, workflow automation, and custom agents — built for Indian businesses."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+      .page-top-anchor {
+        height: 0;
+        width: 100%;
+        pointer-events: none;
+      }
+      .section-label {
+        font-size: var(--label-size);
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        color: var(--black);
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: fit-content;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+      .section-label::after {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 1px;
+        margin-top: 12px;
+        background: var(--black);
+      }
+      .section-label--left {
+        margin-left: 0;
+        margin-right: 0;
+        align-items: flex-start;
+        text-align: left;
+      }
+      .section-label--left::after {
+        margin-left: 0;
+      }
+      .section-label--dark {
+        font-size: clamp(13px, 1.4vw, 16px);
+        letter-spacing: 0.22em;
+        color: #9ca3af;
+        font-weight: 500;
+      }
+      .section-label--dark::after {
+        background: #6b7280;
+        width: 48px;
+        margin-top: 14px;
+      }
+
+      /* Hero */
+      .svc-hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 160px 24px 80px;
+        background: var(--bg);
+      }
+      .svc-hero-h1 {
+        font-size: clamp(36px, 6vw, 76px);
+        font-weight: 200;
+        letter-spacing: -3px;
+        line-height: 1.08;
+        color: #0a0a0a;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .svc-hero-line {
+        display: block;
+      }
+      .svc-hero-word {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(14px);
+        animation: svcWordIn 0.5s ease-out forwards;
+        animation-delay: calc(0.22s + var(--sw, 0) * 0.04s);
+      }
+      @keyframes svcWordIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .svc-hero-sub {
+        font-size: 20px;
+        font-weight: 300;
+        color: #555;
+        max-width: 520px;
+        margin: 32px auto 0;
+        line-height: 1.85;
+      }
+
+      .svc-ticker-wrap {
+        width: 100%;
+        max-width: 100vw;
+        margin-top: 64px;
+        overflow: hidden;
+      }
+      .svc-ticker-row + .svc-ticker-row {
+        margin-top: 12px;
+      }
+      .svc-ticker-track {
+        display: flex;
+        width: max-content;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+      .svc-ticker-track--l {
+        animation-name: svcScrollLeft;
+        animation-duration: 30s;
+      }
+      .svc-ticker-track--r {
+        animation-name: svcScrollRight;
+        animation-duration: 25s;
+      }
+      @keyframes svcScrollLeft {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      @keyframes svcScrollRight {
+        0% {
+          transform: translateX(-50%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      .svc-ticker-pill--a {
+        font-size: 13px;
+        font-weight: 400;
+        color: #888;
+        padding: 8px 24px;
+        border: 1px solid #e8e8e8;
+        border-radius: 100px;
+        background: #fff;
+        white-space: nowrap;
+        margin: 0 8px;
+        flex-shrink: 0;
+      }
+      .svc-ticker-pill--b {
+        font-size: 13px;
+        font-weight: 400;
+        color: #444;
+        padding: 8px 24px;
+        border: 1px solid #ddd;
+        border-radius: 100px;
+        background: #fafaf8;
+        white-space: nowrap;
+        margin: 0 8px;
+        flex-shrink: 0;
+      }
+      .svc-ticker-foot {
+        margin-top: 56px;
+        font-size: 13px;
+        color: #aaa;
+        letter-spacing: 2px;
+        font-weight: 400;
+      }
+
+      /* Core */
+      #svc-core {
+        padding: 140px 48px;
+        background: #0a0a0a;
+      }
+      .svc-core-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+      .svc-core-copy {
+        text-align: center;
+        max-width: 520px;
+        margin: 0 auto;
+      }
+      .svc-core-compare {
+        width: 100%;
+      }
+      .svc-core-h2 {
+        font-size: clamp(28px, 4vw, 52px);
+        font-weight: 200;
+        color: #fff;
+        letter-spacing: -1.5px;
+        line-height: 1.15;
+        margin: 0;
+      }
+      .svc-core-p {
+        font-size: 16px;
+        font-weight: 300;
+        color: #666;
+        line-height: 1.9;
+        margin: 28px 0 0;
+      }
+      .svc-core-p2 {
+        font-size: 16px;
+        font-weight: 300;
+        color: #888;
+        line-height: 1.9;
+        margin: 24px 0 0;
+      }
+      .svc-compare-before {
+        background: #111;
+        border: 1px solid #1e1e1e;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 12px;
+        opacity: 0;
+        transform: translateX(-28px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .svc-compare-after {
+        background: #0f1a0f;
+        border: 1px solid #1a2e1a;
+        border-radius: 12px;
+        padding: 20px 24px;
+        opacity: 0;
+        transform: translateX(28px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      #svc-core.in-view .svc-compare-before,
+      #svc-core.in-view .svc-compare-after {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      #svc-core.in-view .svc-compare-after {
+        transition-delay: 0.12s;
+      }
+      .svc-cmp-h {
+        font-size: 10px;
+        letter-spacing: 3px;
+        margin: 0 0 16px;
+        text-transform: uppercase;
+      }
+      .svc-cmp-h--b {
+        color: #444;
+      }
+      .svc-cmp-h--a {
+        color: #2d5a2d;
+      }
+      .svc-cmp-task {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        margin-bottom: 12px;
+        font-size: 13px;
+        color: #666;
+      }
+      .svc-cmp-task--a {
+        color: #888;
+      }
+      .svc-cmp-foot {
+        font-size: 11px;
+        margin-top: 4px;
+      }
+      .svc-cmp-foot small {
+        display: block;
+        font-size: 10px;
+        margin-top: 4px;
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.65s ease, transform 0.65s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #svc-build {
+        padding: 140px 48px;
+        background: #fff;
+      }
+      .svc-build-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .svc-build-h2 {
+        font-size: clamp(28px, 4vw, 52px);
+        font-weight: 200;
+        letter-spacing: -1.5px;
+        max-width: 640px;
+        line-height: 1.15;
+        margin: 0 auto;
+        color: #0a0a0a;
+        text-align: center;
+      }
+      .svc-build-lead {
+        font-size: 16px;
+        font-weight: 300;
+        color: #666;
+        max-width: 520px;
+        line-height: 1.85;
+        margin: 20px auto 0;
+        text-align: center;
+      }
+      .svc-block {
+        border-top: 1px solid #e8e8e8;
+        padding: 64px 0;
+      }
+      .svc-block-grid {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        gap: 80px;
+        align-items: flex-start;
+        text-align: center;
+      }
+      .svc-block-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .svc-block-text .svc-b-desc {
+        max-width: 38rem;
+      }
+      .svc-block-text .svc-ex-list {
+        width: 100%;
+        max-width: 28rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .svc-block-text .svc-step-num {
+        margin: 0;
+      }
+      .svc-step-row {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        gap: 12px;
+        align-items: start;
+        margin-top: 14px;
+        width: 100%;
+        max-width: 26rem;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+      }
+      .svc-step-row--first {
+        margin-top: 16px;
+      }
+      .svc-process-viz.svc-process-desktop {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .svc-block-grid--rev > .svc-wf,
+      .svc-block-grid--rev > .svc-process-viz {
+        order: 2;
+      }
+      .svc-block-grid--rev > .svc-block-text {
+        order: 1;
+      }
+      .svc-num {
+        font-size: 16px;
+        font-weight: 400;
+        color: #c4c4c4;
+        letter-spacing: 0.4em;
+        margin-bottom: 22px;
+        display: inline-block;
+        min-width: 3.25em;
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+      }
+      .svc-b-title {
+        font-size: clamp(28px, 3.5vw, 44px);
+        font-weight: 200;
+        color: #0a0a0a;
+        letter-spacing: -1px;
+        line-height: 1.2;
+        margin: 0 0 16px;
+      }
+      .svc-tag {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .svc-tag--g::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #16a34a;
+      }
+      .svc-tag--g {
+        color: #16a34a;
+      }
+      .svc-tag--m {
+        color: #888;
+      }
+      .svc-b-desc {
+        font-size: 15px;
+        font-weight: 300;
+        color: #555;
+        line-height: 1.85;
+        margin-top: 16px;
+      }
+      .svc-b-small {
+        font-size: 11px;
+        color: #aaa;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 28px;
+      }
+      .svc-b-link {
+        font-size: 14px;
+        font-weight: 500;
+        color: #0a0a0a;
+        margin-top: 24px;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.25s ease;
+      }
+      .svc-b-link:hover {
+        border-bottom-color: #0a0a0a;
+      }
+      .svc-feed {
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+      .svc-feed-card {
+        background: #fff;
+        border: 1px solid #e8e8e8;
+        border-radius: 16px;
+        padding: 28px;
+        text-align: left;
+      }
+      .svc-feed-h {
+        font-size: 12px;
+        color: #888;
+        margin: 0 0 20px;
+        text-align: center;
+      }
+      .svc-feed-item {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.45s ease, transform 0.45s ease;
+      }
+      .svc-feed.is-visible .svc-feed-item {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .svc-feed-ic {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #f8f8f8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .svc-feed-foot {
+        font-size: 11px;
+        color: #888;
+        margin-top: 20px;
+        padding-top: 16px;
+        border-top: 1px solid #f0f0f0;
+      }
+      .svc-ex-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+      }
+      .svc-ex {
+        display: grid;
+        grid-template-columns: 1em 1fr;
+        gap: 10px;
+        align-items: start;
+        font-size: 13px;
+        font-weight: 300;
+        color: #555;
+        margin: 0;
+        text-align: left;
+      }
+      .svc-wf {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 220px;
+        margin: 0 auto;
+      }
+      .svc-wf-node {
+        width: 200px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 400;
+        color: #0a0a0a;
+        padding: 14px 18px;
+        background: #fff;
+        border: 1px solid #e8e8e8;
+        border-radius: 10px;
+        border-left-width: 3px;
+      }
+      .svc-wf-node--1 {
+        border-left-color: #e8e8e8;
+      }
+      .svc-wf-node--2 {
+        border-left-color: #0a0a0a;
+      }
+      .svc-wf-node--3 {
+        border-left-color: #444;
+      }
+      .svc-wf-node--4 {
+        border-left-color: #16a34a;
+      }
+      .svc-wf-line {
+        width: 1px;
+        height: 32px;
+        background: #e8e8e8;
+        position: relative;
+        margin: 0 auto;
+      }
+      .svc-wf-dot {
+        position: absolute;
+        left: 50%;
+        width: 6px;
+        height: 6px;
+        margin-left: -3px;
+        background: #0a0a0a;
+        border-radius: 50%;
+        animation: none;
+      }
+      .svc-wf.is-active .svc-wf-dot {
+        animation: svcTravel 2s ease-in-out infinite;
+      }
+      @keyframes svcTravel {
+        0% {
+          top: 0;
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        85% {
+          opacity: 1;
+        }
+        100% {
+          top: calc(100% - 6px);
+          opacity: 0;
+        }
+      }
+      .svc-ind-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+      .svc-ind-card {
+        background: #fff;
+        border: 1px solid #e8e8e8;
+        border-radius: 12px;
+        padding: 20px 16px;
+        text-align: center;
+        transition: all 0.25s ease;
+        cursor: pointer;
+      }
+      .svc-ind-card:hover {
+        border-color: #0a0a0a;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      }
+      .svc-ind-card svg {
+        display: block;
+        margin: 0 auto 10px;
+      }
+      .svc-ind-name {
+        font-size: 13px;
+        font-weight: 400;
+        color: #0a0a0a;
+      }
+      .svc-ind-use {
+        font-size: 11px;
+        font-weight: 300;
+        color: #888;
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+      .svc-step-num {
+        width: 24px;
+        height: 24px;
+        border: 1px solid #e8e8e8;
+        border-radius: 50%;
+        font-size: 11px;
+        color: #888;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      #svc-process {
+        padding: 140px 48px;
+        background: #fafaf8;
+      }
+      .svc-process-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .svc-process-h2 {
+        font-size: clamp(28px, 4vw, 52px);
+        font-weight: 200;
+        letter-spacing: -1.5px;
+        max-width: 600px;
+        line-height: 1.15;
+        margin: 0 auto;
+        color: #0a0a0a;
+        text-align: center;
+      }
+      .svc-process-lead {
+        font-size: 16px;
+        font-weight: 300;
+        color: #666;
+        max-width: 440px;
+        margin: 20px auto 0;
+        line-height: 1.85;
+        text-align: center;
+      }
+      .svc-process-viz {
+        margin-top: 80px;
+        position: relative;
+      }
+      .svc-process-desktop {
+        display: block;
+      }
+      .svc-process-mobile {
+        display: none;
+      }
+      .svc-process-track {
+        position: relative;
+        height: 200px;
+      }
+      .svc-process-line-bg {
+        position: absolute;
+        left: 8%;
+        right: 8%;
+        top: 56px;
+        height: 1px;
+        background: #e8e8e8;
+      }
+      .svc-process-line-fill {
+        position: absolute;
+        left: 8%;
+        top: 56px;
+        height: 1px;
+        width: 0;
+        background: #0a0a0a;
+        transition: width 1.1s ease-out;
+      }
+      .svc-process-viz.is-done .svc-process-line-fill {
+        width: 84%;
+      }
+      .svc-process-stops {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 1;
+        padding: 0 4%;
+      }
+      .svc-p-step {
+        flex: 1;
+        max-width: 18%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .svc-p-lbl {
+        font-size: 10px;
+        font-weight: 500;
+        color: #aaa;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        min-height: 2.4em;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+      .svc-p-node {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1.5px solid #e8e8e8;
+        background: #fff;
+        font-size: 13px;
+        font-weight: 400;
+        color: #0a0a0a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s ease;
+        flex-shrink: 0;
+      }
+      .svc-p-node.is-on {
+        background: #0a0a0a;
+        color: #fff;
+        border-color: #0a0a0a;
+        animation: svcNodePop 0.45s ease;
+      }
+      @keyframes svcNodePop {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .svc-p-title {
+        font-size: 14px;
+        font-weight: 400;
+        color: #0a0a0a;
+        margin-top: 16px;
+        line-height: 1.4;
+        max-width: 140px;
+      }
+      .svc-p-desc {
+        font-size: 12px;
+        font-weight: 300;
+        color: #888;
+        margin-top: 8px;
+        line-height: 1.6;
+        max-width: 140px;
+      }
+      .svc-p-m {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 8px 0 8px 8px;
+        border-left: 1px solid #e8e8e8;
+        margin-left: 11px;
+        padding-left: 20px;
+      }
+      .svc-p-m-node {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1.5px solid #e8e8e8;
+        background: #fff;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: -30px;
+        flex-shrink: 0;
+        transition: all 0.4s ease;
+      }
+      .svc-p-m-node.is-on {
+        background: #0a0a0a;
+        color: #fff;
+        border-color: #0a0a0a;
+        animation: svcNodePop 0.45s ease;
+      }
+      .svc-p-m-text {
+        flex: 1;
+        padding-top: 2px;
+      }
+
+      #svc-industries {
+        padding: 140px 48px;
+        background: #fff;
+      }
+      .svc-industries-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .svc-industries-inner .svc-build-h2,
+      .svc-industries-inner .svc-build-lead {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .svc-cell-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: #e8e8e8;
+        margin-top: 72px;
+        text-align: left;
+      }
+      .svc-cell {
+        background: #fafaf8;
+        padding: 40px 32px;
+        cursor: pointer;
+        transition: background 0.25s ease;
+      }
+      .svc-cell:hover {
+        background: #fff;
+      }
+      .svc-cell--custom {
+        background: #fff;
+        border: 1.5px dashed #ddd;
+      }
+      .svc-cell--custom:hover {
+        border-color: #0a0a0a;
+      }
+      .svc-cell-name {
+        font-size: 16px;
+        font-weight: 400;
+        color: #0a0a0a;
+        margin-top: 16px;
+      }
+      .svc-cell-desc {
+        font-size: 13px;
+        font-weight: 300;
+        color: #777;
+        line-height: 1.6;
+        margin-top: 10px;
+      }
+      .svc-pill {
+        display: inline-block;
+        border-radius: 100px;
+        padding: 4px 12px;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        margin-top: 16px;
+      }
+      .svc-pill--live {
+        background: #ecfdf5;
+        color: #16a34a;
+      }
+      .svc-pill--build {
+        background: #fff7ed;
+        color: #ea580c;
+      }
+      .svc-pill--avail {
+        background: #f8f8f8;
+        color: #888;
+      }
+      .svc-cell-cta {
+        font-size: 12px;
+        font-weight: 500;
+        color: #0a0a0a;
+        margin-top: 12px;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s ease;
+      }
+      .svc-cell-cta:hover {
+        border-bottom-color: #0a0a0a;
+      }
+
+      #svc-diff {
+        padding: 140px 48px;
+        background: #0a0a0a;
+      }
+      .svc-diff-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .svc-diff-h2 {
+        font-size: clamp(28px, 4vw, 52px);
+        font-weight: 200;
+        color: #fff;
+        letter-spacing: -1.5px;
+        line-height: 1.15;
+        max-width: 680px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .svc-diff-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: #111;
+        margin-top: 72px;
+      }
+      .svc-diff-cell {
+        background: #0a0a0a;
+        padding: 48px 40px;
+        text-align: center;
+      }
+      .svc-diff-num {
+        font-size: 15px;
+        font-weight: 400;
+        color: #4b5563;
+        letter-spacing: 0.06em;
+        margin-bottom: 24px;
+        display: inline-block;
+        font-variant-numeric: tabular-nums;
+      }
+      .svc-diff-cell h3 {
+        font-size: 17px;
+        font-weight: 400;
+        color: #fff;
+        margin: 0 auto 12px;
+        max-width: 22rem;
+      }
+      .svc-diff-cell p {
+        font-size: 14px;
+        font-weight: 300;
+        color: #9ca3af;
+        line-height: 1.85;
+        margin: 0 auto;
+        max-width: 26rem;
+      }
+
+      #svc-stats {
+        padding: 120px 48px;
+        background: #fafaf8;
+        text-align: center;
+      }
+      .svc-stats-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .svc-stats-h2 {
+        font-size: clamp(28px, 4vw, 48px);
+        font-weight: 200;
+        letter-spacing: -1.5px;
+        max-width: 540px;
+        margin: 0 auto;
+        color: #0a0a0a;
+      }
+      .svc-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 72px;
+      }
+      .svc-stat {
+        padding: 0 40px;
+        border-right: 1px solid #e8e8e8;
+        text-align: center;
+      }
+      .svc-stat:last-child {
+        border-right: none;
+      }
+      .svc-stat-val {
+        font-size: clamp(40px, 6vw, 72px);
+        font-weight: 200;
+        color: #0a0a0a;
+        line-height: 1;
+      }
+      .svc-stat-lbl {
+        font-size: 13px;
+        font-weight: 300;
+        color: #666;
+        max-width: 150px;
+        margin: 12px auto 0;
+        line-height: 1.6;
+      }
+
+      #svc-cta {
+        padding: 160px 48px;
+        background: #fff;
+        text-align: center;
+      }
+      .svc-cta-inner {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .svc-cta-h2 {
+        font-size: clamp(32px, 5.5vw, 68px);
+        font-weight: 200;
+        color: #0a0a0a;
+        letter-spacing: -2.5px;
+        line-height: 1.08;
+        max-width: 680px;
+        margin: 0 auto;
+      }
+      .svc-cta-sub {
+        font-size: 17px;
+        font-weight: 300;
+        color: #666;
+        max-width: 480px;
+        margin: 28px auto 0;
+        line-height: 1.9;
+      }
+      .svc-cta-row {
+        margin-top: 48px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        align-items: center;
+      }
+      .svc-cta-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 52px;
+        border-radius: 100px;
+        background: #0a0a0a;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.25s ease, transform 0.25s ease;
+      }
+      .svc-cta-primary:hover {
+        background: #222;
+        transform: scale(1.02);
+      }
+      .svc-cta-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 36px;
+        border-radius: 100px;
+        border: 1px solid #ddd;
+        color: #888;
+        font-size: 14px;
+        font-weight: 300;
+        text-decoration: none;
+        transition: border-color 0.25s ease, color 0.25s ease;
+      }
+      .svc-cta-secondary:hover {
+        border-color: #0a0a0a;
+        color: #0a0a0a;
+      }
+      .svc-cta-note {
+        margin-top: 24px;
+        font-size: 12px;
+        color: #aaa;
+        font-weight: 300;
+      }
+      .svc-cta-note a {
+        color: #0a0a0a;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+      .svc-cta-note a:hover {
+        opacity: 0.75;
+      }
+
+      .svc-block.fade-up-block {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.65s ease, transform 0.65s ease;
+      }
+      .svc-block.fade-up-block.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 768px) {
+        .svc-ticker-row--desktop {
+          display: none;
+        }
+        .svc-core-inner {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .svc-core-compare {
+          max-width: 420px;
+          margin: 0 auto;
+        }
+        .svc-block-grid,
+        .svc-block-grid--rev {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .svc-ind-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .svc-cell-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .svc-diff-grid {
+          grid-template-columns: 1fr;
+        }
+        .svc-stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .svc-stat {
+          border-right: none;
+          border-bottom: 1px solid #e8e8e8;
+          padding: 24px 16px;
+        }
+        .svc-stat:nth-child(2n) {
+          border-left: 1px solid #e8e8e8;
+        }
+        .svc-process-desktop {
+          display: none;
+        }
+        .svc-process-mobile {
+          display: block;
+          margin-top: 48px;
+        }
+        .svc-process-mobile .svc-p-m {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          border-left: none;
+          margin-left: 0;
+          padding-left: 0;
+          padding-bottom: 28px;
+          border-bottom: 1px solid #e8e8e8;
+        }
+        .svc-process-mobile .svc-p-m:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+        .svc-process-mobile .svc-p-m-node {
+          margin-left: 0;
+        }
+        .svc-process-mobile .svc-p-m-text {
+          text-align: center;
+        }
+        .svc-wf-dot {
+          animation: none !important;
+          display: none;
+        }
+        #svc-build,
+        #svc-process,
+        #svc-industries,
+        #svc-diff,
+        #svc-stats,
+        #svc-cta {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="top" class="page-top-anchor" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="nav-inner">
+        <a href="index.html#top" class="logo" aria-label="Ivvlyn home">
+          <img class="logo-mark" src="assets/ivvlyn-logo.png" alt="" width="600" height="452" decoding="async" />
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html#top">Home</a>
+          <a href="vaani.html">Agents</a>
+          <a href="services.html" aria-current="page">Services</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <a class="btn-nav nav-cta desktop-demo" href="contact.html#demo-form-wrap">Book a Demo</a>
+        <a class="btn-nav nav-cta desktop-login" href="http://localhost:3001/login">Login</a>
+        <button type="button" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-overlay" id="mobile-menu" aria-hidden="true">
+      <button type="button" class="mobile-close" aria-label="Close menu">&times;</button>
+      <nav>
+        <a href="index.html#top">Home</a>
+        <a href="vaani.html">Agents</a>
+        <a href="services.html" aria-current="page">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="http://localhost:3001/login">Login</a>
+      </nav>
+    </div>
+
+    <main>
+      <section class="svc-hero" id="svc-hero" aria-labelledby="svc-hero-h1">
+        <p class="section-label">What we do</p>
+        <h1 class="svc-hero-h1" id="svc-hero-h1">
+          <span class="svc-hero-line">
+            <span class="svc-hero-word" style="--sw: 0">Every</span>
+            <span class="svc-hero-word" style="--sw: 1">business</span>
+            <span class="svc-hero-word" style="--sw: 2">has</span>
+            <span class="svc-hero-word" style="--sw: 3">work</span>
+          </span>
+          <span class="svc-hero-line">
+            <span class="svc-hero-word" style="--sw: 4">that</span>
+            <span class="svc-hero-word" style="--sw: 5">happens</span>
+            <span class="svc-hero-word" style="--sw: 6">every</span>
+            <span class="svc-hero-word" style="--sw: 7">day,</span>
+          </span>
+          <span class="svc-hero-line">
+            <span class="svc-hero-word" style="--sw: 8">costs</span>
+            <span class="svc-hero-word" style="--sw: 9">a</span>
+            <span class="svc-hero-word" style="--sw: 10">fortune</span>
+            <span class="svc-hero-word" style="--sw: 11">in</span>
+            <span class="svc-hero-word" style="--sw: 12">time,</span>
+          </span>
+          <span class="svc-hero-line">
+            <span class="svc-hero-word" style="--sw: 13">and</span>
+            <span class="svc-hero-word" style="--sw: 14">does</span>
+            <span class="svc-hero-word" style="--sw: 15">not</span>
+            <span class="svc-hero-word" style="--sw: 16">need</span>
+            <span class="svc-hero-word" style="--sw: 17">a</span>
+            <span class="svc-hero-word" style="--sw: 18">human.</span>
+          </span>
+        </h1>
+        <p class="svc-hero-sub">
+          We find that work. We automate it. We give you back the time, the money, and the sanity you have been spending
+          on it for years.
+        </p>
+
+        <div class="svc-ticker-wrap" aria-hidden="true">
+          <div class="svc-ticker-row">
+            <div class="svc-ticker-track svc-ticker-track--l" id="ticker-row-a"></div>
+          </div>
+          <div class="svc-ticker-row svc-ticker-row--desktop">
+            <div class="svc-ticker-track svc-ticker-track--r" id="ticker-row-b"></div>
+          </div>
+        </div>
+        <p class="svc-ticker-foot">We build for any industry. Any repetitive process. Any size.</p>
+      </section>
+
+      <section id="svc-core" class="dark-section" aria-labelledby="svc-core-h2">
+        <div class="svc-core-inner">
+          <div class="svc-core-copy">
+            <h2 class="svc-core-h2" id="svc-core-h2">Your team is too expensive to be doing this.</h2>
+            <p class="svc-core-p">
+              Think about what your team does every day. Replying to the same enquiries. Updating the same spreadsheet.
+              Sending the same follow-up message. Calling to confirm the same appointments.<br /><br />
+              That is not work that needs a human. That is work that needs a system.
+            </p>
+            <p class="svc-core-p2">
+              We build that system. Custom. Automated. Running 24/7. So your team can do the work that actually needs a
+              human.
+            </p>
+          </div>
+          <div class="svc-core-compare">
+            <div class="svc-compare-before">
+              <p class="svc-cmp-h svc-cmp-h--b">A typical Monday morning</p>
+              <div class="svc-cmp-task">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 6v6l4 2" stroke="#555" stroke-width="1.2" stroke-linecap="round" />
+                  <circle cx="12" cy="12" r="9" stroke="#555" stroke-width="1.2" />
+                </svg>
+                <span>Replying to 23 overnight WhatsApp enquiries</span>
+              </div>
+              <div class="svc-cmp-task">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 6v6l4 2" stroke="#555" stroke-width="1.2" stroke-linecap="round" />
+                  <circle cx="12" cy="12" r="9" stroke="#555" stroke-width="1.2" />
+                </svg>
+                <span>Updating lead details in Excel manually</span>
+              </div>
+              <div class="svc-cmp-task">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 6v6l4 2" stroke="#555" stroke-width="1.2" stroke-linecap="round" />
+                  <circle cx="12" cy="12" r="9" stroke="#555" stroke-width="1.2" />
+                </svg>
+                <span>Calling 8 leads to confirm tomorrow's visits</span>
+              </div>
+              <div class="svc-cmp-task">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 6v6l4 2" stroke="#555" stroke-width="1.2" stroke-linecap="round" />
+                  <circle cx="12" cy="12" r="9" stroke="#555" stroke-width="1.2" />
+                </svg>
+                <span>Sending follow-up messages to cold leads</span>
+              </div>
+              <div class="svc-cmp-task">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 6v6l4 2" stroke="#555" stroke-width="1.2" stroke-linecap="round" />
+                  <circle cx="12" cy="12" r="9" stroke="#555" stroke-width="1.2" />
+                </svg>
+                <span>Preparing report for management meeting</span>
+              </div>
+              <p class="svc-cmp-foot" style="color: #e53e3e">Time spent: 3.5 hours</p>
+              <small style="font-size: 10px; color: #333">Every. Single. Monday.</small>
+            </div>
+            <div class="svc-compare-after">
+              <p class="svc-cmp-h svc-cmp-h--a">Same Monday with Ivvlyn</p>
+              <div class="svc-cmp-task svc-cmp-task--a">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12l4 4 10-10" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+                <span>23 enquiries replied to — overnight, automatically</span>
+              </div>
+              <div class="svc-cmp-task svc-cmp-task--a">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12l4 4 10-10" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+                <span>All leads updated in CRM — in real time</span>
+              </div>
+              <div class="svc-cmp-task svc-cmp-task--a">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12l4 4 10-10" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+                <span>Visit confirmations sent — while team was sleeping</span>
+              </div>
+              <div class="svc-cmp-task svc-cmp-task--a">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12l4 4 10-10" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+                <span>Follow-up sequences running — on schedule</span>
+              </div>
+              <div class="svc-cmp-task svc-cmp-task--a">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12l4 4 10-10" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+                <span>Morning briefing waiting — in team WhatsApp</span>
+              </div>
+              <p class="svc-cmp-foot" style="color: #16a34a; margin-top: 8px">Time spent: 0 hours</p>
+              <small style="font-size: 10px; color: #2d5a2d">Your team arrived to finished work.</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-build" aria-labelledby="svc-build-h2">
+        <div class="svc-build-inner">
+          <p class="section-label">Our services</p>
+          <h2 class="svc-build-h2 fade-up" id="svc-build-h2">Three things we build. All of them running while you sleep.</h2>
+          <p class="svc-build-lead fade-up" style="transition-delay: 0.06s">
+            Every Ivvlyn automation falls into one of these three categories. Most businesses need all three.
+          </p>
+
+          <article class="svc-block fade-up-block" data-svc-block>
+            <div class="svc-block-grid">
+              <div class="svc-block-text">
+                <span class="svc-num">01</span>
+                <h3 class="svc-b-title">AI Employees</h3>
+                <span class="svc-tag svc-tag--g">Our flagship service</span>
+                <p class="svc-b-desc">
+                  A fully autonomous AI system that handles an entire business function — from first contact to closed deal.
+                  Not a chatbot. Not a form. An employee that thinks, responds, follows up, and reports — built specifically
+                  for your industry.
+                </p>
+                <p class="svc-b-small">Starting with:</p>
+                <p style="font-size: 14px; font-weight: 400; color: #0a0a0a; margin: 8px 0 0">Vaani — Real Estate AI Employee</p>
+                <p style="font-size: 13px; font-weight: 300; color: #888; margin: 6px 0 0">More agents coming in 2026 →</p>
+                <a class="svc-b-link" href="vaani.html">Meet Vaani →</a>
+              </div>
+              <div class="svc-feed" id="svc-feed" aria-label="Sample overnight activity">
+                <div class="svc-feed-card">
+                  <p class="svc-feed-h">What Vaani handled last night</p>
+                  <div class="svc-feed-item" style="transition-delay: 0s">
+                    <span class="svc-feed-ic"
+                      ><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4zM8 10h8M8 14h5" stroke="#0a0a0a" stroke-width="1.5"/></svg
+                    ></span>
+                    <div>
+                      <div style="font-size: 12px; font-weight: 400; color: #0a0a0a">Replied to Rahul — 3BHK Baner</div>
+                      <div style="font-size: 10px; color: #aaa; margin-top: 2px">2:14 AM</div>
+                    </div>
+                  </div>
+                  <div class="svc-feed-item" style="transition-delay: 0.15s">
+                    <span class="svc-feed-ic"
+                      ><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M4 18V6l8 5 8-5v12" stroke="#0a0a0a" stroke-width="1.5"/></svg
+                    ></span>
+                    <div>
+                      <div style="font-size: 12px; font-weight: 400; color: #0a0a0a">Lead scored 91 — marked HOT</div>
+                      <div style="font-size: 10px; color: #aaa; margin-top: 2px">2:15 AM</div>
+                    </div>
+                  </div>
+                  <div class="svc-feed-item" style="transition-delay: 0.3s">
+                    <span class="svc-feed-ic"
+                      ><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="14" rx="2" stroke="#0a0a0a" stroke-width="1.5"/><path d="M8 3v4M16 3v4M4 11h16" stroke="#0a0a0a" stroke-width="1.5"/></svg
+                    ></span>
+                    <div>
+                      <div style="font-size: 12px; font-weight: 400; color: #0a0a0a">Visit booked — Saturday 11 AM</div>
+                      <div style="font-size: 10px; color: #aaa; margin-top: 2px">2:16 AM</div>
+                    </div>
+                  </div>
+                  <div class="svc-feed-item" style="transition-delay: 0.45s">
+                    <span class="svc-feed-ic"
+                      ><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4zM8 10h8M8 14h5" stroke="#0a0a0a" stroke-width="1.5"/></svg
+                    ></span>
+                    <div>
+                      <div style="font-size: 12px; font-weight: 400; color: #0a0a0a">Replied to Priya — 2BHK Wakad</div>
+                      <div style="font-size: 10px; color: #aaa; margin-top: 2px">3:42 AM</div>
+                    </div>
+                  </div>
+                  <div class="svc-feed-item" style="transition-delay: 0.6s">
+                    <span class="svc-feed-ic"
+                      ><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M8 8l4-4 4 4" stroke="#0a0a0a" stroke-width="1.5"/></svg
+                    ></span>
+                    <div>
+                      <div style="font-size: 12px; font-weight: 400; color: #0a0a0a">Follow-up sent to 8 cold leads</div>
+                      <div style="font-size: 10px; color: #aaa; margin-top: 2px">6:00 AM</div>
+                    </div>
+                  </div>
+                  <div class="svc-feed-item" style="transition-delay: 0.75s">
+                    <span class="svc-feed-ic"
+                      ><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M4 18V6l8 5 8-5v12" stroke="#0a0a0a" stroke-width="1.5"/></svg
+                    ></span>
+                    <div>
+                      <div style="font-size: 12px; font-weight: 400; color: #0a0a0a">Morning briefing sent to team</div>
+                      <div style="font-size: 10px; color: #aaa; margin-top: 2px">9:00 AM</div>
+                    </div>
+                  </div>
+                  <p class="svc-feed-foot">14 leads handled · 2 visits booked · 0 human hours</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="svc-block fade-up-block" data-svc-block>
+            <div class="svc-block-grid svc-block-grid--rev">
+              <div class="svc-wf" id="svc-wf" aria-hidden="true">
+                <div class="svc-wf-node svc-wf-node--1">Lead fills form on website</div>
+                <div class="svc-wf-line"><span class="svc-wf-dot" style="animation-delay: 0s"></span></div>
+                <div class="svc-wf-node svc-wf-node--2">Vaani sends WhatsApp instantly</div>
+                <div class="svc-wf-line"><span class="svc-wf-dot" style="animation-delay: 0.2s"></span></div>
+                <div class="svc-wf-node svc-wf-node--3">Lead replies → CRM updated</div>
+                <div class="svc-wf-line"><span class="svc-wf-dot" style="animation-delay: 0.4s"></span></div>
+                <div class="svc-wf-node svc-wf-node--4">Team gets morning briefing</div>
+              </div>
+              <div class="svc-block-text">
+                <span class="svc-num">02</span>
+                <h3 class="svc-b-title">Workflow Automation</h3>
+                <span class="svc-tag svc-tag--m">For any repetitive process</span>
+                <p class="svc-b-desc">
+                  Any task your team does more than three times a week on a computer can probably be automated.<br /><br />
+                  We map your current process, identify what is repetitive, and build an automation that handles it —
+                  without changing how your business works.
+                </p>
+                <p class="svc-b-small" style="margin-top: 28px">Examples we have built</p>
+                <ul class="svc-ex-list">
+                  <li class="svc-ex"><span style="color: #ccc">→</span><span>Auto-send invoices when payment is received</span></li>
+                  <li class="svc-ex"><span style="color: #ccc">→</span><span>Move leads through CRM stages automatically</span></li>
+                  <li class="svc-ex"><span style="color: #ccc">→</span><span>Notify team when a hot lead goes cold</span></li>
+                  <li class="svc-ex"><span style="color: #ccc">→</span><span>Generate weekly reports without manual work</span></li>
+                  <li class="svc-ex"><span style="color: #ccc">→</span><span>Sync data between two apps automatically</span></li>
+                  <li class="svc-ex"><span style="color: #ccc">→</span><span>Send reminders before appointments</span></li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="svc-block fade-up-block" data-svc-block style="border-bottom: 1px solid #e8e8e8">
+            <div class="svc-block-grid">
+              <div class="svc-block-text">
+                <span class="svc-num">03</span>
+                <h3 class="svc-b-title">Custom AI Agents</h3>
+                <span class="svc-tag svc-tag--m">Built to your exact specifications</span>
+                <p class="svc-b-desc">
+                  Some businesses have processes that do not fit a standard template.<br /><br />
+                  We build from scratch. Tell us what your team does manually every day — we will build an AI agent that
+                  does it faster, more consistently, and without taking a salary.
+                </p>
+                <p class="svc-b-small" style="margin-top: 28px">What we need from you:</p>
+                <div class="svc-step-row svc-step-row--first">
+                  <span class="svc-step-num">1</span>
+                  <span style="font-size: 13px; font-weight: 300; color: #555; padding-top: 2px">Tell us what task you want automated</span>
+                </div>
+                <div class="svc-step-row">
+                  <span class="svc-step-num">2</span>
+                  <span style="font-size: 13px; font-weight: 300; color: #555; padding-top: 2px">We design and build the agent</span>
+                </div>
+                <div class="svc-step-row">
+                  <span class="svc-step-num">3</span>
+                  <span style="font-size: 13px; font-weight: 300; color: #555; padding-top: 2px">We connect it to your existing tools</span>
+                </div>
+                <a class="svc-b-link" href="contact.html#demo-form-wrap">Tell us what you need →</a>
+              </div>
+              <div class="svc-ind-grid" id="svc-ind-cards">
+                <div class="svc-ind-card fade-up" style="transition-delay: 0s">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 21V8l8-4 8 4v13M9 21v-9h6v9" stroke="#0a0a0a" stroke-width="1" />
+                  </svg>
+                  <div class="svc-ind-name">Real Estate</div>
+                  <div class="svc-ind-use">Lead &amp; visit management</div>
+                </div>
+                <div class="svc-ind-card fade-up" style="transition-delay: 0.06s">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 4v16M8 8h8M8 16h8" stroke="#0a0a0a" stroke-width="1" />
+                    <circle cx="12" cy="12" r="9" stroke="#0a0a0a" stroke-width="1" />
+                  </svg>
+                  <div class="svc-ind-name">Healthcare</div>
+                  <div class="svc-ind-use">Patient appointments</div>
+                </div>
+                <div class="svc-ind-card fade-up" style="transition-delay: 0.12s">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 10l8-6 8 6v10H4zM8 14h8" stroke="#0a0a0a" stroke-width="1" />
+                  </svg>
+                  <div class="svc-ind-name">Education</div>
+                  <div class="svc-ind-use">Admissions &amp; follow-up</div>
+                </div>
+                <div class="svc-ind-card fade-up" style="transition-delay: 0.18s">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 4h12v16H6zM9 8h6M9 12h6" stroke="#0a0a0a" stroke-width="1" />
+                  </svg>
+                  <div class="svc-ind-name">Restaurants</div>
+                  <div class="svc-ind-use">Reservations &amp; orders</div>
+                </div>
+                <div class="svc-ind-card fade-up" style="transition-delay: 0.24s">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 3l8 18H4zM8 14h8" stroke="#0a0a0a" stroke-width="1" />
+                  </svg>
+                  <div class="svc-ind-name">Legal</div>
+                  <div class="svc-ind-use">Client intake &amp; docs</div>
+                </div>
+                <div class="svc-ind-card fade-up" style="transition-delay: 0.3s">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M8 17V7l4-3 4 3v10M8 12h8" stroke="#0a0a0a" stroke-width="1" />
+                  </svg>
+                  <div class="svc-ind-name">Fitness</div>
+                  <div class="svc-ind-use">Membership &amp; scheduling</div>
+                </div>
+                <div class="svc-ind-card fade-up" style="transition-delay: 0.36s">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 14h16v6H4zM6 14V8h12v6M8 4h8" stroke="#0a0a0a" stroke-width="1" />
+                  </svg>
+                  <div class="svc-ind-name">Hotels</div>
+                  <div class="svc-ind-use">Bookings &amp; guest care</div>
+                </div>
+                <div class="svc-ind-card fade-up" style="transition-delay: 0.42s">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 8h12l-2 12H8L6 8zM9 8V6a3 3 0 016 0v2" stroke="#0a0a0a" stroke-width="1" />
+                  </svg>
+                  <div class="svc-ind-name">Retail</div>
+                  <div class="svc-ind-use">Orders &amp; customer support</div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="svc-process" aria-labelledby="svc-process-h2">
+        <div class="svc-process-inner">
+          <p class="section-label">The process</p>
+          <h2 class="svc-process-h2 fade-up" id="svc-process-h2">From 'I have a problem' to 'it is already fixed' in 7 days.</h2>
+          <p class="svc-process-lead fade-up" style="transition-delay: 0.06s">
+            We do not need months of discovery and project planning. We move fast, build precisely, and launch quickly.
+          </p>
+
+          <div class="svc-process-viz svc-process-desktop" id="svc-process-viz" data-process-viz>
+            <div class="svc-process-track">
+              <div class="svc-process-line-bg" aria-hidden="true"></div>
+              <div class="svc-process-line-fill" aria-hidden="true"></div>
+              <div class="svc-process-stops">
+                <div class="svc-p-step">
+                  <span class="svc-p-lbl">Day 1</span>
+                  <span class="svc-p-node" data-pn>1</span>
+                  <span class="svc-p-title">Discovery Call</span>
+                  <span class="svc-p-desc">We understand your business and exactly what needs automating</span>
+                </div>
+                <div class="svc-p-step">
+                  <span class="svc-p-lbl">Day 2-3</span>
+                  <span class="svc-p-node" data-pn>2</span>
+                  <span class="svc-p-title">We Design It</span>
+                  <span class="svc-p-desc">Workflow mapped, AI trained, integration planned</span>
+                </div>
+                <div class="svc-p-step">
+                  <span class="svc-p-lbl">Day 4-5</span>
+                  <span class="svc-p-node" data-pn>3</span>
+                  <span class="svc-p-title">We Build It</span>
+                  <span class="svc-p-desc">Full automation built and tested internally</span>
+                </div>
+                <div class="svc-p-step">
+                  <span class="svc-p-lbl">Day 6</span>
+                  <span class="svc-p-node" data-pn>4</span>
+                  <span class="svc-p-title">We Connect It</span>
+                  <span class="svc-p-desc">Linked to your WhatsApp, CRM, website, and portals</span>
+                </div>
+                <div class="svc-p-step">
+                  <span class="svc-p-lbl">Day 7</span>
+                  <span class="svc-p-node" data-pn>5</span>
+                  <span class="svc-p-title">You Go Live</span>
+                  <span class="svc-p-desc">Your automation starts working. We monitor the first week.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="svc-process-mobile" id="svc-process-m" data-process-m>
+            <div class="svc-p-m">
+              <span class="svc-p-m-node" data-pm>1</span>
+              <div class="svc-p-m-text">
+                <div class="svc-p-lbl" style="margin-bottom: 8px">Day 1</div>
+                <div class="svc-p-title" style="max-width: none; margin-top: 0">Discovery Call</div>
+                <div class="svc-p-desc" style="max-width: none">We understand your business and exactly what needs automating</div>
+              </div>
+            </div>
+            <div class="svc-p-m">
+              <span class="svc-p-m-node" data-pm>2</span>
+              <div class="svc-p-m-text">
+                <div class="svc-p-lbl" style="margin-bottom: 8px">Day 2-3</div>
+                <div class="svc-p-title" style="max-width: none; margin-top: 0">We Design It</div>
+                <div class="svc-p-desc" style="max-width: none">Workflow mapped, AI trained, integration planned</div>
+              </div>
+            </div>
+            <div class="svc-p-m">
+              <span class="svc-p-m-node" data-pm>3</span>
+              <div class="svc-p-m-text">
+                <div class="svc-p-lbl" style="margin-bottom: 8px">Day 4-5</div>
+                <div class="svc-p-title" style="max-width: none; margin-top: 0">We Build It</div>
+                <div class="svc-p-desc" style="max-width: none">Full automation built and tested internally</div>
+              </div>
+            </div>
+            <div class="svc-p-m">
+              <span class="svc-p-m-node" data-pm>4</span>
+              <div class="svc-p-m-text">
+                <div class="svc-p-lbl" style="margin-bottom: 8px">Day 6</div>
+                <div class="svc-p-title" style="max-width: none; margin-top: 0">We Connect It</div>
+                <div class="svc-p-desc" style="max-width: none">Linked to your WhatsApp, CRM, website, and portals</div>
+              </div>
+            </div>
+            <div class="svc-p-m">
+              <span class="svc-p-m-node" data-pm>5</span>
+              <div class="svc-p-m-text">
+                <div class="svc-p-lbl" style="margin-bottom: 8px">Day 7</div>
+                <div class="svc-p-title" style="max-width: none; margin-top: 0">You Go Live</div>
+                <div class="svc-p-desc" style="max-width: none">Your automation starts working. We monitor the first week.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-industries" aria-labelledby="svc-ind-h2">
+        <div class="svc-industries-inner">
+          <p class="section-label">Industries</p>
+          <h2 class="svc-build-h2 fade-up" id="svc-ind-h2">If your business talks to customers, we can help.</h2>
+          <p class="svc-build-lead fade-up" style="transition-delay: 0.06s">
+            We have built or are building automations for these industries. Do not see yours? Tell us your problem — if it
+            is repetitive, we can almost certainly automate it.
+          </p>
+          <div class="svc-cell-grid" id="svc-cell-grid">
+            <div class="svc-cell fade-up" style="transition-delay: 0s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 21V8l8-4 8 4v13M9 21v-9h6v9" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">Real Estate</div>
+              <p class="svc-cell-desc">Lead response, visit booking, follow-up, CRM, morning briefing</p>
+              <span class="svc-pill svc-pill--live">LIVE</span>
+            </div>
+            <div class="svc-cell fade-up" style="transition-delay: 0.06s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 4v16M8 8h8M8 16h8" stroke="#0a0a0a" stroke-width="1" />
+                <circle cx="12" cy="12" r="9" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">Healthcare &amp; Clinics</div>
+              <p class="svc-cell-desc">Patient enquiries, appointments, reminders, doctor availability</p>
+              <span class="svc-pill svc-pill--build">BUILDING</span>
+            </div>
+            <div class="svc-cell fade-up" style="transition-delay: 0.12s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 10l8-6 8 6v10H4zM8 14h8" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">Education &amp; Coaching</div>
+              <p class="svc-cell-desc">Admissions, demo bookings, fee follow-ups, batch management</p>
+              <span class="svc-pill svc-pill--build">BUILDING</span>
+            </div>
+            <div class="svc-cell fade-up" style="transition-delay: 0.18s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 6h4v12H4zM10 6h4v12h-4zM16 6h4v12h-4z" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">Restaurants</div>
+              <p class="svc-cell-desc">Table reservations, order queries, feedback, event bookings</p>
+              <span class="svc-pill svc-pill--avail">AVAILABLE</span>
+            </div>
+            <div class="svc-cell fade-up" style="transition-delay: 0.24s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3l8 18H4zM8 14h8" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">Legal Firms</div>
+              <p class="svc-cell-desc">Client intake, document requests, appointment scheduling</p>
+              <span class="svc-pill svc-pill--avail">AVAILABLE</span>
+            </div>
+            <div class="svc-cell fade-up" style="transition-delay: 0.3s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 4h12v4H6zM6 10h12v10H6zM9 14h6" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">Gyms &amp; Fitness</div>
+              <p class="svc-cell-desc">Membership enquiries, class bookings, renewal reminders, diet queries</p>
+              <span class="svc-pill svc-pill--avail">AVAILABLE</span>
+            </div>
+            <div class="svc-cell fade-up" style="transition-delay: 0.36s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 14h16v6H4zM6 14V8h12v6M8 4h8" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">Hotels &amp; Hospitality</div>
+              <p class="svc-cell-desc">Room bookings, guest queries, check-in reminders, reviews</p>
+              <span class="svc-pill svc-pill--avail">AVAILABLE</span>
+            </div>
+            <div class="svc-cell fade-up" style="transition-delay: 0.42s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 8h12l-2 12H8L6 8zM9 8V6a3 3 0 016 0v2" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">E-commerce</div>
+              <p class="svc-cell-desc">Order updates, return requests, product queries, reviews</p>
+              <span class="svc-pill svc-pill--avail">AVAILABLE</span>
+            </div>
+            <div class="svc-cell fade-up" style="transition-delay: 0.48s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 18V6l4 4 4-4 4 4 4-4v12" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">Finance &amp; Insurance</div>
+              <p class="svc-cell-desc">Lead qualification, policy queries, renewal reminders, claim updates</p>
+              <span class="svc-pill svc-pill--avail">AVAILABLE</span>
+            </div>
+            <div class="svc-cell fade-up" style="transition-delay: 0.54s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 12h18M12 3l9 9-9 9" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">Travel Agencies</div>
+              <p class="svc-cell-desc">Package enquiries, booking follow-ups, itinerary sharing, reviews</p>
+              <span class="svc-pill svc-pill--avail">AVAILABLE</span>
+            </div>
+            <div class="svc-cell fade-up" style="transition-delay: 0.6s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 8h16v10H4zM8 8V6h8v2M6 18v2h12v-2" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">Retail Stores</div>
+              <p class="svc-cell-desc">Stock queries, order tracking, loyalty reminders, feedback</p>
+              <span class="svc-pill svc-pill--avail">AVAILABLE</span>
+            </div>
+            <div class="svc-cell svc-cell--custom fade-up" style="transition-delay: 0.66s">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="3" stroke="#0a0a0a" stroke-width="1" />
+                <path d="M12 5V3M12 21v-2M5 12H3M21 12h-2" stroke="#0a0a0a" stroke-width="1" />
+              </svg>
+              <div class="svc-cell-name">Your Industry</div>
+              <p class="svc-cell-desc">Do not see your sector? Tell us what needs automating.</p>
+              <a class="svc-cell-cta" href="contact.html#demo-form-wrap">Tell us your problem →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-diff" class="dark-section" aria-labelledby="svc-diff-h2">
+        <div class="svc-diff-inner">
+          <p class="section-label section-label--dark">Why Ivvlyn</p>
+          <h2 class="svc-diff-h2 fade-up" id="svc-diff-h2">We are not selling you software. We are taking the work off your plate.</h2>
+          <div class="svc-diff-grid">
+            <div class="svc-diff-cell fade-up" style="transition-delay: 0s">
+              <span class="svc-diff-num">01</span>
+              <h3>Built for how your customers actually buy</h3>
+              <p>
+                Your leads live on WhatsApp, mix Hinglish and English without thinking, and expect fast replies at odd
+                hours. We design every automation around that reality — so conversations feel natural, follow-ups match
+                local buying cycles, and nothing gets lost in a one-size-fits-all tool built for another market.
+              </p>
+            </div>
+            <div class="svc-diff-cell fade-up" style="transition-delay: 0.06s">
+              <span class="svc-diff-num">02</span>
+              <h3>We do the work, not just the software</h3>
+              <p>
+                You do not get a dashboard and a tutorial video. We set everything up, connect it to your tools, test it,
+                and hand it to you working on Day 7. Full managed service.
+              </p>
+            </div>
+            <div class="svc-diff-cell fade-up" style="transition-delay: 0.12s">
+              <span class="svc-diff-num">03</span>
+              <h3>One point of contact — the founder</h3>
+              <p>
+                You will not talk to a support team reading from a script. You talk to the person who built the product.
+                Fast answers. Real solutions. No ticket numbers.
+              </p>
+            </div>
+            <div class="svc-diff-cell fade-up" style="transition-delay: 0.18s">
+              <span class="svc-diff-num">04</span>
+              <h3>We say no when it is not the right fit</h3>
+              <p>
+                If automation will not genuinely help your business, we will tell you that on the first call. We would
+                rather lose the sale than waste your money. That is how we sleep at night.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-stats" aria-labelledby="svc-stats-h2">
+        <div class="svc-stats-inner">
+          <p class="section-label">By the numbers</p>
+          <h2 class="svc-stats-h2 fade-up" id="svc-stats-h2">What automation actually does for a business.</h2>
+          <div class="svc-stats-grid" id="svc-stats-grid">
+            <div class="svc-stat fade-up" style="transition-delay: 0s">
+              <div class="svc-stat-val" data-count="73" data-suffix="%">0%</div>
+              <p class="svc-stat-lbl">Reduction in time spent on repetitive daily tasks</p>
+            </div>
+            <div class="svc-stat fade-up" style="transition-delay: 0.06s">
+              <div class="svc-stat-val" data-count="3" data-suffix="×" data-prefix="">0×</div>
+              <p class="svc-stat-lbl">More leads responded to in the first hour of enquiry</p>
+            </div>
+            <div class="svc-stat fade-up" style="transition-delay: 0.12s">
+              <div class="svc-stat-val" data-special="rupee0">₹0</div>
+              <p class="svc-stat-lbl">Extra staff needed to handle double the lead volume</p>
+            </div>
+            <div class="svc-stat fade-up" style="transition-delay: 0.18s">
+              <div class="svc-stat-val" data-count="7" data-suffix=" days">0 days</div>
+              <p class="svc-stat-lbl">Average time from first call to going live</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="svc-cta" aria-labelledby="svc-cta-h2">
+        <div class="svc-cta-inner">
+          <h2 class="svc-cta-h2 fade-up" id="svc-cta-h2">Tell us what is eating your team's time. We will fix it.</h2>
+          <p class="svc-cta-sub fade-up" style="transition-delay: 0.08s">
+            Every automation we build starts with one conversation. No pitch. No slide deck. Just — what is your biggest
+            problem right now, and how do we fix it.
+          </p>
+          <div class="svc-cta-row fade-up" style="transition-delay: 0.14s">
+            <a class="svc-cta-primary" href="contact.html#demo-form-wrap">Start the Conversation</a>
+            <a class="svc-cta-secondary" href="vaani.html">See Vaani First →</a>
+          </div>
+          <p class="svc-cta-note fade-up" style="transition-delay: 0.2s">
+            Or
+            <a href="https://wa.me/916265447844" target="_blank" rel="noopener noreferrer">WhatsApp us directly</a>
+            — we reply within the hour.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-legal">
+        <p>© 2026 Ivvlyn. All rights reserved.</p>
+        <p class="footer-trademark">
+          Ivvlyn™ is a trademark of Ivvlyn. Other product or company names may be trademarks of their respective owners.
+        </p>
+        <p><a href="mailto:founder@ivvlin.com" class="footer-legal-link">founder@ivvlin.com</a></p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const rowA = [
+          "Lead Response",
+          "Appointment Booking",
+          "Follow-Up Sequences",
+          "CRM Updates",
+          "Customer Support",
+          "Invoice Reminders",
+          "Enquiry Handling",
+          "Visit Scheduling",
+          "Patient Registration",
+          "Fee Collection",
+          "Menu Queries",
+          "Feedback Collection",
+          "Admission Enquiries",
+          "Order Tracking",
+        ];
+        const rowB = [
+          "Real Estate",
+          "Healthcare",
+          "Education",
+          "Restaurants",
+          "Legal Firms",
+          "Finance",
+          "E-commerce",
+          "Coaching Institutes",
+          "Clinics",
+          "Hotels",
+          "Gyms",
+          "Insurance",
+          "Travel Agencies",
+          "Retail",
+        ];
+        function fillTicker(el, pills, cls) {
+          if (!el) return;
+          const parts = [];
+          for (let r = 0; r < 2; r++) {
+            pills.forEach((t) => parts.push('<span class="' + cls + '">' + t + "</span>"));
+          }
+          el.innerHTML = parts.join("");
+        }
+        fillTicker(document.getElementById("ticker-row-a"), rowA, "svc-ticker-pill--a");
+        fillTicker(document.getElementById("ticker-row-b"), rowB, "svc-ticker-pill--b");
+
+        const header = document.querySelector(".site-header");
+        const menuBtn = document.querySelector(".menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeBtn = mobileMenu.querySelector(".mobile-close");
+        const mobileLinks = mobileMenu.querySelectorAll("a");
+        function setHeader() {
+          header.classList.toggle("is-scrolled", window.scrollY > 60);
+        }
+        window.addEventListener("scroll", setHeader, { passive: true });
+        setHeader();
+        function openMenu(open) {
+          menuBtn.setAttribute("aria-expanded", open);
+          mobileMenu.classList.toggle("is-open", open);
+          mobileMenu.setAttribute("aria-hidden", !open);
+          document.body.style.overflow = open ? "hidden" : "";
+        }
+        menuBtn.addEventListener("click", () => openMenu(true));
+        closeBtn.addEventListener("click", () => openMenu(false));
+        mobileLinks.forEach((a) => a.addEventListener("click", () => openMenu(false)));
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        document.querySelectorAll(".fade-up").forEach((el) => io.observe(el));
+
+        const blkIo = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                blkIo.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+        document.querySelectorAll("[data-svc-block]").forEach((el) => blkIo.observe(el));
+
+        const feed = document.getElementById("svc-feed");
+        if (feed) {
+          const fio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((en) => {
+                if (en.isIntersecting) {
+                  en.target.classList.add("is-visible");
+                  fio.unobserve(en.target);
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+          fio.observe(feed);
+        }
+
+        const wf = document.getElementById("svc-wf");
+        if (wf) {
+          const wio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((en) => {
+                if (en.isIntersecting) {
+                  wf.classList.add("is-active");
+                  wio.unobserve(wf);
+                }
+              });
+            },
+            { threshold: 0.25 }
+          );
+          wio.observe(wf);
+        }
+
+        const core = document.getElementById("svc-core");
+        if (core) {
+          const cio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((en) => {
+                if (en.isIntersecting) {
+                  core.classList.add("in-view");
+                  cio.unobserve(core);
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+          cio.observe(core);
+        }
+
+        function runProcessAnim(root, nodesSel) {
+          if (!root) return;
+          const nodes = root.querySelectorAll(nodesSel);
+          nodes.forEach((n, i) => {
+            setTimeout(() => n.classList.add("is-on"), 400 * i);
+          });
+          setTimeout(() => root.classList.add("is-done"), 400 * nodes.length + 300);
+        }
+        const pv = document.getElementById("svc-process-viz");
+        if (pv) {
+          const pio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((en) => {
+                if (en.isIntersecting) {
+                  runProcessAnim(pv, "[data-pn]");
+                  pio.unobserve(pv);
+                }
+              });
+            },
+            { threshold: 0.25 }
+          );
+          pio.observe(pv);
+        }
+        const pm = document.getElementById("svc-process-m");
+        if (pm) {
+          const mpio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((en) => {
+                if (en.isIntersecting) {
+                  runProcessAnim(pm, "[data-pm]");
+                  mpio.unobserve(pm);
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+          mpio.observe(pm);
+        }
+
+        const statsSec = document.getElementById("svc-stats");
+        let statsDone = false;
+        function runStats() {
+          if (statsDone) return;
+          statsDone = true;
+          document.querySelectorAll(".svc-stat-val[data-count]").forEach((el) => {
+            const target = parseInt(el.getAttribute("data-count"), 10);
+            const suf = el.getAttribute("data-suffix") || "";
+            const pref = el.getAttribute("data-prefix") || "";
+            const dur = 900;
+            const t0 = performance.now();
+            function frame(t) {
+              const p = Math.min((t - t0) / dur, 1);
+              const e = 1 - (1 - p) * (1 - p);
+              const v = Math.round(target * e);
+              el.textContent = pref + v + suf;
+              if (p < 1) requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+          });
+        }
+        if (statsSec) {
+          const sio = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((en) => {
+                if (en.isIntersecting) {
+                  runStats();
+                  sio.unobserve(statsSec);
+                }
+              });
+            },
+            { threshold: 0.25 }
+          );
+          sio.observe(statsSec);
+        }
+      })();
+    </script>
+  </body>
+</html>
