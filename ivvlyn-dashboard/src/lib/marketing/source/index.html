@@ -1368,6 +1368,31 @@
           --block-gap-y: clamp(28px, 8vw, 48px);
         }
 
+        /*
+         * Must live in this file *after* base .logo / .menu-btn rules above.
+         * Otherwise base rules override shared.css mobile nav because inline CSS is concatenated after shared.css.
+         */
+        .nav-links,
+        .nav-cta {
+          display: none;
+        }
+
+        .nav-inner {
+          justify-content: center;
+        }
+
+        .logo {
+          margin-left: 0;
+        }
+
+        .menu-btn {
+          display: flex;
+          position: absolute;
+          right: 20px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
         .hero {
           padding-top: calc(var(--nav-bar-height) + 20px);
           padding-bottom: 48px;
