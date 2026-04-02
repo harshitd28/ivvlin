@@ -14,7 +14,6 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="shared.css" />
     <style>
       :root {
         --nav-bar-height: 112px;
@@ -392,35 +391,11 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 6px;
-        transform: translateX(6px);
-      }
-
-      .mobile-logo {
-        opacity: 0;
-        transform: translateY(12px);
-        animation: none;
-        pointer-events: none;
-      }
-
-      .mobile-overlay.is-open .mobile-logo {
-        animation: mobileLinkIn 0.5s ease forwards;
-        animation-delay: 0.05s;
-      }
-
-      .mobile-logo-mark {
-        height: 36px;
-        width: auto;
-        display: block;
-        object-fit: contain;
-        object-position: center;
-        /* The logo PNG is dark; invert so it becomes white on dark overlay */
-        filter: brightness(0) invert(1);
-        max-width: 200px;
+        gap: 8px;
       }
 
       .mobile-overlay a {
-        font-size: 28px;
+        font-size: 32px;
         font-weight: 200;
         color: #ffffff;
         text-decoration: none;
@@ -449,10 +424,6 @@
       }
       .mobile-overlay.is-open a:nth-child(6) {
         animation-delay: 0.6s;
-      }
-
-      .mobile-overlay.is-open a:nth-child(7) {
-        animation-delay: 0.7s;
       }
 
       @keyframes mobileLinkIn {
@@ -1368,10 +1339,6 @@
           --block-gap-y: clamp(28px, 8vw, 48px);
         }
 
-        /*
-         * Must live in this file *after* base .logo / .menu-btn rules above.
-         * Otherwise base rules override shared.css mobile nav because inline CSS is concatenated after shared.css.
-         */
         .nav-links,
         .nav-cta {
           display: none;

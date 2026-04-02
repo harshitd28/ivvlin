@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { getPublicLoginUrl } from "@/lib/marketing/seo";
 
 const PROMPT_TEMPLATE = `═══ IDENTITY ═══
 You are [AGENT_NAME], a warm and professional consultant at [BUSINESS_NAME].
@@ -168,7 +169,7 @@ export default function AdminNewClientPage() {
       {created ? (
         <div className="rounded-xl border border-green-200 bg-green-50 p-4 text-[13px] text-green-900">
           <div className="font-medium">Client created. Share these login details with them:</div>
-          <div className="mt-2">URL: dashboard.ivvlyn.com/login</div>
+          <div className="mt-2">URL: {getPublicLoginUrl()}</div>
           <div>Email: {created.email}</div>
           <div>Password: {created.password}</div>
           <button

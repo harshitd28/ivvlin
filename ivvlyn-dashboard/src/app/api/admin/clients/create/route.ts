@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getPublicLoginUrl } from "@/lib/marketing/seo";
 
 function requiredEnv(name: string): string {
   const v = process.env[name];
@@ -100,7 +101,7 @@ export async function POST(req: Request) {
     ok: true,
     clientId: createdClient.id,
     login: {
-      url: "https://dashboard.ivvlyn.com/login",
+      url: getPublicLoginUrl(),
       email: clientEmail,
       password: tempPassword,
     },

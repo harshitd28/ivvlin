@@ -5,6 +5,11 @@ export const siteUrl =
     ? process.env.NEXT_PUBLIC_SITE_URL
     : "http://localhost:3001";
 
+/** Absolute login URL for the unified app (same origin as marketing when deployed). */
+export function getPublicLoginUrl(): string {
+  return `${siteUrl.replace(/\/$/, "")}/login`;
+}
+
 const defaultOgImage = "/assets/ivvlyn-logo.png";
 
 type MetaInput = {
