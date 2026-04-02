@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import MarketingHtmlPage from "@/components/marketing/MarketingHtmlPage";
-import { createMarketingMetadata } from "@/lib/marketing/seo";
+import { createMarketingMetadata, siteUrl } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = createMarketingMetadata({
   title: "AI Automation Agency India | Ivvlyn",
@@ -22,8 +22,8 @@ export default function Home() {
       {
         "@type": "Organization",
         name: "Ivvlyn",
-        url: "https://ivvlyn.com",
-        logo: "https://ivvlyn.com/logo.png",
+        url: siteUrl,
+        logo: `${siteUrl}/assets/ivvlyn-logo.png`,
         description:
           "Ivvlyn builds AI employees for Indian businesses with WhatsApp-first lead automation and follow-up workflows.",
         foundingDate: "2024",
@@ -39,10 +39,10 @@ export default function Home() {
       {
         "@type": "WebSite",
         name: "Ivvlyn",
-        url: "https://ivvlyn.com",
+        url: siteUrl,
         potentialAction: {
           "@type": "SearchAction",
-          target: "https://ivvlyn.com/?q={search_term_string}",
+          target: `${siteUrl}/?q={search_term_string}`,
           "query-input": "required name=search_term_string",
         },
       },
