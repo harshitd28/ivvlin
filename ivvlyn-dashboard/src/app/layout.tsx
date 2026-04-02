@@ -16,6 +16,11 @@ export const metadata: Metadata = {
     template: "%s | Ivvlyn",
   },
   description: "Ivvlyn marketing site and internal dashboard.",
+  icons: {
+    icon: [{ url: "/assets/ivvlyn-logo.png", type: "image/png" }],
+    shortcut: ["/assets/ivvlyn-logo.png"],
+    apple: [{ url: "/assets/ivvlyn-logo.png" }],
+  },
   keywords: ["AI automation", "WhatsApp automation", "Ivvlyn"],
   openGraph: {
     title: "Ivvlyn",
