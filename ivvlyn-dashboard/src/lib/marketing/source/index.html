@@ -391,11 +391,35 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
+        transform: translateX(6px);
+      }
+
+      .mobile-logo {
+        opacity: 0;
+        transform: translateY(12px);
+        animation: none;
+        pointer-events: none;
+      }
+
+      .mobile-overlay.is-open .mobile-logo {
+        animation: mobileLinkIn 0.5s ease forwards;
+        animation-delay: 0.05s;
+      }
+
+      .mobile-logo-mark {
+        height: 36px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+        object-position: center;
+        /* The logo PNG is dark; invert so it becomes white on dark overlay */
+        filter: brightness(0) invert(1);
+        max-width: 200px;
       }
 
       .mobile-overlay a {
-        font-size: 32px;
+        font-size: 28px;
         font-weight: 200;
         color: #ffffff;
         text-decoration: none;
@@ -424,6 +448,10 @@
       }
       .mobile-overlay.is-open a:nth-child(6) {
         animation-delay: 0.6s;
+      }
+
+      .mobile-overlay.is-open a:nth-child(7) {
+        animation-delay: 0.7s;
       }
 
       @keyframes mobileLinkIn {
@@ -1344,8 +1372,21 @@
           display: none;
         }
 
+        /* Mobile header: center the logo, keep hamburger on the right */
+        .nav-inner {
+          justify-content: center;
+        }
+
+        .logo {
+          margin-left: 0;
+        }
+
         .menu-btn {
           display: flex;
+          position: absolute;
+          right: 20px;
+          top: 50%;
+          transform: translateY(-50%);
         }
 
         .hero {
@@ -1443,7 +1484,7 @@
           <a href="contact.html">Contact</a>
         </nav>
         <a class="btn-nav nav-cta desktop-demo" href="contact.html#demo-form-wrap">Book a Demo</a>
-        <a class="btn-nav nav-cta desktop-login" href="http://localhost:3001/login">Login</a>
+        <a class="btn-nav nav-cta desktop-login" href="/login">Login</a>
         <button type="button" class="menu-btn" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -1452,9 +1493,6 @@
 
     <div class="mobile-overlay" id="mobile-menu" aria-hidden="true">
       <button type="button" class="mobile-close" aria-label="Close menu">&times;</button>
-      <div class="mobile-logo" aria-hidden="true">
-        <img src="/assets/ivvlyn-logo.png" alt="" width="600" height="452" decoding="async" class="mobile-logo-mark" />
-      </div>
       <nav>
         <a href="#top" aria-current="page">Home</a>
         <a href="vaani.html">Agents</a>
@@ -1462,7 +1500,7 @@
         <a href="pricing.html">Pricing</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <a href="http://localhost:3001/login">Login</a>
+        <a href="/login">Login</a>
       </nav>
     </div>
 
