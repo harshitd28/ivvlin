@@ -476,8 +476,21 @@ body {
     display: none;
   }
 
+  /* Center the header logo on mobile, while keeping the hamburger on the right */
+  .nav-inner {
+    justify-content: center;
+  }
+
+  .logo {
+    margin-left: 0;
+  }
+
   .menu-btn {
     display: flex;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .footer-legal {
