@@ -10,8 +10,9 @@ export default function MarketingHtmlPage({ page }: Props) {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: content.css }} />
-      <div dangerouslySetInnerHTML={{ __html: content.bodyHtml }} />
+      {/* suppressHydrationWarning: browser may normalize legacy HTML/CSS vs SSR string */}
+      <style suppressHydrationWarning dangerouslySetInnerHTML={{ __html: content.css }} />
+      <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: content.bodyHtml }} />
       {content.script ? (
         <Script id={`marketing-${page}-script`} strategy="afterInteractive">
           {content.script}
