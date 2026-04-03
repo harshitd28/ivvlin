@@ -1,4 +1,4 @@
-import Script from "next/script";
+import MarketingInlineScript from "@/components/marketing/MarketingInlineScript";
 import { loadMarketingPage, type MarketingPageKey } from "@/lib/marketing/pages";
 
 type Props = {
@@ -13,11 +13,7 @@ export default function MarketingHtmlPage({ page }: Props) {
       {/* suppressHydrationWarning: browser may normalize legacy HTML/CSS vs SSR string */}
       <style suppressHydrationWarning dangerouslySetInnerHTML={{ __html: content.css }} />
       <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: content.bodyHtml }} />
-      {content.script ? (
-        <Script id={`marketing-${page}-script`} strategy="afterInteractive">
-          {content.script}
-        </Script>
-      ) : null}
+      {content.script ? <MarketingInlineScript script={content.script} pageKey={page} /> : null}
     </>
   );
 }

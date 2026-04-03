@@ -2947,6 +2947,20 @@ Score jumped from 68 → 91 overnight.
 
     <script>
       (function () {
+        if (!window.__vaaniDemoTimeouts) window.__vaaniDemoTimeouts = [];
+        window.__vaaniDemoTimeouts.forEach(clearTimeout);
+        window.__vaaniDemoTimeouts.length = 0;
+
+        function trackTimeout(id) {
+          window.__vaaniDemoTimeouts.push(id);
+          return id;
+        }
+
+        function untrackFromGlobal(id) {
+          const idx = window.__vaaniDemoTimeouts.indexOf(id);
+          if (idx >= 0) window.__vaaniDemoTimeouts.splice(idx, 1);
+        }
+
         const header = document.querySelector(".site-header");
         const menuBtn = document.querySelector(".menu-btn");
         const mobileMenu = document.getElementById("mobile-menu");
@@ -3034,7 +3048,10 @@ Score jumped from 68 → 91 overnight.
 
         const waChatTimeouts = [];
         function clearWaChatTimeouts() {
-          waChatTimeouts.forEach(clearTimeout);
+          waChatTimeouts.forEach((id) => {
+            clearTimeout(id);
+            untrackFromGlobal(id);
+          });
           waChatTimeouts.length = 0;
         }
         function runChatLoop() {
@@ -3043,11 +3060,17 @@ Score jumped from 68 → 91 overnight.
           notifyEl.classList.remove("is-visible");
           const times = [0, 1500, 4000, 5500, 8000, 9500];
           times.forEach((delay, i) => {
-            waChatTimeouts.push(setTimeout(() => chatEl.appendChild(bubble(msgs[i])), delay));
+            waChatTimeouts.push(
+              trackTimeout(setTimeout(() => chatEl.appendChild(bubble(msgs[i])), delay))
+            );
           });
-          waChatTimeouts.push(setTimeout(() => notifyEl.classList.add("is-visible"), 11000));
-          waChatTimeouts.push(setTimeout(() => notifyEl.classList.remove("is-visible"), 13200));
-          waChatTimeouts.push(setTimeout(runChatLoop, 14000));
+          waChatTimeouts.push(
+            trackTimeout(setTimeout(() => notifyEl.classList.add("is-visible"), 11000))
+          );
+          waChatTimeouts.push(
+            trackTimeout(setTimeout(() => notifyEl.classList.remove("is-visible"), 13200))
+          );
+          waChatTimeouts.push(trackTimeout(setTimeout(runChatLoop, 14000)));
         }
         runChatLoop();
 
@@ -3055,7 +3078,10 @@ Score jumped from 68 → 91 overnight.
         const igDmChatEl = document.getElementById("ig-dm-chat");
         const igDmTimeouts = [];
         function clearIgDmTimeouts() {
-          igDmTimeouts.forEach(clearTimeout);
+          igDmTimeouts.forEach((id) => {
+            clearTimeout(id);
+            untrackFromGlobal(id);
+          });
           igDmTimeouts.length = 0;
         }
 
@@ -3112,50 +3138,62 @@ Score jumped from 68 → 91 overnight.
           ];
 
           igDmTimeouts.push(
-            setTimeout(() => {
-              igDmChatEl.appendChild(igDmBubble(dmMsgs[0]));
-              igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-            }, 0)
+            trackTimeout(
+              setTimeout(() => {
+                igDmChatEl.appendChild(igDmBubble(dmMsgs[0]));
+                igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
+              }, 0)
+            )
           );
 
           igDmTimeouts.push(
-            setTimeout(() => {
-              const typing = igTypingBubble();
-              igDmChatEl.appendChild(typing);
-              igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-              igDmTimeouts.push(
-                setTimeout(() => {
-                  typing.remove();
-                  igDmChatEl.appendChild(igDmBubble(dmMsgs[1]));
-                  igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-                }, 650)
-              );
-            }, 1250)
+            trackTimeout(
+              setTimeout(() => {
+                const typing = igTypingBubble();
+                igDmChatEl.appendChild(typing);
+                igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
+                igDmTimeouts.push(
+                  trackTimeout(
+                    setTimeout(() => {
+                      typing.remove();
+                      igDmChatEl.appendChild(igDmBubble(dmMsgs[1]));
+                      igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
+                    }, 650)
+                  )
+                );
+              }, 1250)
+            )
           );
 
           igDmTimeouts.push(
-            setTimeout(() => {
-              igDmChatEl.appendChild(igDmBubble(dmMsgs[2]));
-              igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-            }, 3300)
+            trackTimeout(
+              setTimeout(() => {
+                igDmChatEl.appendChild(igDmBubble(dmMsgs[2]));
+                igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
+              }, 3300)
+            )
           );
 
           igDmTimeouts.push(
-            setTimeout(() => {
-              const typing = igTypingBubble();
-              igDmChatEl.appendChild(typing);
-              igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-              igDmTimeouts.push(
-                setTimeout(() => {
-                  typing.remove();
-                  igDmChatEl.appendChild(igDmBubble(dmMsgs[3]));
-                  igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-                }, 700)
-              );
-            }, 4450)
+            trackTimeout(
+              setTimeout(() => {
+                const typing = igTypingBubble();
+                igDmChatEl.appendChild(typing);
+                igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
+                igDmTimeouts.push(
+                  trackTimeout(
+                    setTimeout(() => {
+                      typing.remove();
+                      igDmChatEl.appendChild(igDmBubble(dmMsgs[3]));
+                      igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
+                    }, 700)
+                  )
+                );
+              }, 4450)
+            )
           );
 
-          igDmTimeouts.push(setTimeout(runInstagramLoop, 10200));
+          igDmTimeouts.push(trackTimeout(setTimeout(runInstagramLoop, 10200)));
         }
 
         runInstagramLoop();
@@ -3164,7 +3202,10 @@ Score jumped from 68 → 91 overnight.
         const igCommentFeed = document.getElementById("ig-comment-feed");
         const igCmtTimeouts = [];
         function clearIgCmtTimeouts() {
-          igCmtTimeouts.forEach(clearTimeout);
+          igCmtTimeouts.forEach((id) => {
+            clearTimeout(id);
+            untrackFromGlobal(id);
+          });
           igCmtTimeouts.length = 0;
         }
 
@@ -3243,43 +3284,53 @@ Score jumped from 68 → 91 overnight.
 
           const typing1 = igReplyTyping();
           igCmtTimeouts.push(
-            setTimeout(() => {
-              first.appendChild(typing1);
-              igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
-              igCmtTimeouts.push(
-                setTimeout(() => {
-                  typing1.remove();
-                  first.appendChild(igReplyBlock(igCommentItems[0].reply));
-                  igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
-                }, 900)
-              );
-            }, 900)
+            trackTimeout(
+              setTimeout(() => {
+                first.appendChild(typing1);
+                igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
+                igCmtTimeouts.push(
+                  trackTimeout(
+                    setTimeout(() => {
+                      typing1.remove();
+                      first.appendChild(igReplyBlock(igCommentItems[0].reply));
+                      igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
+                    }, 900)
+                  )
+                );
+              }, 900)
+            )
           );
 
           igCmtTimeouts.push(
-            setTimeout(() => {
-              const second = igCommentCard(igCommentItems[1]);
-              igCommentFeed.appendChild(second);
-              igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
+            trackTimeout(
+              setTimeout(() => {
+                const second = igCommentCard(igCommentItems[1]);
+                igCommentFeed.appendChild(second);
+                igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
 
-              const typing2 = igReplyTyping();
-              igCmtTimeouts.push(
-                setTimeout(() => {
-                  second.appendChild(typing2);
-                  igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
-                  igCmtTimeouts.push(
+                const typing2 = igReplyTyping();
+                igCmtTimeouts.push(
+                  trackTimeout(
                     setTimeout(() => {
-                      typing2.remove();
-                      second.appendChild(igReplyBlock(igCommentItems[1].reply));
+                      second.appendChild(typing2);
                       igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
-                    }, 920)
-                  );
-                }, 780)
-              );
-            }, 3400)
+                      igCmtTimeouts.push(
+                        trackTimeout(
+                          setTimeout(() => {
+                            typing2.remove();
+                            second.appendChild(igReplyBlock(igCommentItems[1].reply));
+                            igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
+                          }, 920)
+                        )
+                      );
+                    }, 780)
+                  )
+                );
+              }, 3400)
+            )
           );
 
-          igCmtTimeouts.push(setTimeout(runInstagramCommentLoop, 9800));
+          igCmtTimeouts.push(trackTimeout(setTimeout(runInstagramCommentLoop, 9800)));
         }
 
         runInstagramCommentLoop();
@@ -3372,7 +3423,7 @@ Score jumped from 68 → 91 overnight.
                 if (!e.isIntersecting) return;
                 const dots = daySection.querySelectorAll(".day-dot--active");
                 dots.forEach((d, i) => {
-                  setTimeout(() => d.classList.add("visible"), i * 200);
+                  trackTimeout(setTimeout(() => d.classList.add("visible"), i * 200));
                 });
                 dio.unobserve(daySection);
               });
