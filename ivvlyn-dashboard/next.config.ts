@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+// noop: comment-only bump to trigger redeploy (root directory / Vercel cache)
+
 const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
