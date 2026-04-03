@@ -3032,25 +3032,32 @@ Score jumped from 68 → 91 overnight.
           return wrap;
         }
 
-        let loopTimer;
+        const waChatTimeouts = [];
+        function clearWaChatTimeouts() {
+          waChatTimeouts.forEach(clearTimeout);
+          waChatTimeouts.length = 0;
+        }
         function runChatLoop() {
-          if (loopTimer) clearTimeout(loopTimer);
+          clearWaChatTimeouts();
           chatEl.innerHTML = "";
           notifyEl.classList.remove("is-visible");
           const times = [0, 1500, 4000, 5500, 8000, 9500];
           times.forEach((delay, i) => {
-            setTimeout(() => chatEl.appendChild(bubble(msgs[i])), delay);
+            waChatTimeouts.push(setTimeout(() => chatEl.appendChild(bubble(msgs[i])), delay));
           });
-          setTimeout(() => notifyEl.classList.add("is-visible"), 11000);
-          setTimeout(() => notifyEl.classList.remove("is-visible"), 13200);
-          loopTimer = setTimeout(runChatLoop, 14000);
+          waChatTimeouts.push(setTimeout(() => notifyEl.classList.add("is-visible"), 11000));
+          waChatTimeouts.push(setTimeout(() => notifyEl.classList.remove("is-visible"), 13200));
+          waChatTimeouts.push(setTimeout(runChatLoop, 14000));
         }
         runChatLoop();
 
         /* Instagram DM live loop */
         const igDmChatEl = document.getElementById("ig-dm-chat");
-        let igLoopTimer;
-        let igTypingTimer;
+        const igDmTimeouts = [];
+        function clearIgDmTimeouts() {
+          igDmTimeouts.forEach(clearTimeout);
+          igDmTimeouts.length = 0;
+        }
 
         function igDmBubble(m) {
           const wrap = document.createElement("div");
@@ -3082,8 +3089,7 @@ Score jumped from 68 → 91 overnight.
 
         function runInstagramLoop() {
           if (!igDmChatEl) return;
-          if (igLoopTimer) clearTimeout(igLoopTimer);
-          if (igTypingTimer) clearTimeout(igTypingTimer);
+          clearIgDmTimeouts();
 
           igDmChatEl.innerHTML = "";
           const dmMsgs = [
@@ -3105,47 +3111,62 @@ Score jumped from 68 → 91 overnight.
             },
           ];
 
-          setTimeout(() => {
-            igDmChatEl.appendChild(igDmBubble(dmMsgs[0]));
-            igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-          }, 0);
-
-          setTimeout(() => {
-            const typing = igTypingBubble();
-            igDmChatEl.appendChild(typing);
-            igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-            igTypingTimer = setTimeout(() => {
-              typing.remove();
-              igDmChatEl.appendChild(igDmBubble(dmMsgs[1]));
+          igDmTimeouts.push(
+            setTimeout(() => {
+              igDmChatEl.appendChild(igDmBubble(dmMsgs[0]));
               igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-            }, 650);
-          }, 1250);
+            }, 0)
+          );
 
-          setTimeout(() => {
-            igDmChatEl.appendChild(igDmBubble(dmMsgs[2]));
-            igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-          }, 3300);
-
-          setTimeout(() => {
-            const typing = igTypingBubble();
-            igDmChatEl.appendChild(typing);
-            igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-            igTypingTimer = setTimeout(() => {
-              typing.remove();
-              igDmChatEl.appendChild(igDmBubble(dmMsgs[3]));
+          igDmTimeouts.push(
+            setTimeout(() => {
+              const typing = igTypingBubble();
+              igDmChatEl.appendChild(typing);
               igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
-            }, 700);
-          }, 4450);
+              igDmTimeouts.push(
+                setTimeout(() => {
+                  typing.remove();
+                  igDmChatEl.appendChild(igDmBubble(dmMsgs[1]));
+                  igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
+                }, 650)
+              );
+            }, 1250)
+          );
 
-          igLoopTimer = setTimeout(runInstagramLoop, 10200);
+          igDmTimeouts.push(
+            setTimeout(() => {
+              igDmChatEl.appendChild(igDmBubble(dmMsgs[2]));
+              igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
+            }, 3300)
+          );
+
+          igDmTimeouts.push(
+            setTimeout(() => {
+              const typing = igTypingBubble();
+              igDmChatEl.appendChild(typing);
+              igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
+              igDmTimeouts.push(
+                setTimeout(() => {
+                  typing.remove();
+                  igDmChatEl.appendChild(igDmBubble(dmMsgs[3]));
+                  igDmChatEl.scrollTop = igDmChatEl.scrollHeight;
+                }, 700)
+              );
+            }, 4450)
+          );
+
+          igDmTimeouts.push(setTimeout(runInstagramLoop, 10200));
         }
 
         runInstagramLoop();
 
         /* Instagram comments live reply loop */
         const igCommentFeed = document.getElementById("ig-comment-feed");
-        let igCommentLoopTimer;
-        let igCommentReplyTimer;
+        const igCmtTimeouts = [];
+        function clearIgCmtTimeouts() {
+          igCmtTimeouts.forEach(clearTimeout);
+          igCmtTimeouts.length = 0;
+        }
 
         const igCommentItems = [
           {
@@ -3212,8 +3233,7 @@ Score jumped from 68 → 91 overnight.
 
         function runInstagramCommentLoop() {
           if (!igCommentFeed) return;
-          if (igCommentLoopTimer) clearTimeout(igCommentLoopTimer);
-          if (igCommentReplyTimer) clearTimeout(igCommentReplyTimer);
+          clearIgCmtTimeouts();
 
           igCommentFeed.innerHTML = "";
 
@@ -3222,34 +3242,44 @@ Score jumped from 68 → 91 overnight.
           igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
 
           const typing1 = igReplyTyping();
-          igCommentReplyTimer = setTimeout(() => {
-            first.appendChild(typing1);
-            igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
+          igCmtTimeouts.push(
             setTimeout(() => {
-              typing1.remove();
-              first.appendChild(igReplyBlock(igCommentItems[0].reply));
+              first.appendChild(typing1);
               igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
-            }, 900);
-          }, 900);
+              igCmtTimeouts.push(
+                setTimeout(() => {
+                  typing1.remove();
+                  first.appendChild(igReplyBlock(igCommentItems[0].reply));
+                  igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
+                }, 900)
+              );
+            }, 900)
+          );
 
-          setTimeout(() => {
-            const second = igCommentCard(igCommentItems[1]);
-            igCommentFeed.appendChild(second);
-            igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
-
-            const typing2 = igReplyTyping();
+          igCmtTimeouts.push(
             setTimeout(() => {
-              second.appendChild(typing2);
+              const second = igCommentCard(igCommentItems[1]);
+              igCommentFeed.appendChild(second);
               igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
-              setTimeout(() => {
-                typing2.remove();
-                second.appendChild(igReplyBlock(igCommentItems[1].reply));
-                igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
-              }, 920);
-            }, 780);
-          }, 3400);
 
-          igCommentLoopTimer = setTimeout(runInstagramCommentLoop, 9800);
+              const typing2 = igReplyTyping();
+              igCmtTimeouts.push(
+                setTimeout(() => {
+                  second.appendChild(typing2);
+                  igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
+                  igCmtTimeouts.push(
+                    setTimeout(() => {
+                      typing2.remove();
+                      second.appendChild(igReplyBlock(igCommentItems[1].reply));
+                      igCommentFeed.scrollTop = igCommentFeed.scrollHeight;
+                    }, 920)
+                  );
+                }, 780)
+              );
+            }, 3400)
+          );
+
+          igCmtTimeouts.push(setTimeout(runInstagramCommentLoop, 9800));
         }
 
         runInstagramCommentLoop();
