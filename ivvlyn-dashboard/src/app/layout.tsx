@@ -15,8 +15,11 @@ export const metadata: Metadata = {
   },
   description: "Ivvlyn marketing site and internal dashboard.",
   icons: {
-    icon: [{ url: "/assets/ivvlyn-logo.png", type: "image/png" }],
-    shortcut: ["/assets/ivvlyn-logo.png"],
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/assets/ivvlyn-logo.png", type: "image/png" },
+    ],
+    shortcut: ["/favicon.ico"],
     apple: [{ url: "/assets/ivvlyn-logo.png" }],
   },
   keywords: ["AI automation", "WhatsApp automation", "Ivvlyn"],
