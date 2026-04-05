@@ -51,10 +51,10 @@ export default function AdminSidebar({ clients, userName, userRole }: Props) {
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <div className="relative w-[44px] h-[44px] rounded-lg bg-[#F4F4F2] border border-[#E8E8E8] flex items-center justify-center">
-                <Image src="/assets/ivvlyn-logo.png" alt="Ivvlyn" fill sizes="44px" className="object-contain p-2" />
+                <Image src="/assets/ivvlyn-logo.png" alt="Ivvlin" fill sizes="44px" className="object-contain p-2" />
               </div>
               <div>
-                <div className="text-[#0A0A0A] text-[12px] font-semibold">Ivvlyn</div>
+                <div className="text-[#0A0A0A] text-[12px] font-semibold">Ivvlin</div>
                 <div className="text-[#555555] text-[11px] font-medium">Admin</div>
               </div>
             </div>

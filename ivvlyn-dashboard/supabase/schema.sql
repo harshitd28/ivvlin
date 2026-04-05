@@ -1,4 +1,4 @@
--- Ivvlyn platform schema reference
+-- Ivvlin platform schema reference
 -- Documentation-only file: do not execute directly in production.
 -- Purpose: define the minimum table contract required by app code.
 

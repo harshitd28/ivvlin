@@ -1,4 +1,4 @@
-/* Ivvlyn — shared base (nav, footer, fade-up) */
+/* Ivvlin — shared base (nav, footer, fade-up) */
 :root {
   --nav-bar-height: 112px;
   --logo-header-h: clamp(62px, 11.5vw, 88px);

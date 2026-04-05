@@ -4,9 +4,9 @@ import MarketingHtmlPage from "@/components/marketing/MarketingHtmlPage";
 import { createMarketingMetadata, siteUrl } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = createMarketingMetadata({
-  title: "AI Automation Agency India | Ivvlyn",
+  title: "AI Automation Agency India | Ivvlin",
   description:
-    "Ivvlyn builds AI employees for Indian businesses with WhatsApp-first lead automation, 24/7 follow-up, and conversion-focused workflows.",
+    "Ivvlin builds AI employees for Indian businesses with WhatsApp-first lead automation, 24/7 follow-up, and conversion-focused workflows.",
   path: "/",
   keywords: [
     "AI automation agency India",
@@ -21,11 +21,11 @@ export default function Home() {
     "@graph": [
       {
         "@type": "Organization",
-        name: "Ivvlyn",
+        name: "Ivvlin",
         url: siteUrl,
         logo: `${siteUrl}/assets/ivvlyn-logo.png`,
         description:
-          "Ivvlyn builds AI employees for Indian businesses with WhatsApp-first lead automation and follow-up workflows.",
+          "Ivvlin builds AI employees for Indian businesses with WhatsApp-first lead automation and follow-up workflows.",
         foundingDate: "2024",
         founders: [{ "@type": "Person", name: "Harshit" }],
         contactPoint: [
@@ -38,7 +38,7 @@ export default function Home() {
       },
       {
         "@type": "WebSite",
-        name: "Ivvlyn",
+        name: "Ivvlin",
         url: siteUrl,
         potentialAction: {
           "@type": "SearchAction",
@@ -49,7 +49,7 @@ export default function Home() {
       {
         "@type": "Service",
         name: "Vaani AI Real Estate Agent",
-        provider: { "@type": "Organization", name: "Ivvlyn" },
+        provider: { "@type": "Organization", name: "Ivvlin" },
         areaServed: "IN",
         description:
           "Vaani is an AI real estate agent for instant lead response, qualification, and booking workflows.",

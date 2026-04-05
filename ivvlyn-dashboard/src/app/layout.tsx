@@ -10,10 +10,10 @@ const interGoogleFontsHref =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Ivvlyn",
-    template: "%s | Ivvlyn",
+    default: "Ivvlin",
+    template: "%s | Ivvlin",
   },
-  description: "Ivvlyn marketing site and internal dashboard.",
+  description: "Ivvlin marketing site and internal dashboard.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -22,17 +22,17 @@ export const metadata: Metadata = {
     shortcut: ["/favicon.ico"],
     apple: [{ url: "/assets/ivvlyn-logo.png" }],
   },
-  keywords: ["AI automation", "WhatsApp automation", "Ivvlyn"],
+  keywords: ["AI automation", "WhatsApp automation", "Ivvlin"],
   openGraph: {
-    title: "Ivvlyn",
-    description: "Ivvlyn marketing site and internal dashboard.",
+    title: "Ivvlin",
+    description: "Ivvlin marketing site and internal dashboard.",
     type: "website",
     images: ["/assets/ivvlyn-logo.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ivvlyn",
-    description: "Ivvlyn marketing site and internal dashboard.",
+    title: "Ivvlin",
+    description: "Ivvlin marketing site and internal dashboard.",
     images: ["/assets/ivvlyn-logo.png"],
   },
   robots: {

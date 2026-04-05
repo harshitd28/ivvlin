@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Ivvlyn — AI Employees for Business";
+export const alt = "Ivvlin — AI Employees for Business";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -20,7 +20,7 @@ export default function OpenGraphImage() {
           color: "#f9fafb",
         }}
       >
-        <div style={{ fontSize: 34, letterSpacing: 6, opacity: 0.9 }}>IVVLYN</div>
+        <div style={{ fontSize: 34, letterSpacing: 6, opacity: 0.9 }}>IVVLIN</div>
         <div style={{ fontSize: 76, lineHeight: 1.05, marginTop: 24, fontWeight: 700 }}>
           AI Employees
           <br />

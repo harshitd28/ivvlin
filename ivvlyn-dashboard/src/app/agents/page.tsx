@@ -3,7 +3,7 @@ import MarketingHtmlPage from "@/components/marketing/MarketingHtmlPage";
 import { createMarketingMetadata } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = createMarketingMetadata({
-  title: "AI Real Estate Agent India | Ivvlyn",
+  title: "AI Real Estate Agent India | Ivvlin",
   description:
     "Meet Vaani, the AI real estate agent for India handling WhatsApp lead automation, Instagram DMs, and instant multilingual follow-up.",
   path: "/agents",

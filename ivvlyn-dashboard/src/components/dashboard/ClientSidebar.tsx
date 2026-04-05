@@ -51,10 +51,10 @@ export default function ClientSidebar({
         <div className="p-5">
           <div className="flex items-start gap-3">
             <div className="relative w-[44px] h-[44px] rounded-lg bg-[#F4F4F2] border border-[#E8E8E8] flex items-center justify-center">
-              <Image src="/assets/ivvlyn-logo.png" alt="Ivvlyn" fill sizes="44px" className="object-contain p-2" />
+              <Image src="/assets/ivvlyn-logo.png" alt="Ivvlin" fill sizes="44px" className="object-contain p-2" />
             </div>
             <div className="min-w-0">
-              <div className="text-[#0A0A0A] text-[14px] font-semibold truncate">Ivvlyn</div>
+              <div className="text-[#0A0A0A] text-[14px] font-semibold truncate">Ivvlin</div>
               <div className="text-[#555555] text-[13px] mt-1 truncate">{businessName}</div>
               <div className="mt-3">
                 <AgentBadge agentType={agentType} label={agentLabel} />
