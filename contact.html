@@ -389,8 +389,39 @@
         cursor: not-allowed;
         transform: none;
       }
+      .contact-submit.is-success {
+        background: linear-gradient(180deg, #111111 0%, #060606 100%);
+        border: 1px solid #1f1f1f;
+        box-shadow:
+          0 10px 24px rgba(0, 0, 0, 0.22),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        animation: contactSubmitFlip 0.72s cubic-bezier(0.22, 0.68, 0.24, 1);
+      }
+      .contact-submit.is-success .contact-submit-spinner,
+      .contact-submit.is-success .contact-submit-loading-text {
+        display: none;
+      }
+      .contact-submit.is-success .contact-submit-text {
+        display: inline;
+      }
+      .contact-submit.is-success .contact-submit-text::before {
+        content: "✓ ";
+        font-weight: 700;
+        color: #f8fafc;
+      }
       .contact-submit.is-shake {
         animation: shake 0.4s ease;
+      }
+      @keyframes contactSubmitFlip {
+        0% {
+          transform: perspective(900px) rotateX(0deg) translateY(0) scale(1);
+        }
+        45% {
+          transform: perspective(900px) rotateX(86deg) translateY(1px) scale(0.986);
+        }
+        100% {
+          transform: perspective(900px) rotateX(0deg) translateY(0) scale(1);
+        }
       }
       @keyframes shake {
         0%,
@@ -447,6 +478,77 @@
         font-size: 11px;
         color: #aaa;
         text-align: center;
+      }
+      .contact-status {
+        margin-top: 14px;
+        min-height: 0;
+        opacity: 0;
+        transform: translateY(6px);
+        pointer-events: none;
+        transition:
+          opacity 0.28s ease,
+          transform 0.28s ease;
+      }
+      .contact-status.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .contact-status-card {
+        width: 100%;
+        border: 1px solid #e7e7e7;
+        border-radius: 999px;
+        background: #fafaf8;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 14px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        color: #1f2937;
+      }
+      .contact-status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #9ca3af;
+        flex-shrink: 0;
+      }
+      .contact-status.is-success {
+        color: #14532d;
+      }
+      .contact-status.is-success .contact-status-card {
+        border-color: #bbf7d0;
+        background: #f0fdf4;
+      }
+      .contact-status.is-success .contact-status-dot {
+        background: #16a34a;
+        animation: statusPulse 1.2s ease-out 1;
+      }
+      .contact-status.is-error {
+        color: #991b1b;
+      }
+      .contact-status.is-error .contact-status-card {
+        border-color: #fecaca;
+        background: #fef2f2;
+      }
+      .contact-status.is-error .contact-status-dot {
+        background: #dc2626;
+      }
+      @keyframes statusPulse {
+        0% {
+          transform: scale(0.8);
+          box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.35);
+        }
+        70% {
+          transform: scale(1);
+          box-shadow: 0 0 0 8px rgba(22, 163, 74, 0);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+        }
       }
 
       .contact-success {
@@ -508,6 +610,36 @@
       }
       .success-link:hover {
         text-decoration-thickness: 2px;
+      }
+      .success-meta {
+        margin-top: 22px;
+        border: 1px solid #e9e9e9;
+        border-radius: 14px;
+        background: #fafaf8;
+        padding: 16px 18px;
+        text-align: left;
+      }
+      .success-meta-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .success-meta-row + .success-meta-row {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed #ddd;
+      }
+      .success-meta-label {
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #8a8a8a;
+      }
+      .success-meta-val {
+        font-size: 13px;
+        color: #111;
+        font-weight: 500;
       }
 
       .trust-card-dark {
@@ -889,6 +1021,20 @@
         .contact-final {
           padding: 80px 20px;
         }
+        .contact-success {
+          padding: 32px 22px;
+        }
+        .success-h2 {
+          font-size: 24px;
+        }
+        .success-meta {
+          padding: 14px;
+        }
+        .success-meta-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+        }
       }
     </style>
   </head>
@@ -1104,6 +1250,12 @@ ads but conversions are low..."
                   </svg>
                   <span>Your information is private and never shared.</span>
                 </div>
+                <p class="contact-status" id="contact-status" aria-live="polite">
+                  <span class="contact-status-card">
+                    <span class="contact-status-dot" aria-hidden="true"></span>
+                    <span id="contact-status-text"></span>
+                  </span>
+                </p>
               </div>
             </div>
 
@@ -1124,6 +1276,16 @@ ads but conversions are low..."
                 We have received your request. Harshit will personally confirm your slot within 4 hours.<br /><br />
                 Check your WhatsApp and email.
               </p>
+              <div class="success-meta">
+                <div class="success-meta-row">
+                  <span class="success-meta-label">Delivery status</span>
+                  <span class="success-meta-val" id="success-status">Mail sent to founder@ivvlin.com</span>
+                </div>
+                <div class="success-meta-row">
+                  <span class="success-meta-label">Submission time</span>
+                  <span class="success-meta-val" id="success-time">Just now</span>
+                </div>
+              </div>
               <a class="success-link" href="vaani.html">While you wait — see how Vaani works</a>
             </div>
           </div>
@@ -1378,15 +1540,18 @@ ads but conversions are low..."
           });
         });
 
-        /* Form validation & fake submit
-           TODO: Connect to Formspree, Netlify Forms, or your backend:
-           - POST the collected payload (JSON or FormData) to your endpoint
-           - On success response, call showSuccess(); on error, show message
-        */
+        /* Form submission to backend API */
         const formWrap = document.getElementById("demo-form-wrap");
         const formEl = document.getElementById("demo-form");
         const successEl = document.getElementById("contact-success");
+        const successStatusEl = document.getElementById("success-status");
+        const successTimeEl = document.getElementById("success-time");
+        const statusEl = document.getElementById("contact-status");
+        const statusTextEl = document.getElementById("contact-status-text");
         const submitBtn = document.getElementById("contact-submit");
+        const submitBtnText = submitBtn?.querySelector(".contact-submit-text");
+        const defaultSubmitText = submitBtnText?.textContent || "Book My Free Demo Call";
+        let successResetTimer = null;
         let selectedTime = "";
 
         document.querySelectorAll(".time-pill").forEach((btn) => {
@@ -1470,14 +1635,63 @@ ads but conversions are low..."
           return true;
         }
 
-        function showSuccess() {
-          formWrap.classList.add("is-hidden");
-          successEl.classList.add("is-visible");
-          successEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        function setStatusMessage(message, type) {
+          if (!statusEl || !statusTextEl) return;
+          statusTextEl.textContent = message;
+          statusEl.classList.remove("is-success", "is-error");
+          statusEl.classList.remove("is-visible");
+          // Re-trigger entry animation for each new message.
+          void statusEl.offsetWidth;
+          if (message) statusEl.classList.add("is-visible");
+          if (type === "success") statusEl.classList.add("is-success");
+          if (type === "error") statusEl.classList.add("is-error");
         }
 
-        submitBtn.addEventListener("click", () => {
+        function showSuccess(result) {
+          if (successResetTimer) {
+            clearTimeout(successResetTimer);
+            successResetTimer = null;
+          }
+          if (successStatusEl) {
+            const deliveryMs = Number(result?.elapsedMs);
+            if (Number.isFinite(deliveryMs) && deliveryMs > 0) {
+              successStatusEl.textContent = `Mail sent in ${Math.max(1, Math.round(deliveryMs / 1000))}s to founder@ivvlin.com`;
+            } else {
+              successStatusEl.textContent = "Mail sent to founder@ivvlin.com";
+            }
+          }
+          if (successTimeEl) {
+            successTimeEl.textContent = new Date().toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+          }
+
+          if (submitBtn && submitBtnText) {
+            submitBtnText.textContent = "Request Sent";
+            submitBtn.classList.remove("is-loading");
+            submitBtn.classList.add("is-success");
+            submitBtn.disabled = true;
+
+            successResetTimer = setTimeout(() => {
+              submitBtn.classList.remove("is-success");
+              submitBtn.disabled = false;
+              submitBtnText.textContent = defaultSubmitText;
+            }, 4000);
+          }
+          setStatusMessage("Request delivered successfully. Our team will reach out shortly.", "success");
+        }
+
+        function showSubmitError(message) {
+          const timeErr = document.getElementById("err-time");
+          if (!timeErr) return;
+          timeErr.textContent = message;
+          setStatusMessage(message, "error");
+        }
+
+        submitBtn.addEventListener("click", async () => {
           if (!validate()) return;
+          setStatusMessage("", "");
           submitBtn.disabled = true;
           submitBtn.classList.add("is-loading");
           const payload = {
@@ -1489,14 +1703,30 @@ ads but conversions are low..."
             problem: document.getElementById("field-problem").value.trim(),
             preferredTime: selectedTime,
           };
-          const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-          console.log("Demo request payload (connect to your backend):", payload);
 
-          setTimeout(() => {
-            submitBtn.disabled = false;
+          try {
+            const response = await fetch("/api/contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+              const errorData = await response.json().catch(() => ({}));
+              throw new Error(errorData?.error || "Could not submit your request right now.");
+            }
+
+            const result = await response.json().catch(() => ({}));
+            showSuccess(result);
+          } catch (error) {
+            const message = error?.message || "Something went wrong. Please try again or WhatsApp us directly.";
+            showSubmitError(message);
+          } finally {
+            if (!submitBtn.classList.contains("is-success")) {
+              submitBtn.disabled = false;
+            }
             submitBtn.classList.remove("is-loading");
-            showSuccess();
-          }, 1500);
+          }
         });
 
         document.getElementById("contact-scroll-form")?.addEventListener("click", () => {
