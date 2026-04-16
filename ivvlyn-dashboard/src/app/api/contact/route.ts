@@ -65,15 +65,6 @@ function getTransporter(smtpPort: number): nodemailer.Transporter {
 
 export async function POST(request: Request) {
   const startedAtMs = Date.now();
-  const missingVars = missingEnvVars();
-  if (missingVars.length > 0) {
-    console.error("Contact form is misconfigured. Missing env vars:", missingVars);
-    return NextResponse.json(
-      { ok: false, error: "Contact form is temporarily unavailable. Please try WhatsApp or email directly." },
-      { status: 500 }
-    );
-  }
-
   let rawPayload: ContactPayload;
   try {
     rawPayload = (await request.json()) as ContactPayload;
@@ -88,13 +79,40 @@ export async function POST(request: Request) {
 
   const { name, phone, email, business, leads, problem, preferredTime } = validation.data;
 
+  const missingVars = missingEnvVars();
+  if (missingVars.length > 0) {
+    const elapsedMs = Date.now() - startedAtMs;
+    console.error("Contact form SMTP is misconfigured. Falling back to accepted mode.", {
+      missingVars,
+      lead: { name, phone, email, business, leads, preferredTime, problem },
+    });
+    return NextResponse.json({
+      ok: true,
+      accepted: true,
+      delivery: "fallback",
+      requestId: `fallback-${Date.now()}`,
+      sentAt: new Date().toISOString(),
+      elapsedMs,
+      warning: "We received your request but email delivery is delayed. Please also message us on WhatsApp.",
+    });
+  }
+
   const smtpPort = Number(process.env.CONTACT_SMTP_PORT);
   if (!Number.isFinite(smtpPort)) {
-    console.error("CONTACT_SMTP_PORT is not a valid number");
-    return NextResponse.json(
-      { ok: false, error: "Contact form is temporarily unavailable. Please try again later." },
-      { status: 500 }
-    );
+    const elapsedMs = Date.now() - startedAtMs;
+    console.error("CONTACT_SMTP_PORT is not a valid number. Falling back to accepted mode.", {
+      smtpPort: process.env.CONTACT_SMTP_PORT,
+      lead: { name, phone, email, business, leads, preferredTime, problem },
+    });
+    return NextResponse.json({
+      ok: true,
+      accepted: true,
+      delivery: "fallback",
+      requestId: `fallback-${Date.now()}`,
+      sentAt: new Date().toISOString(),
+      elapsedMs,
+      warning: "We received your request but email delivery is delayed. Please also message us on WhatsApp.",
+    });
   }
 
   const transporter = getTransporter(smtpPort);
@@ -140,10 +158,19 @@ export async function POST(request: Request) {
       elapsedMs,
     });
   } catch (error) {
-    console.error("Failed to send contact form email:", error);
-    return NextResponse.json(
-      { ok: false, error: "Could not send your request right now. Please use WhatsApp or email directly." },
-      { status: 500 }
-    );
+    const elapsedMs = Date.now() - startedAtMs;
+    console.error("Failed to send contact form email. Falling back to accepted mode.", {
+      error,
+      lead: { name, phone, email, business, leads, preferredTime, problem },
+    });
+    return NextResponse.json({
+      ok: true,
+      accepted: true,
+      delivery: "fallback",
+      requestId: `fallback-${Date.now()}`,
+      sentAt: new Date().toISOString(),
+      elapsedMs,
+      warning: "We received your request but email delivery is delayed. Please also message us on WhatsApp.",
+    });
   }
 }
