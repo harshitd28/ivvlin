@@ -3,9 +3,9 @@ import MarketingHtmlPage from "@/components/marketing/MarketingHtmlPage";
 import { createMarketingMetadata } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = createMarketingMetadata({
-  title: "AI Real Estate Agent India | Ivvlin",
+  title: "Vaani AI Sales Agent | Ivvlin",
   description:
-    "Meet Vaani, the AI real estate agent for India handling WhatsApp lead automation, Instagram DMs, and instant multilingual follow-up.",
+    "Meet Vaani — Ivvlin's AI sales employee for real estate. Handles WhatsApp, Instagram and portal leads 24/7. Qualifies buyers and books site visits automatically.",
   path: "/agents",
   keywords: [
     "AI real estate agent India",

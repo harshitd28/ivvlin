@@ -3,9 +3,9 @@ import MarketingHtmlPage from "@/components/marketing/MarketingHtmlPage";
 import { createMarketingMetadata } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = createMarketingMetadata({
-  title: "AI Automation Pricing India | Ivvlin",
+  title: "Pricing | Vaani AI Sales Agent — Ivvlin",
   description:
-    "Explore transparent AI automation pricing for India with custom WhatsApp bot pricing, ROI visibility, and plans that scale with lead volume.",
+    "Vaani starts at ₹25,000/month for real estate developers in India. No setup fees. Unlimited follow-ups. See full pricing and plans.",
   path: "/pricing",
   keywords: ["AI automation pricing India", "WhatsApp bot pricing"],
 });

@@ -3,9 +3,9 @@ import MarketingHtmlPage from "@/components/marketing/MarketingHtmlPage";
 import { createMarketingMetadata } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = createMarketingMetadata({
-  title: "About Ivvlin AI Agency Bhopal | Ivvlin",
+  title: "About Ivvlin | AI Automation Agency India",
   description:
-    "Learn the story behind Ivvlin, an AI agency from Bhopal building human-like AI employees for high-converting lead response workflows.",
+    "Ivvlin is an AI automation agency founded by Harshit Divekar, building India's first human-like AI sales employees for real estate developers.",
   path: "/about",
   keywords: ["Ivvlin AI agency Bhopal"],
 });

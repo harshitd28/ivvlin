@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
-import { siteUrl } from "@/lib/marketing/seo";
+import { marketingOgImageUrl, siteUrl } from "@/lib/marketing/seo";
 
 /** Same Inter weights + loading as static root HTML (Google Fonts CSS2). Avoids duplicating Inter via next/font. */
 const interGoogleFontsHref =
@@ -27,17 +27,20 @@ export const metadata: Metadata = {
     title: "Ivvlin",
     description: "Ivvlin marketing site and internal dashboard.",
     type: "website",
-    images: ["/assets/ivvlyn-logo.png"],
+    images: [{ url: marketingOgImageUrl, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Ivvlin",
     description: "Ivvlin marketing site and internal dashboard.",
-    images: ["/assets/ivvlyn-logo.png"],
+    images: [marketingOgImageUrl],
   },
   robots: {
     index: true,
     follow: true,
+    "max-snippet": -1,
+    "max-image-preview": "large",
+    "max-video-preview": -1,
   },
 };
 
@@ -49,7 +52,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const isProd = process.env.NODE_ENV === "production";
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en-IN" className="h-full antialiased">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

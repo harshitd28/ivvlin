@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/marketing/seo";
 
+// TODO: When /blog, /vaani, or similar public routes are added, include them here.
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
