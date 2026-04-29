@@ -34,7 +34,11 @@ function rewriteLinks(bodyHtml: string): string {
     .replaceAll('href="contact.html#demo-form-wrap"', 'href="/contact#demo-form-wrap"')
     .replaceAll('href="contact.html"', 'href="/contact"')
     .replaceAll('href="services.html"', 'href="/#services"')
-    .replaceAll('href="http://localhost:3001/login"', 'href="/login"');
+    .replaceAll('href="http://localhost:3001/login"', 'href="/login"')
+    .replaceAll(
+      '<p><a href="mailto:founder@ivvlin.com" class="footer-legal-link">founder@ivvlin.com</a></p>',
+      '<p><a href="/privacy-policy" class="footer-legal-link">Privacy Policy</a> · <a href="/terms-of-service" class="footer-legal-link">Terms of Service</a> · <a href="/user-data-deletion" class="footer-legal-link">User Data Deletion</a></p><p><a href="mailto:founder@ivvlin.com" class="footer-legal-link">founder@ivvlin.com</a></p>',
+    );
 }
 
 function readSourceFile(filename: string): string {
