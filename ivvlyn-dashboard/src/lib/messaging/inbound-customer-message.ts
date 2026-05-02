@@ -2,6 +2,8 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { mergeConversationMetadata } from "@/lib/conversations/merge-metadata";
 import { mapWaStatusToLifecycle } from "@/lib/messaging/meta-webhook";
 
+const LEAD_PHONE_LOOKUP_PAGE_SIZE = 1000;
+
 /** Compare Meta `from` with DB phone — digits only, optional leading 91 for IN. */
 export function normalizePhoneDigits(input: string): string {
   let d = input.replace(/\D/g, "");
@@ -47,14 +49,24 @@ export async function resolveLeadIdByCustomerPhone(
   clientId: string,
   fromDigits: string
 ): Promise<string | null> {
-  const { data: leadRows } = await svc
-    .from("leads")
-    .select("lead_id, phone")
-    .eq("client_id", clientId)
-    .limit(80);
+  for (let offset = 0; ; offset += LEAD_PHONE_LOOKUP_PAGE_SIZE) {
+    const { data: leadRows, error } = await svc
+      .from("leads")
+      .select("id, lead_id, phone")
+      .eq("client_id", clientId)
+      .not("phone", "is", null)
+      .order("created_at", { ascending: true })
+      .order("id", { ascending: true })
+      .range(offset, offset + LEAD_PHONE_LOOKUP_PAGE_SIZE - 1);
 
-  const leadsList = (leadRows ?? []) as Array<{ lead_id: string; phone: string | null }>;
-  return leadsList.find((l) => l.phone && normalizePhoneDigits(l.phone) === fromDigits)?.lead_id ?? null;
+    if (error) return null;
+
+    const leadsList = (leadRows ?? []) as Array<{ lead_id: string; phone: string | null }>;
+    const matchedLead = leadsList.find((l) => l.phone && normalizePhoneDigits(l.phone) === fromDigits);
+    if (matchedLead?.lead_id) return matchedLead.lead_id;
+
+    if (leadsList.length < LEAD_PHONE_LOOKUP_PAGE_SIZE) return null;
+  }
 }
 
 export type InsertInboundParams = {
