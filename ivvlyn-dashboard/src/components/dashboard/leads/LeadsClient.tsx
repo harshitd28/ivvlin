@@ -31,7 +31,7 @@ type Props = {
   };
 };
 
-type TabKey = "all" | "hot" | "warm" | "cold" | "lost";
+type TabKey = "all" | "hot" | "warm" | "cold";
 type SortKey = "newest" | "score" | "last_active" | "visit_date";
 type ChannelKey = "all" | Channel;
 
@@ -41,8 +41,6 @@ function lastContactForLead(lead: Lead) {
 
 function tabMatches(lead: Lead, tab: TabKey) {
   if (tab === "all") return true;
-  if (tab === "lost") return lead.status === "lost";
-
   const score = typeof lead.score === "number" ? lead.score : 0;
   if (tab === "hot") return lead.status === "hot" || score >= 70;
   if (tab === "warm") return lead.status === "warm" || (score >= 50 && score < 70);
@@ -125,9 +123,6 @@ export default function LeadsClient({ leads, counts }: Props) {
                 <TabsTrigger value="cold" className="px-3 py-2 text-[13px]">
                   Cold ({counts.cold})
                 </TabsTrigger>
-                <TabsTrigger value="lost" className="px-3 py-2 text-[13px]">
-                  Lost ({counts.lost})
-                </TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
@@ -208,6 +203,7 @@ export default function LeadsClient({ leads, counts }: Props) {
                     <TableCell className="text-[#0A0A0A] font-medium">
                       <div>{l.name ?? "Lead"}</div>
                       <div className="text-[#555] text-[12px] mt-1">{l.phone ?? ""}</div>
+                      <div className="text-[#777] text-[12px] mt-0.5">{l.email ?? "—"}</div>
                     </TableCell>
 
                     <TableCell>
@@ -266,6 +262,7 @@ export default function LeadsClient({ leads, counts }: Props) {
                     <div className="min-w-0">
                       <div className="text-[14px] font-medium text-[#111] truncate">{l.name ?? "Lead"}</div>
                       <div className="text-[12px] text-[#555] mt-1">{l.phone ?? ""}</div>
+                      <div className="text-[12px] text-[#777] mt-0.5">{l.email ?? "—"}</div>
                     </div>
                     <LeadStatusPill status={l.status} />
                   </div>

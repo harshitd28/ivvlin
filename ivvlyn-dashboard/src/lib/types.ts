@@ -1,3 +1,6 @@
+/** JSON value as stored in Postgres json/jsonb (Supabase-typed). */
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
+
 export type UserRole = "admin" | "client";
 
 export type AgentType = "vaani" | "nova" | "kira" | "zane" | "custom";
@@ -85,6 +88,17 @@ export interface Lead {
   owner_summary: string | null;
   urgency: string | null;
   intent: string | null;
+  assigned_to_user_id?: string | null;
+  inbox_starred?: boolean;
+  sla_target_minutes?: number;
+  first_response_due_at?: string | null;
+  sla_breached_at?: string | null;
+  inbox_locked_until?: string | null;
+  inbox_locked_by?: string | null;
+  /** Rolled-out inbox (replaces inbox_starred convention with pinned/open/…) */
+  inbox_status?: string | null;
+  last_customer_message_at?: string | null;
+  last_agent_response_at?: string | null;
 }
 
 export interface Conversation {
@@ -99,7 +113,110 @@ export interface Conversation {
   status: string | null;
   intent: string | null;
   sentiment: string | null;
+  /** queued | sent | delivered | read | failed — provider lifecycle */
+  lifecycle_state: string | null;
+  provider_message_id: string | null;
+  retry_count: number;
+  idempotency_key: string | null;
 }
+
+/** Insert payload — explicit so UI/API calls do not need every Row field. */
+export type ConversationInsert = {
+  id?: string;
+  created_at?: string;
+  client_id: string;
+  lead_id?: string | null;
+  channel?: Channel;
+  direction: "inbound" | "outbound";
+  message: string;
+  is_automated?: boolean;
+  status?: string | null;
+  intent?: string | null;
+  sentiment?: string | null;
+  lifecycle_state?: string | null;
+  provider_message_id?: string | null;
+  retry_count?: number;
+  idempotency_key?: string | null;
+};
+
+/** Rolled-out: unique (provider, event_id). Legacy docs used idempotency_key + source. */
+export interface WebhookIdempotency {
+  provider: string;
+  event_id: string;
+  payload: Json;
+  processed_at: string | null;
+  created_at: string;
+}
+
+export type WebhookIdempotencyInsert = {
+  provider: string;
+  event_id: string;
+  payload?: Json;
+  processed_at?: string | null;
+  created_at?: string;
+};
+
+export type OutboundJobState = "pending" | "processing" | "sent" | "failed" | "dead";
+
+export interface OutboundMessageJob {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  client_id: string;
+  lead_id: string;
+  channel: string;
+  conversation_id: string | null;
+  to_phone?: string | null;
+  template_name?: string | null;
+  template_language?: string | null;
+  message_type?: string | null;
+  payload: Json;
+  state: OutboundJobState;
+  priority: number;
+  attempts: number;
+  max_attempts: number;
+  /** Rolled-out uses scheduled_at; legacy migrations used next_attempt_at */
+  scheduled_at?: string;
+  next_attempt_at?: string;
+  locked_at?: string | null;
+  locked_by?: string | null;
+  sent_at?: string | null;
+  failed_at?: string | null;
+  error?: string | null;
+  last_error?: string | null;
+  external_message_id?: string | null;
+  provider_message_id?: string | null;
+}
+
+export type OutboundMessageJobInsert = {
+  id?: string;
+  created_at?: string;
+  updated_at?: string;
+  client_id: string;
+  lead_id: string;
+  channel: string;
+  conversation_id?: string | null;
+  to_phone?: string | null;
+  template_name?: string | null;
+  template_language?: string | null;
+  message_type?: string | null;
+  payload?: Json;
+  state?: OutboundJobState;
+  priority?: number;
+  attempts?: number;
+  max_attempts?: number;
+  /** Production queue uses `scheduled_at`; legacy SQL may use `next_attempt_at` */
+  scheduled_at?: string;
+  next_attempt_at?: string;
+  locked_at?: string | null;
+  locked_by?: string | null;
+  sent_at?: string | null;
+  failed_at?: string | null;
+  error?: string | null;
+  last_error?: string | null;
+  external_message_id?: string | null;
+  provider_message_id?: string | null;
+};
 
 export interface Activity {
   id: string;
@@ -143,8 +260,8 @@ export interface Visit {
 }
 
 /**
- * Supabase typed Database definition (enough for our queries).
- * We keep this narrow/explicit to avoid `any`.
+ * Reference schema shape for docs and future `supabase gen types`.
+ * Supabase clients in this app use the default untyped client so inserts/updates stay compatible as the DB evolves.
  */
 export type Database = {
   public: {
@@ -153,42 +270,61 @@ export type Database = {
         Row: Client;
         Insert: Omit<Client, "id" | "created_at"> & Partial<Pick<Client, "id" | "created_at">>;
         Update: Partial<Omit<Client, "id">>;
+        Relationships: [];
       };
       leads: {
         Row: Lead;
         Insert: Omit<Lead, "id" | "created_at"> & Partial<Pick<Lead, "id" | "created_at">>;
         Update: Partial<Omit<Lead, "id">>;
+        Relationships: [];
       };
       conversations: {
         Row: Conversation;
-        Insert: Omit<Conversation, "id" | "created_at"> & Partial<Pick<Conversation, "id" | "created_at">>;
+        Insert: ConversationInsert;
         Update: Partial<Omit<Conversation, "id">>;
+        Relationships: [];
+      };
+      webhook_idempotency: {
+        Row: WebhookIdempotency;
+        Insert: WebhookIdempotencyInsert;
+        Update: Partial<WebhookIdempotency>;
+        Relationships: [];
+      };
+      outbound_message_jobs: {
+        Row: OutboundMessageJob;
+        Insert: OutboundMessageJobInsert;
+        Update: Partial<Omit<OutboundMessageJob, "id">>;
+        Relationships: [];
       };
       activities: {
         Row: Activity;
         Insert: Omit<Activity, "id" | "created_at"> & Partial<Pick<Activity, "id" | "created_at">>;
         Update: Partial<Omit<Activity, "id">>;
+        Relationships: [];
       };
       credit_logs: {
         Row: CreditLog;
         Insert: Omit<CreditLog, "id" | "created_at"> & Partial<Pick<CreditLog, "id" | "created_at">>;
         Update: Partial<Omit<CreditLog, "id">>;
+        Relationships: [];
       };
       visits: {
         Row: Visit;
         Insert: Omit<Visit, "id" | "created_at"> & Partial<Pick<Visit, "id" | "created_at">>;
         Update: Partial<Omit<Visit, "id">>;
+        Relationships: [];
       };
       profiles: {
         Row: Profile;
         Insert: Omit<Profile, "id" | "created_at" | "role"> & Partial<Pick<Profile, "id" | "created_at">> & Partial<Pick<Profile, "role">>;
         Update: Partial<Omit<Profile, "id">>;
+        Relationships: [];
       };
     };
-    Views: Record<string, never>;
-    Functions: Record<string, never>;
-    Enums: Record<string, never>;
-    CompositeTypes: Record<string, never>;
+    Views: { [_ in never]: never };
+    Functions: { [_ in never]: never };
+    Enums: { [_ in never]: never };
+    CompositeTypes: { [_ in never]: never };
   };
 };
 

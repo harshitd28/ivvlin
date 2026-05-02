@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Client } from "@/lib/types";
+import AdminClientOverview from "@/components/admin/AdminClientOverview";
 import GlobalStats from "@/components/admin/GlobalStats";
 import ClientCard from "@/components/admin/ClientCard";
 import RecentActivityFeed from "@/components/admin/RecentActivityFeed";
@@ -15,17 +16,8 @@ export default async function AdminHomePage({
   const clientId = resolved?.clientId;
   const activeClientId = typeof clientId === "string" && clientId.length ? clientId : null;
 
-  // In this step we fully implement the "All clients" view.
-  // Client-filtered view will be expanded in the next steps.
   if (activeClientId) {
-    return (
-      <div className="p-8 pt-0 space-y-4">
-        <h1 className="text-[#0A0A0A] text-[22px] font-medium">Client view</h1>
-        <p className="text-[#555] text-[13px]">
-          Overview for the selected client will be implemented next.
-        </p>
-      </div>
-    );
+    return <AdminClientOverview clientId={activeClientId} />;
   }
 
   const supabase = await createSupabaseServerClient();

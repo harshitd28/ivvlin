@@ -4,7 +4,7 @@ import LoginForm from "./LoginForm";
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams?: Record<string, string | string[] | undefined>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const resolved = searchParams ? await searchParams : undefined;
   const redirect = resolved?.redirect;

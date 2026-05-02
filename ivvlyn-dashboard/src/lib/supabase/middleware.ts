@@ -1,15 +1,11 @@
 import { createServerClient } from "@supabase/ssr";
-import type { Database } from "@/lib/types";
 import type { NextRequest, NextResponse } from "next/server";
 
-export function createSupabaseMiddlewareClient(
-  req: NextRequest,
-  res: NextResponse
-): ReturnType<typeof createServerClient<Database>> {
+export function createSupabaseMiddlewareClient(req: NextRequest, res: NextResponse) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
 
-  return createServerClient<Database>(supabaseUrl, supabaseAnonKey, {
+  return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       getAll() {
         return req.cookies

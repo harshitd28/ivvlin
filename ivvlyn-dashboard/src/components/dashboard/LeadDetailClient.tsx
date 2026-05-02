@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { format, formatDistanceToNow } from "date-fns";
 import type { Channel } from "@/lib/types";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -12,6 +13,7 @@ type LeadData = {
   lead_id: string;
   name: string | null;
   phone: string | null;
+  email: string | null;
   instagram_psid: string | null;
   channel: Channel;
   score: number | null;
@@ -28,6 +30,19 @@ type LeadData = {
   dnd: boolean;
   preferred_lang: string | null;
   assigned_to: string | null;
+  visit_date: string | null;
+  visit_time: string | null;
+  property_interest: string | null;
+  all_sources: string | null;
+  owner_summary: string | null;
+  urgency: string | null;
+  intent: string | null;
+  assigned_to_user_id?: string | null;
+  inbox_status?: string | null;
+  first_response_due_at?: string | null;
+  sla_breached_at?: string | null;
+  last_customer_message_at?: string | null;
+  last_agent_response_at?: string | null;
 };
 
 type TimelineItem = {
@@ -46,7 +61,12 @@ type Props = {
 };
 
 type LeadDetailUpdateBuilder = {
-  update: (payload: { mode: "ai" | "human"; assigned_to: string | null }) => {
+  update: (payload: {
+    mode: "ai" | "human";
+    assigned_to: string | null;
+    takeover_at?: string;
+    handback_at?: string;
+  }) => {
     eq: (column: string, value: string) => Promise<{ error: { message: string } | null }>;
   };
 };
@@ -94,6 +114,9 @@ export default function LeadDetailClient({ lead, timeline, defaultTakenOverAt }:
       .update({
         mode: nextMode,
         assigned_to: nextMode === "human" ? lead.phone ?? lead.instagram_psid ?? "unassigned" : null,
+        ...(nextMode === "human"
+          ? { takeover_at: atIso }
+          : { handback_at: atIso }),
       })
       .eq("lead_id", lead.lead_id);
 
@@ -105,7 +128,10 @@ export default function LeadDetailClient({ lead, timeline, defaultTakenOverAt }:
 
       void fetch("/webhook/takeover-handler", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Idempotency-Key": `${lead.lead_id}:${nextMode}:${atIso}`,
+        },
         body: JSON.stringify({
           lead_id: lead.lead_id,
           mode: nextMode,
@@ -124,6 +150,7 @@ export default function LeadDetailClient({ lead, timeline, defaultTakenOverAt }:
           <div>
             <h1 className="text-[22px] font-medium text-[#0A0A0A]">{lead.name ?? "Lead"}</h1>
             <div className="mt-2 text-[13px] text-[#555]">{lead.phone ?? lead.instagram_psid ?? "No phone/PSID"}</div>
+            <div className="mt-1 text-[13px] text-[#555]">{lead.email ?? "No email"}</div>
             <div className="mt-3 inline-flex items-center gap-2">
               <ChannelBadge channel={lead.channel} />
               <span className="px-2.5 py-1 rounded-full text-[11px] border border-[#e5e7eb] bg-[#fafafa]">{lead.status ?? "status"}</span>
@@ -144,12 +171,43 @@ export default function LeadDetailClient({ lead, timeline, defaultTakenOverAt }:
                 ["BHK preference", lead.bhk_preference],
                 ["Location preference", lead.location_preference],
                 ["Source", lead.source],
+                ["All Sources", lead.all_sources],
                 ["Created at", format(new Date(lead.created_at), "dd MMM yyyy, hh:mm a")],
                 ["Last contact", lead.last_contact ? formatDistanceToNow(new Date(lead.last_contact), { addSuffix: true }) : "—"],
                 ["Follow-up step", lead.follow_up_step ? String(lead.follow_up_step) : "—"],
                 ["Stage", lead.stage],
+                ["Visit date", lead.visit_date ?? "—"],
+                ["Visit time", lead.visit_time ?? "—"],
+                ["Property interest", lead.property_interest],
+                ["Intent", lead.intent],
+                ["Urgency", lead.urgency],
                 ["DND", lead.dnd ? "Yes" : "No"],
                 ["Preferred language", lead.preferred_lang],
+                ["Owner summary", lead.owner_summary],
+                ["Inbox status", lead.inbox_status ?? "—"],
+                ["Assigned (user id)", lead.assigned_to_user_id ?? "—"],
+                [
+                  "First response due",
+                  lead.first_response_due_at
+                    ? format(new Date(lead.first_response_due_at), "dd MMM yyyy, hh:mm a")
+                    : "—",
+                ],
+                [
+                  "SLA breached at",
+                  lead.sla_breached_at ? format(new Date(lead.sla_breached_at), "dd MMM yyyy, hh:mm a") : "—",
+                ],
+                [
+                  "Last customer message",
+                  lead.last_customer_message_at
+                    ? formatDistanceToNow(new Date(lead.last_customer_message_at), { addSuffix: true })
+                    : "—",
+                ],
+                [
+                  "Last agent response",
+                  lead.last_agent_response_at
+                    ? formatDistanceToNow(new Date(lead.last_agent_response_at), { addSuffix: true })
+                    : "—",
+                ],
               ].map(([k, v]) => (
                 <div key={k} className="border border-[#efefef] rounded-lg p-3 bg-[#fcfcfb]">
                   <div className="text-[#777]">{k}</div>
@@ -223,6 +281,16 @@ export default function LeadDetailClient({ lead, timeline, defaultTakenOverAt }:
           <section className="border border-[#E8E8E8] rounded-xl bg-white p-5">
             <div className="text-[11px] uppercase tracking-[0.14em] text-[#777] mb-3">Score</div>
             <LeadScoreBar score={score} />
+          </section>
+
+          <section className="border border-[#E8E8E8] rounded-xl bg-white p-5">
+            <div className="text-[11px] uppercase tracking-[0.14em] text-[#777] mb-3">Conversation</div>
+            <Link
+              href={`/dashboard/conversations?leadId=${encodeURIComponent(lead.lead_id)}`}
+              className="inline-flex w-full items-center justify-center rounded-lg border border-[#111] bg-[#111] px-3 py-2 text-[13px] text-white hover:bg-[#222]"
+            >
+              Open Inbox For This Lead
+            </Link>
           </section>
         </aside>
       </div>

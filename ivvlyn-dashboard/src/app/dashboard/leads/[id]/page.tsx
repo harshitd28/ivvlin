@@ -1,5 +1,7 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Channel, Lead } from "@/lib/types";
+import { activityOccurredAt } from "@/lib/activities/time";
+import { rowToThreadMessage, type ConversationRowInput } from "@/lib/conversations/thread-map";
 import DashboardRealtime from "@/components/dashboard/realtime/DashboardRealtime";
 import LeadDetailClient from "@/components/dashboard/LeadDetailClient";
 
@@ -48,7 +50,7 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
   const { data: leadRow } = await supabase
     .from("leads")
     .select(
-      "lead_id, name, phone, instagram_psid, score, status, stage, channel, source, budget, bhk_preference, location_preference, created_at, last_contact, mode, dnd, preferred_lang, follow_up_step, assigned_to"
+      "lead_id, name, phone, email, instagram_psid, score, status, stage, channel, source, budget, bhk_preference, location_preference, created_at, last_contact, mode, dnd, preferred_lang, follow_up_step, assigned_to, visit_date, visit_time, property_interest, all_sources, owner_summary, urgency, intent, assigned_to_user_id, inbox_status, first_response_due_at, sla_breached_at, last_customer_message_at, last_agent_response_at"
     )
     .eq("client_id", clientId)
     .eq("lead_id", leadId)
@@ -65,25 +67,57 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
     );
   }
 
-  const { data: timelineRows } = await supabase
+  const { data: activityRows } = await supabase
     .from("activities")
-    .select("id, created_at, direction, channel, content, type")
+    .select("id, timestamp, created_at, direction, channel, content, type")
     .eq("client_id", clientId)
     .eq("lead_id", leadId)
+    .order("timestamp", { ascending: true })
     .order("created_at", { ascending: true })
     .limit(200);
 
-  const timeline = (timelineRows ?? []) as Array<{
-    id: string;
-    created_at: string;
-    direction: string | null;
-    channel: string | null;
-    content: string | null;
-    type: string | null;
-  }>;
+  const activityItems = (activityRows ?? [])
+    .map((r) => {
+      const at = activityOccurredAt(r);
+      if (!at) return null;
+      return {
+        id: `activity:${r.id}`,
+        created_at: at,
+        direction: r.direction,
+        channel: r.channel,
+        content: r.content,
+        type: r.type,
+      };
+    })
+    .filter((x): x is NonNullable<typeof x> => x !== null);
 
-  const modeEvents = timeline.filter((t) => t.type === "mode_change");
+  const modeEvents = activityItems.filter((t) => t.type === "mode_change");
   const lastModeEvent = modeEvents.length ? modeEvents[modeEvents.length - 1] : null;
+
+  const { data: convTimelineRows } = await supabase
+    .from("conversations")
+    .select("id, content, message, timestamp, created_at, direction, channel, metadata, sender")
+    .eq("client_id", clientId)
+    .eq("lead_id", leadId)
+    .order("timestamp", { ascending: true })
+    .order("created_at", { ascending: true })
+    .limit(200);
+
+  const conversationItems = (convTimelineRows ?? []).map((r) => {
+    const tm = rowToThreadMessage(r as ConversationRowInput);
+    return {
+      id: `conversation:${r.id}`,
+      created_at: tm.created_at,
+      direction: tm.direction,
+      channel: tm.channel,
+      content: tm.message,
+      type: tm.is_automated ? "automated_message" : "message",
+    };
+  });
+
+  const timeline = [...activityItems, ...conversationItems].sort(
+    (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+  );
 
   return (
     <>
@@ -94,6 +128,7 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
             lead_id: lead.lead_id,
             name: lead.name,
             phone: lead.phone,
+            email: lead.email ?? null,
             instagram_psid: (lead as Lead & { instagram_psid?: string | null }).instagram_psid ?? null,
             channel: lead.channel as Channel,
             score: lead.score,
@@ -110,6 +145,19 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
             dnd: (lead as Lead & { dnd?: boolean }).dnd ?? false,
             preferred_lang: (lead as Lead & { preferred_lang?: string | null }).preferred_lang ?? null,
             assigned_to: (lead as Lead & { assigned_to?: string | null }).assigned_to ?? null,
+            visit_date: lead.visit_date ?? null,
+            visit_time: lead.visit_time ?? null,
+            property_interest: lead.property_interest ?? null,
+            all_sources: lead.all_sources ?? null,
+            owner_summary: lead.owner_summary ?? null,
+            urgency: lead.urgency ?? null,
+            intent: lead.intent ?? null,
+            assigned_to_user_id: (lead as Lead).assigned_to_user_id ?? null,
+            inbox_status: (lead as Lead).inbox_status ?? null,
+            first_response_due_at: (lead as Lead).first_response_due_at ?? null,
+            sla_breached_at: (lead as Lead).sla_breached_at ?? null,
+            last_customer_message_at: (lead as Lead).last_customer_message_at ?? null,
+            last_agent_response_at: (lead as Lead).last_agent_response_at ?? null,
           }}
           timeline={timeline}
           defaultTakenOverAt={lastModeEvent?.created_at ?? null}

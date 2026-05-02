@@ -122,20 +122,28 @@ export default async function AnalyticsPage() {
 
   const scoreBins = binCounts.map((x) => ({ bin: x.bin, count: x.count }));
 
-  // Channel performance (sent messages, last 7 days)
+  // Channel performance (sent messages, last 7 days) — use `timestamp` when present (rolled-out schema), else `created_at`
+  const start7Iso = start7.toISOString();
   const { data: convRows } = await supabase
     .from("conversations")
-    .select("created_at, channel, direction")
+    .select("timestamp, created_at, channel, direction")
     .eq("client_id", clientId)
     .eq("direction", "outbound")
-    .gte("created_at", start7.toISOString());
+    .or(`timestamp.gte."${start7Iso}",created_at.gte."${start7Iso}"`);
 
-  const convTyped = (convRows ?? []) as unknown as Array<{ created_at: string; channel: "whatsapp" | "instagram"; direction: string }>;
+  const convTyped = (convRows ?? []) as unknown as Array<{
+    timestamp: string | null;
+    created_at: string | null;
+    channel: "whatsapp" | "instagram";
+    direction: string;
+  }>;
   const perfMap = new Map<string, { whatsapp: number; instagram: number }>();
   for (const k of dayKeys) perfMap.set(k, { whatsapp: 0, instagram: 0 });
 
   for (const c of convTyped) {
-    const key = format(new Date(c.created_at), "yyyy-MM-dd");
+    const at = c.timestamp ?? c.created_at;
+    if (!at) continue;
+    const key = format(new Date(at), "yyyy-MM-dd");
     const cur = perfMap.get(key) ?? { whatsapp: 0, instagram: 0 };
     if (c.channel === "instagram") cur.instagram += 1;
     else cur.whatsapp += 1;

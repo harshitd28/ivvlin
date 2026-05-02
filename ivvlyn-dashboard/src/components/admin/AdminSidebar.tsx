@@ -40,6 +40,9 @@ export default function AdminSidebar({ clients, userName, userRole }: Props) {
     { href: `/admin${qs}`, label: "Overview", active: pathname === "/admin" },
     { href: `/admin/clients${qs}`, label: "Clients", active: pathname.startsWith("/admin/clients") },
     { href: `/admin/leads${qs}`, label: "All Leads", active: pathname.startsWith("/admin/leads") },
+    { href: `/admin/conversations${qs}`, label: "Conversations", active: pathname.startsWith("/admin/conversations") },
+    { href: `/admin/visits${qs}`, label: "Visits", active: pathname.startsWith("/admin/visits") },
+    { href: `/admin/webhooks${qs}`, label: "Webhooks", active: pathname.startsWith("/admin/webhooks") },
     { href: `/admin/credits${qs}`, label: "Credits", active: pathname.startsWith("/admin/credits") },
     { href: `/admin/settings${qs}`, label: "Settings", active: pathname.startsWith("/admin/settings") },
   ];

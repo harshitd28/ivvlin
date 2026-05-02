@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "comment": "Merge into project vercel.json on Pro/Enterprise. Hobby plan allows at most one cron invocation per day — remove or use GitHub Actions instead. Set CRON_SECRET in Vercel env; Vercel sends Authorization: Bearer automatically.",
+  "crons": [
+    {
+      "path": "/api/cron/all",
+      "schedule": "*/15 * * * *"
+    }
+  ]
+}
