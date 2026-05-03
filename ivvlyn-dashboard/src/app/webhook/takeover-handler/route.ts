@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { claimWebhookIdempotency } from "@/lib/messaging/idempotency";
+import { hasCompletedWebhookIdempotency, markWebhookIdempotencyCompleted } from "@/lib/messaging/idempotency";
 import { buildLeadTakeoverPatch, updateLeadTakeoverByLeadId } from "@/lib/leads/takeover-patch";
 import { createServiceRoleClient } from "@/lib/supabase/service-role";
 import type { Json } from "@/lib/types";
@@ -77,13 +77,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, message: "Service role not configured" }, { status: 503 });
   }
 
+  const meta: Record<string, unknown> = { lead_id: parsed.lead_id, mode: parsed.mode };
   if (idem) {
-    const meta: Record<string, unknown> = { lead_id: parsed.lead_id, mode: parsed.mode };
-    const claimed = await claimWebhookIdempotency(svc, idem, "takeover-handler", meta as Json);
-    if (!claimed.ok) {
-      return NextResponse.json({ ok: false, message: claimed.error }, { status: 500 });
+    const duplicate = await hasCompletedWebhookIdempotency(svc, idem, "takeover-handler");
+    if (!duplicate.ok) {
+      return NextResponse.json({ ok: false, message: duplicate.error }, { status: 500 });
     }
-    if (claimed.duplicate) {
+    if (duplicate.duplicate) {
       return NextResponse.json({ ok: true, duplicate: true });
     }
   }
@@ -95,6 +95,13 @@ export async function POST(req: Request) {
   const result = await updateLeadTakeoverByLeadId(svc, parsed.lead_id, patch);
   if (!result.ok) {
     return NextResponse.json({ ok: false, message: result.error }, { status: result.error === "lead not found" ? 404 : 500 });
+  }
+
+  if (idem) {
+    const claimed = await markWebhookIdempotencyCompleted(svc, idem, "takeover-handler", meta as Json);
+    if (!claimed.ok) {
+      return NextResponse.json({ ok: false, message: claimed.error }, { status: 500 });
+    }
   }
 
   return NextResponse.json({ ok: true, persisted: true, lead_id: parsed.lead_id, mode: parsed.mode });

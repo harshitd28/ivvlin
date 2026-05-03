@@ -7,10 +7,33 @@ export type IdempotencyResult =
   | { ok: false; error: string };
 
 /**
- * Inserts (provider, event_id). Duplicate → duplicate: true (caller should return 200/no-op).
+ * Checks whether a webhook key has already been fully processed.
  * Matches rolled-out `webhook_idempotency` (see docs/supabase-rolled-out-schema.md).
  */
-export async function claimWebhookIdempotency(
+export async function hasCompletedWebhookIdempotency(
+  supabase: SupabaseClient,
+  idempotencyKey: string,
+  source: string
+): Promise<IdempotencyResult> {
+  const event_id = idempotencyKey.trim();
+  if (!event_id) return { ok: false, error: "missing idempotency key" };
+
+  const { data, error } = await supabase
+    .from("webhook_idempotency")
+    .select("event_id")
+    .eq("provider", source)
+    .eq("event_id", event_id)
+    .maybeSingle();
+
+  if (error) return { ok: false, error: error.message };
+  return { ok: true, duplicate: Boolean((data as { event_id?: string } | null)?.event_id) };
+}
+
+/**
+ * Records a webhook key after successful processing. Duplicate → duplicate: true
+ * because another worker already completed the same event.
+ */
+export async function markWebhookIdempotencyCompleted(
   supabase: SupabaseClient,
   idempotencyKey: string,
   source: string,
@@ -33,3 +56,5 @@ export async function claimWebhookIdempotency(
 
   return { ok: false, error: error.message };
 }
+
+export const claimWebhookIdempotency = markWebhookIdempotencyCompleted;

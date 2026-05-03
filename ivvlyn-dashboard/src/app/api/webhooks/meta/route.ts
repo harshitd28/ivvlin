@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
-import { claimWebhookIdempotency } from "@/lib/messaging/idempotency";
+import { hasCompletedWebhookIdempotency, markWebhookIdempotencyCompleted } from "@/lib/messaging/idempotency";
 import {
   collectMetaWaIds,
   mapWaStatusToLifecycle,
@@ -79,16 +79,20 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, message: "Service role not configured" }, { status: 503 });
   }
 
-  const claimed = await claimWebhookIdempotency(svc, idempotencyKey, "meta-whatsapp", { count: ids.length });
-  if (!claimed.ok) {
+  const completed = await hasCompletedWebhookIdempotency(svc, idempotencyKey, "meta-whatsapp");
+  if (!completed.ok) {
     return NextResponse.json({ ok: false }, { status: 500 });
   }
-  if (claimed.duplicate) {
+  if (completed.duplicate) {
     return NextResponse.json({ ok: true, duplicate: true });
   }
 
   try {
     await applyMetaPayload(svc, body);
+    const marked = await markWebhookIdempotencyCompleted(svc, idempotencyKey, "meta-whatsapp", { count: ids.length });
+    if (!marked.ok) {
+      return NextResponse.json({ ok: false }, { status: 500 });
+    }
     return NextResponse.json({ ok: true });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
