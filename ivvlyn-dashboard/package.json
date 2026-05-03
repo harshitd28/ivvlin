@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "node --import tsx --test tests/**/*.test.ts",
     "lint": "eslint",
     "worker:outbound": "tsx scripts/outbound-worker.ts",
     "db:verify": "node scripts/db-verify.mjs",

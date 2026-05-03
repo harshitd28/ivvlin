@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { claimWebhookIdempotency } from "@/lib/messaging/idempotency";
+import { hasCompletedWebhookIdempotency, markWebhookIdempotencyCompleted } from "@/lib/messaging/idempotency";
 import { assertInternalIngestSecret } from "@/lib/messaging/assert-internal-ingest";
 import {
   applyForwardedDeliveryStatus,
@@ -13,7 +13,7 @@ import type { Json } from "@/lib/types";
 
 /**
  * Forward WhatsApp Cloud API events from n8n (or any worker) when Meta webhook is not pointed at this app.
- * Uses the same idempotency keys as `/api/webhooks/meta` (`wa:msg:*`, `wa:status:*`) so duplicate delivery is ignored.
+ * Uses the same idempotency keys as `/api/webhooks/meta` (`wa:msg:*`, `wa:status:*`) so completed duplicate delivery is ignored.
  *
  * Runbook: `docs/n8n-whatsapp-forward.md`
  *
@@ -85,13 +85,11 @@ async function handleMessage(
   }
 
   const idempotencyKey = `wa:msg:${waId}`;
-  const claimed = await claimWebhookIdempotency(svc, idempotencyKey, "meta-whatsapp", {
-    source: "n8n_forward",
-  } as Json);
-  if (!claimed.ok) {
-    return NextResponse.json({ ok: false, message: claimed.error }, { status: 500 });
+  const completed = await hasCompletedWebhookIdempotency(svc, idempotencyKey, "meta-whatsapp");
+  if (!completed.ok) {
+    return NextResponse.json({ ok: false, message: completed.error }, { status: 500 });
   }
-  if (claimed.duplicate) {
+  if (completed.duplicate) {
     return NextResponse.json({ ok: true, duplicate: true });
   }
 
@@ -182,6 +180,12 @@ async function handleMessage(
     text: text || "[empty]",
     metadataExtras: { ingest_source: "n8n_forward" },
   });
+  const marked = await markWebhookIdempotencyCompleted(svc, idempotencyKey, "meta-whatsapp", {
+    source: "n8n_forward",
+  } as Json);
+  if (!marked.ok) {
+    return NextResponse.json({ ok: false, message: marked.error }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true });
 }
@@ -197,14 +201,11 @@ async function handleStatus(
   }
 
   const idempotencyKey = `wa:status:${waId}`;
-  const claimed = await claimWebhookIdempotency(svc, idempotencyKey, "meta-whatsapp", {
-    source: "n8n_forward",
-    status: statusRaw,
-  } as Json);
-  if (!claimed.ok) {
-    return NextResponse.json({ ok: false, message: claimed.error }, { status: 500 });
+  const completed = await hasCompletedWebhookIdempotency(svc, idempotencyKey, "meta-whatsapp");
+  if (!completed.ok) {
+    return NextResponse.json({ ok: false, message: completed.error }, { status: 500 });
   }
-  if (claimed.duplicate) {
+  if (completed.duplicate) {
     return NextResponse.json({ ok: true, duplicate: true });
   }
 
@@ -222,5 +223,12 @@ async function handleStatus(
   }
 
   const result = await applyForwardedDeliveryStatus(svc, clientId, waId, statusRaw);
+  const marked = await markWebhookIdempotencyCompleted(svc, idempotencyKey, "meta-whatsapp", {
+    source: "n8n_forward",
+    status: statusRaw,
+  } as Json);
+  if (!marked.ok) {
+    return NextResponse.json({ ok: false, message: marked.error }, { status: 500 });
+  }
   return NextResponse.json({ ok: true, updated: result.updated });
 }
